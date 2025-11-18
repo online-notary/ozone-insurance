@@ -19,17 +19,17 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* Primary Brand - Golden Brown */
-    --primary: 40 49% 37%;
+    /* Primary Brand - Ozone Deep Blue */
+    --primary: 211 100% 24%;
     --primary-foreground: 0 0% 100%;
-    --primary-darker: 40 49% 27%;
+    --primary-darker: 211 100% 18%;
     
-    /* Secondary - Trust Blue */
-    --secondary: 213 93% 68%;
+    /* Secondary - Ozone Light Blue */
+    --secondary: 207 89% 54%;
     --secondary-foreground: 0 0% 100%;
     
-    /* Accent - Warm Golden */
-    --accent: 38 92% 50%;
+    /* Accent - Professional Blue */
+    --accent: 211 100% 35%;
     --accent-foreground: 0 0% 100%;
     
     /* Neutral Grays */
@@ -47,15 +47,15 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 40 49% 37%;
     
-    /* Beautiful Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(213 93% 68%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(213 93% 68%) 50%, hsl(210 100% 70%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(45 93% 47%) 100%);
+    /* Beautiful Gradients - Ozone Blue Theme */
+    --gradient-primary: linear-gradient(135deg, hsl(211 100% 24%) 0%, hsl(207 89% 54%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(211 100% 24%) 0%, hsl(207 89% 54%) 50%, hsl(204 100% 60%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(211 100% 35%) 0%, hsl(207 89% 54%) 100%);
     
-    /* Elegant Shadows */
-    --shadow-soft: 0 4px 20px -2px hsl(217 91% 60% / 0.1);
-    --shadow-medium: 0 8px 30px -4px hsl(217 91% 60% / 0.15);
-    --shadow-strong: 0 20px 40px -8px hsl(217 91% 60% / 0.25);
+    /* Elegant Shadows - Ozone Blue */
+    --shadow-soft: 0 4px 20px -2px hsl(211 100% 24% / 0.1);
+    --shadow-medium: 0 8px 30px -4px hsl(211 100% 24% / 0.15);
+    --shadow-strong: 0 20px 40px -8px hsl(211 100% 24% / 0.25);
     
     /* Form colors */
     --form-border: hsl(var(--border));
@@ -101,17 +101,17 @@
     --popover: 217.2 32.6% 17.5%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 40 49% 37%;
+    --primary: 211 100% 24%;
     --primary-foreground: 0 0% 100%;
-    --primary-darker: 40 49% 27%;
+    --primary-darker: 211 100% 18%;
 
-    --secondary: 213 93% 68%;
+    --secondary: 207 89% 54%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 215.4 16.3% 25.9%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 38 92% 50%;
+    --accent: 211 100% 35%;
     --accent-foreground: 0 0% 100%;
     
     --success: 142 71% 45%;
@@ -124,13 +124,13 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 40 49% 37%;
     
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(213 93% 68%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(213 93% 68%) 50%, hsl(210 100% 70%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(45 93% 47%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(211 100% 24%) 0%, hsl(207 89% 54%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(211 100% 24%) 0%, hsl(207 89% 54%) 50%, hsl(204 100% 60%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(211 100% 35%) 0%, hsl(207 89% 54%) 100%);
     
-    --shadow-soft: 0 4px 20px -2px hsl(217 91% 60% / 0.15);
-    --shadow-medium: 0 8px 30px -4px hsl(217 91% 60% / 0.2);
-    --shadow-strong: 0 20px 40px -8px hsl(217 91% 60% / 0.3);
+    --shadow-soft: 0 4px 20px -2px hsl(211 100% 24% / 0.15);
+    --shadow-medium: 0 8px 30px -4px hsl(211 100% 24% / 0.2);
+    --shadow-strong: 0 20px 40px -8px hsl(211 100% 24% / 0.3);
   }
 }
 

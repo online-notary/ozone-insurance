@@ -76,8 +76,8 @@ export default function Footer() {
         <div className="bg-gradient-to-r from-blue-500 to-blue-400 text-white rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <h2 className="font-bold text-2xl md:text-3xl leading-tight">
-              Find an Insurance Agent or Start
-              <br className="hidden md:block" /> Tracking your Claims
+              Better Insurance For Everyone
+              <br className="hidden md:block" /> Start Your Quote Today
             </h2>
           </div>
           <div className="flex items-center gap-6 md:ml-auto">
@@ -121,11 +121,16 @@ export default function Footer() {
             {/* Col 1: Company Info */}
             <div className="col-span-12 lg:col-span-4">
               <div className="inline-flex items-center gap-2 mb-4">
-                <span className="px-3 py-2 bg-blue-500 text-white rounded-lg text-sm font-bold">🛡️ Vankine</span>
+                <span className="px-3 py-2 bg-blue-500 text-white rounded-lg text-sm font-bold">🛡️ Ozone Insurance</span>
               </div>
-              <p className="text-white/80 mb-6 leading-relaxed">
-                Sed ut perspiciatis unde omnis iste natus errors voluptatem accusantium
-                doloremque laudantium totam
+              <p className="text-white/80 mb-2 font-semibold">
+                Ozone Insurance Services Inc.
+              </p>
+              <p className="text-white/70 mb-1 text-sm">
+                Your one-stop shop for all your insurance needs
+              </p>
+              <p className="text-white/70 mb-6 text-sm">
+                CA LIC# 0K48512
               </p>
 
               <form className="mb-6 flex gap-2" onSubmit={(e)=>e.preventDefault()}>
@@ -228,12 +233,12 @@ export default function Footer() {
           <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
             <div className="flex items-center gap-2">
               <IconShield />
-              <span className="text-white/80 text-sm">© 2025 Brightness Legacy Financial</span>
+              <span className="text-white/80 text-sm">© 2025 Ozone Insurance Services Inc.</span>
             </div>
 
             <div className="flex items-center gap-2">
               <IconClock />
-              <span className="text-white/80 text-sm">Working Hours : Sun-monday, 09am–5pm</span>
+              <span className="text-white/80 text-sm">Working Hours : Sun-Monday, 09am–5pm</span>
             </div>
 
             <button
