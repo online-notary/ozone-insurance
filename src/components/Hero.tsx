@@ -38,22 +38,22 @@ const Hero = () => {
     },
     {
       type: "image",
-      badge: "Best For Insurance",
-      title: ["Insurance", "For Better", "World"],
+      badge: "Independent Agents",
+      title: ["Better Insurance", "For", "Everyone"],
       image: banner11,
       alt: "Professional insurance services for a better world"
     },
     {
       type: "image",
-      badge: "Reliable Protection", 
-      title: ["Secure Your", "Family's", "Future"],
+      badge: "Your One-Stop Shop", 
+      title: ["Complete", "Insurance", "Solutions"],
       image: banner12,
       alt: "Secure insurance coverage for your family's future"
     },
     {
       type: "image",
-      badge: "Trusted Coverage",
-      title: ["Complete", "Insurance", "Solutions"],
+      badge: "Authorized Company",
+      title: ["Professional", "Service", "Guaranteed"],
       image: banner13,
       alt: "Complete insurance solutions for all your needs"
     }

@@ -54,12 +54,12 @@ const iconMap: Record<string, LucideIcon> = {
 
 
 const Services: React.FC<ServicesProps> = ({
-  smallTitle = "Services",
-  bigTitle = "What We Offer",
+  smallTitle = "Our Services",
+  bigTitle = "Better Insurance For Everyone",
   intro = (
     <>
-      Comprehensive coverage, benefits, and support—tailored to individuals,
-      families, and businesses.
+      Comprehensive insurance solutions tailored to your needs. From Life and Health 
+      to Travel Insurance, we provide custom packages that fit all your requirements.
     </>
   ),
   className = "",

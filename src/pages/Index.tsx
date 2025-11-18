@@ -59,20 +59,20 @@ const Index = () => {
   const features = [
     {
       iconClass: "consultation",
-      title: "Professional Consultation",
-      desc: "Expert advice tailored to your specific insurance and financial needs with comprehensive analysis.",
+      title: "Trained Workers",
+      desc: "Our highly trained professionals ensure top-quality service and expertise in every interaction.",
       href: "#"
     },
     {
       iconClass: "support",
-      title: "24/7 Customer Support",
-      desc: "Round-the-clock assistance for all your insurance queries and emergency claim processing.",
+      title: "Authorized Company",
+      desc: "We are an authorized and certified insurance provider, committed to meeting and exceeding industry standards.",
       href: "#"
     },
     {
       iconClass: "analysis",
-      title: "Expert Risk Analysis",
-      desc: "Detailed risk assessment and mitigation strategies to protect your assets and investments.",
+      title: "Quick Response",
+      desc: "We respond quickly and efficiently to all your questions and insurance needs.",
       href: "#"
     }
   ];
@@ -111,9 +111,9 @@ const Index = () => {
         isOpen={isOptionPanelOpen}
         onClose={() => setIsOptionPanelOpen(false)}
         logoSrc="https://cwhwihjnhezgsbmkvbjf.supabase.co/storage/v1/object/public/logo/%20blf%20logo.png"
-        aboutText="Denounce with righteous indignation and dislike men who are beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble."
-        phone="(415) 900-9086"
-        email="info@vankine.com"
+        aboutText="As independent agents, we review quotes from multiple insurance companies to provide you with the best rates and solutions that meet your personal or business needs. We are your one-stop shop for all things insurance related."
+        phone="1-833-MY-OZONE"
+        email="info@ozoneinsurance.com"
         hoursLabel="Working Hours :"
         hoursValue="Sun-Monday, 09am-5pm"
         portfolioHeading="Latest Portfolio"

@@ -50,30 +50,28 @@ const AboutHero: React.FC<Props> = ({
       key: "aboutus",
       title: "About Us",
       paragraph: (
-        <>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-          laudantium, totam aperiam, eaquecy epsa abillo inventore veritatis architecto beatae</>
+        <>As independent agents, we review quotes from multiple insurance companies to provide you with the best rates and solutions that meet your personal or business needs. We are your one-stop shop for all things insurance related.</>
       ),
-      col1: ["Best Insurance Agency", "Trusted & Experience Insurance", "Dedicated Support & Security"],
-      col2: ["Board Composition", "Key Managerial Persons", "Board Committees"]
+      col1: ["Independent Agents", "Best Rates & Solutions", "Comprehensive Coverage"],
+      col2: ["Trained Workers", "Authorized Company", "Quick Response"]
     },
     {
       key: "mission",
       title: "Mission",
       paragraph: (
-        <>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-          laudantium, totam aperiam…</>
+        <>To simplify the insurance process, making it convenient and seamless to protect your future. We analyze your insurance needs and get you covered quickly at the most optimum price.</>
       ),
-      col1: ["Comprehensive Coverage", "Client-Centered Approach", "Innovation & Efficiency"],
-      col2: ["Risk Assessment", "Long-term Relationships", "Community Impact"]
+      col1: ["Best Rates", "Multiple Carriers", "Personalized Service"],
+      col2: ["Fast Quotes", "Expert Guidance", "Complete Protection"]
     },
     {
       key: "vision",
       title: "Vision",
       paragraph: (
-        <>To be the leading protection partner, empowering people to build a brighter, more secure future.</>
+        <>To be the leading independent insurance agency, providing better insurance for everyone through personalized service, competitive rates, and comprehensive coverage solutions.</>
       ),
-      col1: ["Industry Leadership", "Financial Security for All", "Tech-forward Operations"],
-      col2: ["Sustainable Practices", "Community Focus", "Service Excellence"]
+      col1: ["Industry Excellence", "Client Satisfaction", "Innovation"],
+      col2: ["Trusted Service", "Community Focus", "Reliable Protection"]
     }
   ];
 

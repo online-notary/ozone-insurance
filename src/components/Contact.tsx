@@ -17,25 +17,25 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["(415) 900-9086", "(415) 900-9086"],
+      details: ["1-833-MY-OZONE", "(833) 696-9663"],
       color: "bg-blue-500"
     },
     {
       icon: Mail,
       title: "Email Us", 
-      details: ["info@brightnessfinancial.net", "support@brightnessfinancial.net"],
+      details: ["info@ozoneinsurance.com", "support@ozoneinsurance.com"],
       color: "bg-green-500"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["123 Financial District", "New York, NY 10004"],
+      details: ["California", "CA LIC# 0K48512"],
       color: "bg-purple-500"
     },
     {
       icon: Clock,
       title: "Office Hours",
-      details: ["Mon-Fri: 9:00 AM - 5:00 PM", "Sat: 10:00 AM - 2:00 PM"],
+      details: ["Sun-Monday: 9:00 AM - 5:00 PM", "Available for appointments"],
       color: "bg-orange-500"
     }
   ];
@@ -51,12 +51,12 @@ const Contact = () => {
             <span className="text-sm font-medium text-success">Get In Touch</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
-            Ready to Secure Your
+            Ready to Get
             <br />
-            <span className="text-gradient">Financial Future?</span>
+            <span className="text-gradient">Better Insurance?</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Schedule a free consultation with our financial experts. We're here to answer your questions and help you build a comprehensive protection plan.
+            Contact us today for a free quote. As independent agents, we'll help you find the best insurance solutions at the most competitive rates.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-6">Get in Touch</h3>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                We're always ready to help you with your financial planning needs. 
+                We're always ready to help you with your insurance needs. 
                 Reach out to us through any of the following methods.
               </p>
             </div>
