@@ -1,0 +1,127 @@
+import { useState } from "react";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import TeamSection from "@/components/TeamSection";
+import About from "@/components/About";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import OptionPanel from "@/components/OptionPanel";
+import professionalTeam from "@/assets/professional-team.jpg";
+import businessmanProfessional from "@/assets/businessman-professional.png";
+import project1 from "@/assets/project-1.jpg";
+import project2 from "@/assets/project-2.jpg";
+import project3 from "@/assets/project-3.jpg";
+import project4 from "@/assets/project-4.jpg";
+import project5 from "@/assets/project-5.jpg";
+import project6 from "@/assets/project-6.jpg";
+import project7 from "@/assets/project-7.jpg";
+import project8 from "@/assets/project-8.jpg";
+import project9 from "@/assets/project-9.jpg";
+
+const Index = () => {
+  const [isOptionPanelOpen, setIsOptionPanelOpen] = useState(false);
+
+  const teamMembers = [
+    {
+      name: "Carlos Rivera",
+      role: "Financial & Protection Specialist, Senior Marketing Director",
+      imgSrc: "/lovable-uploads/21f95c47-b29b-4622-924c-7ee2d2c569f0.png",
+      profileHref: "#",
+      socials: [
+        { iconClass: "linkedin", href: "#" },
+        { iconClass: "twitter", href: "#" }
+      ],
+      videoSrc: "https://cwhwihjnhezgsbmkvbjf.supabase.co/storage/v1/object/public/Carlos%20Rivera/Carlos%20Rivera.mp4",
+      license: "CA Lic #1893774"
+    },
+    {
+      name: "Edward Avendano Navarrete",
+      role: "Senior Marketing Director, Financial & Protection Specialist",
+      imgSrc: "/lovable-uploads/f32b7a7d-1eeb-4cb9-b114-5929f088562b.png",
+      profileHref: "#",
+      socials: [
+        { iconClass: "linkedin", href: "#" },
+        { iconClass: "twitter", href: "#" }
+      ],
+      videoSrc: "https://cwhwihjnhezgsbmkvbjf.supabase.co/storage/v1/object/public/Edward%20Avendano%20Navarrete/Edward%20Avendano%20Navarrete.mp4",
+      license: "CA Lic #4377887"
+    }
+  ];
+
+  const skills = [
+    { label: "Insurance Planning", percent: 95 },
+    { label: "Risk Assessment", percent: 88 },
+    { label: "Financial Analysis", percent: 92 },
+    { label: "Client Relations", percent: 97 }
+  ];
+
+  const features = [
+    {
+      iconClass: "consultation",
+      title: "Professional Consultation",
+      desc: "Expert advice tailored to your specific insurance and financial needs with comprehensive analysis.",
+      href: "#"
+    },
+    {
+      iconClass: "support",
+      title: "24/7 Customer Support",
+      desc: "Round-the-clock assistance for all your insurance queries and emergency claim processing.",
+      href: "#"
+    },
+    {
+      iconClass: "analysis",
+      title: "Expert Risk Analysis",
+      desc: "Detailed risk assessment and mitigation strategies to protect your assets and investments.",
+      href: "#"
+    }
+  ];
+
+  const portfolioItems = [
+    { title: "Former insures only the marine perils", href: "#portfolio", imgSrc: project1 },
+    { title: "Insurance covers risk of fire absence", href: "#portfolio", imgSrc: project2 },
+    { title: "Serving the interests of our clients", href: "#portfolio", imgSrc: project3 },
+    { title: "Guide To Audio Visual With JavaScript", href: "#portfolio", imgSrc: project4 },
+    { title: "Building Web Layouts For Dual Devices", href: "#portfolio", imgSrc: project5 },
+    { title: "Professional Financial Planning Solutions", href: "#portfolio", imgSrc: project6 },
+    { title: "Comprehensive Insurance Coverage", href: "#portfolio", imgSrc: project7 },
+    { title: "Expert Financial Advisory Services", href: "#portfolio", imgSrc: project8 },
+    { title: "Modern Insurance Technology", href: "#portfolio", imgSrc: project9 }
+  ];
+
+  return (
+    <div className="min-h-screen">
+      <Header onOptionPanelToggle={() => setIsOptionPanelOpen(!isOptionPanelOpen)} />
+      <main>
+        <Hero />
+        <Services />
+        <TeamSection
+          members={teamMembers}
+          videoImgSrc={professionalTeam}
+          videoUrl="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          skills={skills}
+          features={features}
+        />
+        <About mainImageSrc={businessmanProfessional} />
+        <Contact />
+      </main>
+      <Footer />
+      
+      <OptionPanel
+        isOpen={isOptionPanelOpen}
+        onClose={() => setIsOptionPanelOpen(false)}
+        logoSrc="https://cwhwihjnhezgsbmkvbjf.supabase.co/storage/v1/object/public/logo/%20blf%20logo.png"
+        aboutText="Denounce with righteous indignation and dislike men who are beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble."
+        phone="(415) 900-9086"
+        email="info@vankine.com"
+        hoursLabel="Working Hours :"
+        hoursValue="Sun-Monday, 09am-5pm"
+        portfolioHeading="Latest Portfolio"
+        helpHeading="Need Any Help? Or Looking For an Agent"
+        items={portfolioItems}
+      />
+    </div>
+  );
+};
+
+export default Index;

@@ -1,0 +1,535 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Slick Carousel CSS */
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+/* Brightness Financial Design System - Professional Financial Services */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Primary Brand - Golden Brown */
+    --primary: 40 49% 37%;
+    --primary-foreground: 0 0% 100%;
+    --primary-darker: 40 49% 27%;
+    
+    /* Secondary - Trust Blue */
+    --secondary: 213 93% 68%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Accent - Warm Golden */
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Neutral Grays */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    
+    /* Success Green */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 40 49% 37%;
+    
+    /* Beautiful Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(213 93% 68%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(213 93% 68%) 50%, hsl(210 100% 70%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(45 93% 47%) 100%);
+    
+    /* Elegant Shadows */
+    --shadow-soft: 0 4px 20px -2px hsl(217 91% 60% / 0.1);
+    --shadow-medium: 0 8px 30px -4px hsl(217 91% 60% / 0.15);
+    --shadow-strong: 0 20px 40px -8px hsl(217 91% 60% / 0.25);
+    
+    /* Form colors */
+    --form-border: hsl(var(--border));
+    --form-focus: hsl(var(--primary));
+    --form-background: hsl(var(--background));
+    
+    /* Professional Typography */
+    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Vankine Brand Colors */
+    --vk-600: 214 84% 56%;
+    --vk-700: 217 91% 50%;
+    --vk-800: 220 91% 40%;
+    --vk-900: 223 84% 25%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 217.2 32.6% 17.5%;
+    --foreground: 210 40% 98%;
+
+    --card: 217.2 32.6% 17.5%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217.2 32.6% 17.5%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 40 49% 37%;
+    --primary-foreground: 0 0% 100%;
+    --primary-darker: 40 49% 27%;
+
+    --secondary: 213 93% 68%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 215.4 16.3% 25.9%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 40 49% 37%;
+    
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(213 93% 68%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(213 93% 68%) 50%, hsl(210 100% 70%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(45 93% 47%) 100%);
+    
+    --shadow-soft: 0 4px 20px -2px hsl(217 91% 60% / 0.15);
+    --shadow-medium: 0 8px 30px -4px hsl(217 91% 60% / 0.2);
+    --shadow-strong: 0 20px 40px -8px hsl(217 91% 60% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-white text-primary hover:bg-white/90 shadow-medium transition-all duration-300 hover:shadow-strong;
+  }
+  
+  .btn-hero-outline {
+    @apply bg-transparent text-foreground border-2 border-border hover:bg-[#8e6f2f] hover:text-white active:bg-[#8e6f2f] active:text-white transition-all duration-300;
+  }
+  
+  /* Gradient Backgrounds */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  /* Custom Shadows */
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-strong {
+    box-shadow: var(--shadow-strong);
+  }
+  
+  /* Service Cards */
+  .service-card {
+    @apply bg-white rounded-xl p-8 shadow-soft hover:shadow-medium transition-all duration-300 border border-border/50;
+  }
+  
+  .service-card:hover {
+    @apply transform translate-y-[-4px];
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+  
+  /* Enhanced Animation Utilities */
+  .hover-scale {
+    @apply transition-transform duration-200 ease-out hover:scale-105;
+  }
+  
+  .animate-fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  /* Insurance Slider Animation Classes */
+  .animate_up {
+    animation: animateUp 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .animate_left {
+    animation: animateLeft 1.2s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  .animate_down {
+    animation: animateDown 1s ease-out 0.3s forwards;
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+/* Additional Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Insurance Slider Animations */
+@keyframes animateUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes animateLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes animateDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Primary color variants for better theming */
+:root {
+  --primary-dark: 220 70% 40%;
+  --primary-light: 220 100% 70%;
+}
+
+/* Footer Form Styles - Vankine Inspired */
+.newsteller_simple.button_style_one input[type="email"] {
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 5px 15px;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0;
+  background: transparent;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  transition: all 0.5s ease-in-out;
+  outline: none;
+}
+
+.newsteller_simple.button_style_one input[type="email"]::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.newsteller_simple.button_style_one input[type="email"]:focus,
+.newsteller_simple.button_style_one input[type="email"]:hover {
+  border-bottom-color: white;
+}
+
+.newsteller_simple.button_style_one input[type="submit"] {
+  display: block;
+  height: 50px;
+  min-height: 50px;
+  padding: 5px 15px;
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
+  background: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary));
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  margin: 0;
+}
+
+.newsteller_simple.button_style_one input[type="submit"]:hover {
+  background: hsl(var(--primary) / 0.8);
+  border-color: hsl(var(--primary) / 0.8);
+}
+
+/* Large container */
+.large-container {
+  position: static;
+  max-width: 1650px;
+  padding: 0px 15px;
+  margin: 0 auto;
+}
+
+/* Optional: thin custom scrollbar for .scrollbarcolor containers */
+.scrollbarcolor {
+  scrollbar-width: thin;
+}
+.scrollbarcolor::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.scrollbarcolor::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: rgba(0,0,0,.25);
+}
+
+/* Team video hover styles */
+.team-video-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.team-video-wrap .team-hover-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;                 /* hidden until hover/focus */
+  pointer-events: none;
+  transition: opacity .25s ease;
+  border-radius: inherit;
+  /* If your image has rounded corners, ensure the video matches */
+}
+
+.group:hover .team-hover-video,
+.group:focus .team-hover-video {
+  opacity: 1;                 /* fade video in on hover/focus of the card */
+}
+
+/* OptionPanel Styles */
+.option_panel-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.option_panel-popup.popup-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sdmenu_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.option_boxed {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 480px;
+  max-width: 90vw;
+  height: 100vh;
+  background: white;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.option_panel-popup.popup-visible .option_boxed {
+  transform: translateX(0);
+}
+
+.close-option-pan {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.close-option-pan:hover {
+  color: #333;
+}
+
+.option_content {
+  padding: 60px 30px 30px;
+}
+
+.log_bx {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo_default {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.about_company {
+  color: #666;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.contnet_box {
+  margin-top: 30px;
+}
+
+.title_no_a_28 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.title_no_a_20 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-top: 10px;
+}
+
+.modal_post_grid {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.modal_post_grid:hover {
+  transform: translateY(-2px);
+}
+
+.modal_post_grid img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.contact_panel {
+  margin: 30px 0;
+}
+
+.c_pan {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.c_pan a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.owl-stage-outer {
+  overflow: hidden;
+  position: relative;
+}
+
+.theme_carousel {
+  margin-bottom: 20px;
+}
