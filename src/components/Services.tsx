@@ -125,6 +125,16 @@ const ozoneServices: ServiceCategory[] = [
 ];
 
 
+// Service card gradients matching CodePen design
+const serviceGradients = [
+  'linear-gradient(to bottom, #ff2ae0, #645bf6)', // Travel: Pink to Purple
+  'linear-gradient(to bottom, #3f2ae0, #6ffa12)', // Health: Blue to Green
+  'linear-gradient(to bottom, #af2ae0, #145ba6)', // Auto: Purple to Blue
+  'linear-gradient(to bottom, #ff6b2a, #ff2ae0)', // Home: Orange to Pink
+  'linear-gradient(to bottom, #2affe0, #145ba6)', // Umbrella: Teal to Blue
+  'linear-gradient(to bottom, #6ffa12, #2affe0)', // Business: Green to Teal
+];
+
 const Services: React.FC<ServicesProps> = ({
   smallTitle = "Our Services",
   bigTitle = "Insurance Solutions Tailored to Your Needs",
@@ -163,30 +173,26 @@ const Services: React.FC<ServicesProps> = ({
 
   return (
     <section id="services" className={`service-section relative overflow-hidden ${className}`}>
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-muted via-background to-muted/50" />
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s', animationDelay: '1s' }} />
-      </div>
+      {/* Dark Purple Background */}
+      <div className="absolute inset-0 bg-[#3c2846]" />
 
       {/* top spacing */}
       <div className="pt-20" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
-            <h4 className="text-primary font-semibold text-sm tracking-wide uppercase">{smallTitle}</h4>
+          <div className="inline-block mb-4 px-4 py-2 bg-white/10 rounded-full">
+            <h4 className="text-white font-semibold text-sm tracking-wide uppercase">{smallTitle}</h4>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             {bigTitle}
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">{intro}</p>
+          <p className="text-white/80 text-lg leading-relaxed max-w-3xl mx-auto">{intro}</p>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+        <div className="flex justify-center flex-wrap gap-12 mb-8 px-4">
           {ozoneServices.map((service, index) => {
             const IconComponent = service.icon;
             const isVisible = visibleCards.has(index);
@@ -195,73 +201,30 @@ const Services: React.FC<ServicesProps> = ({
               <article
                 key={service.id}
                 ref={(el) => { cardsRef.current[index] = el; }}
-                className={`group relative bg-card rounded-2xl overflow-hidden transition-all duration-700 ${
+                className={`service-card-pill relative transition-all duration-700 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ 
                   transitionDelay: `${index * 100}ms`,
+                  background: serviceGradients[index],
                 }}
               >
-                {/* Gradient Border Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                <div className="absolute inset-[2px] bg-card rounded-2xl" />
+                {/* Diagonal Light Streak */}
+                <div className="service-card-shine" />
                 
-                {/* Content Container */}
-                <div className="relative">
-                  {/* Icon Header with Animated Background */}
-                  <div className="relative h-48 bg-gradient-to-br from-primary to-secondary overflow-hidden">
-                    {/* Animated Circles */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2 group-hover:scale-150 transition-transform duration-700" />
-                    
-                    {/* Icon */}
-                    <div className="relative h-full flex items-center justify-center">
-                      <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center text-primary shadow-strong group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                        <IconComponent className="w-12 h-12" strokeWidth={1.5} />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative p-8 bg-card">
-                    <h3 className="text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {service.description}
-                    </p>
-                    
-                    {/* Feature List */}
-                    <ul className="space-y-3 mb-8">
-                      {service.items.map((item, idx) => (
-                        <li 
-                          key={idx} 
-                          className="flex items-start gap-3 text-sm text-muted-foreground group/item"
-                        >
-                          <div className="mt-0.5 flex-shrink-0">
-                            <div className="w-5 h-5 rounded-full bg-primary/10 group-hover/item:bg-primary/20 flex items-center justify-center transition-colors duration-300">
-                              <Check className="w-3 h-3 text-primary" />
-                            </div>
-                          </div>
-                          <span className="group-hover/item:text-foreground transition-colors duration-300">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* CTA Button */}
-                    <a 
-                      href="#contact"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl hover:shadow-strong hover:scale-105 transition-all duration-300 group/btn"
-                    >
-                      Get a Quote
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                    </a>
-                  </div>
+                {/* Icon Container with Notches */}
+                <div className="service-icon-container">
+                  <IconComponent className="text-white text-6xl" size={96} strokeWidth={1.5} />
                 </div>
 
-                {/* Hover Glow Effect */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
+                {/* Content */}
+                <div className="service-card-content">
+                  <h2 className="text-white text-3xl font-bold uppercase mb-4 tracking-wide">
+                    {service.title}
+                  </h2>
+                  <p className="text-white/90 leading-relaxed text-base">
+                    {service.description}
+                  </p>
                 </div>
               </article>
             );
