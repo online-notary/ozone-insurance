@@ -10,7 +10,7 @@ import OptionPanel from "@/components/OptionPanel";
 import professionalTeam from "@/assets/professional-team.jpg";
 import madhuAbout from "@/assets/madhu-about.png";
 import ashutoshShyam from "@/assets/ashutosh-shyam-new.png";
-import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
+import rukminiVemulakonda from "@/assets/rukmini-vemulakonda-new.png";
 import anitaMirchandani from "@/assets/anita-mirchandani.gif";
 import sunithaPentapati from "@/assets/sunitha-pentapati.gif";
 import santhoshRaghunath from "@/assets/santhosh-raghunath.gif";
