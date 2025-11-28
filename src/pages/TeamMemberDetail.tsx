@@ -3,6 +3,14 @@ import { ArrowLeft, Mail, Phone, Linkedin, Facebook } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import madhuGowda from "@/assets/madhu-gowda.gif";
 import ashutoshShyam from "@/assets/ashutosh-shyam.gif";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
@@ -177,8 +185,28 @@ const TeamMemberDetail = () => {
         {/* Hero Section */}
         <div className="bg-gradient-primary py-16">
           <div className="container mx-auto px-4">
+            <Breadcrumb className="mb-6">
+              <BreadcrumbList className="text-white/80">
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/" className="hover:text-white transition-colors">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="text-white/60" />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/#team" className="hover:text-white transition-colors">Team</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="text-white/60" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="text-white font-semibold">{member.name}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+            
             <Link to="/#team">
-              <Button variant="ghost" className="text-white hover:text-white/80 mb-6">
+              <Button variant="ghost" className="text-white hover:text-white/80 hover:bg-white/10">
                 <ArrowLeft className="mr-2" size={16} />
                 Back to Team
               </Button>
