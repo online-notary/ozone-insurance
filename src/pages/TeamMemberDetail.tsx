@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
 import madhuGowda from "@/assets/madhu-gowda-new.png";
-import ashutoshShyam from "@/assets/ashutosh-shyam.gif";
+import ashutoshShyam from "@/assets/ashutosh-shyam-new.png";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
 import anitaMirchandani from "@/assets/anita-mirchandani.gif";
 import sunithaPentapati from "@/assets/sunitha-pentapati.gif";
