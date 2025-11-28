@@ -24,8 +24,8 @@ type TeamSectionProps = {
 const SkillBar: React.FC<{ s: Skill }> = ({ s }) => (
   <div className="mb-6">
     <div className="flex justify-between items-center mb-2">
-      <h6 className="text-lg font-medium text-foreground">{s.label}</h6>
-      <span className="text-primary font-semibold">{s.percent}%</span>
+      <h6 className="text-lg font-medium text-white">{s.label}</h6>
+      <span className="text-white font-semibold">{s.percent}%</span>
     </div>
     <div className="w-full bg-secondary rounded-full h-2">
       <div
@@ -95,10 +95,10 @@ const TeamSection: React.FC<TeamSectionProps> = ({
       <div className="relative z-10">
         {/* Team Members */}
         <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h4 className="text-primary font-medium mb-4">{headingSmall}</h4>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white">{heading}</h2>
-        </div>
+         <div className="text-center mb-16">
+           <h4 className="text-white font-medium mb-4">{headingSmall}</h4>
+           <h2 className="text-4xl lg:text-5xl font-bold text-white">{heading}</h2>
+         </div>
 
         {/* Team Members Row */}
         <div className="flex flex-wrap justify-center gap-8 mb-20">
@@ -133,9 +133,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({
           </div>
 
           <div>
-            <h4 className="text-primary font-medium mb-4">{skillsHeadingSmall}</h4>
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">{skillsHeading}</h2>
-            <p className="text-muted-foreground mb-8 leading-relaxed">{skillsDesc}</p>
+            <h4 className="text-white font-medium mb-4">{skillsHeadingSmall}</h4>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">{skillsHeading}</h2>
+            <p className="text-white/90 mb-8 leading-relaxed">{skillsDesc}</p>
 
             {skills.map((s, i) => (
               <SkillBar key={i} s={s} />
@@ -148,8 +148,8 @@ const TeamSection: React.FC<TeamSectionProps> = ({
         <div className="bg-secondary/30 mt-20 py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h4 className="text-primary font-medium mb-4">{featuresHeadingSmall}</h4>
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground">{featuresHeading}</h2>
+            <h4 className="text-white font-medium mb-4">{featuresHeadingSmall}</h4>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">{featuresHeading}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
