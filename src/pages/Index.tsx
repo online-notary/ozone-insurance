@@ -7,7 +7,6 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import OptionPanel from "@/components/OptionPanel";
-import professionalTeam from "@/assets/professional-team.jpg";
 import madhuAbout from "@/assets/madhu-about.png";
 import ashutoshShyam from "@/assets/ashutosh-shyam-new.png";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda-new.png";
@@ -91,13 +90,6 @@ const Index = () => {
     }
   ];
 
-  const skills = [
-    { label: "Insurance Planning", percent: 95 },
-    { label: "Risk Assessment", percent: 88 },
-    { label: "Financial Analysis", percent: 92 },
-    { label: "Client Relations", percent: 97 }
-  ];
-
   const features = [
     {
       iconClass: "consultation",
@@ -138,9 +130,6 @@ const Index = () => {
         <Hero />
         <TeamSection
           members={teamMembers}
-          videoImgSrc={professionalTeam}
-          videoUrl="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-          skills={skills}
           features={features}
         />
         <Services />
