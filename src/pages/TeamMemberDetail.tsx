@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect } from "react";
+import TeamMemberContactForm from "@/components/TeamMemberContactForm";
 import { ArrowLeft, Mail, Phone, Linkedin, Facebook, Twitter, Share2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -14,7 +15,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
-import madhuGowda from "@/assets/madhu-gowda.gif";
+import madhuGowda from "@/assets/madhu-gowda-professional.png";
 import ashutoshShyam from "@/assets/ashutosh-shyam.gif";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
 import anitaMirchandani from "@/assets/anita-mirchandani.gif";
@@ -380,16 +381,25 @@ const TeamMemberDetail = () => {
                 </div>
                 
                 {member.bio ? (
-                  <div className="space-y-6 text-foreground leading-relaxed">
+                  <div className="space-y-6 text-foreground leading-relaxed mb-12">
                     {member.bio.map((paragraph, index) => (
                       <p key={index} className="text-lg">{paragraph}</p>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-muted-foreground text-lg">
+                  <p className="text-muted-foreground text-lg mb-12">
                     {member.name} is a valued member of our team at Ozone Insurance Services.
                   </p>
                 )}
+
+                {/* Contact Form */}
+                <div className="mt-12">
+                  <TeamMemberContactForm
+                    memberName={member.name}
+                    memberEmail={member.email}
+                    memberPhone={member.phone}
+                  />
+                </div>
               </div>
             </div>
           </div>
