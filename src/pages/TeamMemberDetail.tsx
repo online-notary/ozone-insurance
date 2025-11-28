@@ -263,19 +263,19 @@ const TeamMemberDetail = () => {
                   />
                   
                   <div className="space-y-4">
-                    <div>
-                      <h1 className="text-3xl font-bold text-primary mb-2">{member.name}</h1>
-                      <p className="text-xl text-secondary font-semibold mb-4">{member.role}</p>
+                  <div>
+                      <h1 className="text-4xl font-bold text-primary mb-3">{member.name}</h1>
+                      <p className="text-2xl text-secondary font-semibold mb-6">{member.role}</p>
                     </div>
 
                     {member.license && (
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-base text-muted-foreground mb-2">
                         <strong>License:</strong> {member.license}
                       </div>
                     )}
 
                     {member.npn && (
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-base text-muted-foreground mb-2">
                         <strong>NPN:</strong> {member.npn}
                       </div>
                     )}
@@ -283,10 +283,10 @@ const TeamMemberDetail = () => {
                     {member.email && (
                       <a 
                         href={`mailto:${member.email}`}
-                        className="flex items-center gap-2 text-primary hover:text-secondary transition-colors"
+                        className="flex items-center gap-2 text-primary hover:text-secondary transition-colors mb-2"
                       >
-                        <Mail size={18} />
-                        <span className="text-sm">{member.email}</span>
+                        <Mail size={20} />
+                        <span className="text-base">{member.email}</span>
                       </a>
                     )}
 
@@ -295,8 +295,8 @@ const TeamMemberDetail = () => {
                         href={`tel:${member.phone}`}
                         className="flex items-center gap-2 text-primary hover:text-secondary transition-colors"
                       >
-                        <Phone size={18} />
-                        <span className="text-sm">{member.phone}</span>
+                        <Phone size={20} />
+                        <span className="text-base">{member.phone}</span>
                       </a>
                     )}
 
@@ -321,7 +321,7 @@ const TeamMemberDetail = () => {
               {/* Right Column - Biography */}
               <div className="md:col-span-2">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-primary">About {member.name.split(' ')[0]}</h2>
+                  <h2 className="text-3xl font-bold text-primary">About {member.name.split(' ')[0]}</h2>
                   
                   {/* Social Sharing Buttons */}
                   <div className="flex items-center gap-2">
@@ -375,13 +375,13 @@ const TeamMemberDetail = () => {
                 </div>
                 
                 {member.bio ? (
-                  <div className="space-y-4 text-foreground leading-relaxed">
+                  <div className="space-y-6 text-foreground leading-relaxed">
                     {member.bio.map((paragraph, index) => (
-                      <p key={index} className="text-base">{paragraph}</p>
+                      <p key={index} className="text-lg">{paragraph}</p>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground text-lg">
                     {member.name} is a valued member of our team at Ozone Insurance Services.
                   </p>
                 )}
