@@ -14,7 +14,7 @@ import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
 import anitaMirchandani from "@/assets/anita-mirchandani.gif";
 import sunithaPentapati from "@/assets/sunitha-pentapati.gif";
 import santhoshRaghunath from "@/assets/santhosh-raghunath.gif";
-import madhuGowda from "@/assets/madhu-gowda.gif";
+import madhuGowda from "@/assets/madhu-gowda-new.png";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
