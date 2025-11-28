@@ -14,6 +14,7 @@ import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
 import anitaMirchandani from "@/assets/anita-mirchandani.gif";
 import sunithaPentapati from "@/assets/sunitha-pentapati.gif";
 import santhoshRaghunath from "@/assets/santhosh-raghunath.gif";
+import madhuGowda from "@/assets/madhu-gowda.gif";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -28,6 +29,16 @@ const Index = () => {
   const [isOptionPanelOpen, setIsOptionPanelOpen] = useState(false);
 
   const teamMembers = [
+    {
+      name: "Madhu Gowda",
+      role: "Founder",
+      imgSrc: madhuGowda,
+      profileHref: "#",
+      socials: [
+        { iconClass: "linkedin", href: "#" },
+        { iconClass: "facebook", href: "#" }
+      ]
+    },
     {
       name: "Dr. Ashutosh Shyam, PhD",
       role: "Insurance Advisor",
