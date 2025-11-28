@@ -60,8 +60,8 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
 
   return (
     <div 
-      className="group hover:bg-gradient-to-b hover:from-[#8e6f2f] hover:to-[#7d6129] focus:bg-gradient-to-b focus:from-[#8e6f2f] focus:to-[#7d6129] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl focus:shadow-xl transition-all duration-300 p-6 text-center max-w-md mx-auto"
-      style={{backgroundColor: '#EDF7FE'}}
+      className="group hover:bg-gradient-primary focus:bg-gradient-primary rounded-2xl overflow-hidden shadow-soft hover:shadow-medium focus:shadow-medium transition-all duration-300 p-6 text-center max-w-md mx-auto bg-muted"
+      style={{}}
       onMouseEnter={play}
       onMouseLeave={stop}
       onFocus={play}
@@ -95,15 +95,15 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
       </div>
       
       <div className="px-2">
-        <h6 className="text-2xl font-bold text-[#0F3567] group-hover:text-white group-focus:text-white transition-colors mb-3">
+        <h6 className="text-2xl font-bold text-primary group-hover:text-white group-focus:text-white transition-colors mb-3">
           <a href={m.profileHref || "#"} className="text-inherit group-hover:text-white group-focus:text-white transition-colors">
             {m.name}
           </a>
         </h6>
-        <p className="text-[#0F3567] group-hover:text-white group-focus:text-white text-base font-semibold mb-4 leading-relaxed transition-colors">{m.role}</p>
+        <p className="text-primary group-hover:text-white group-focus:text-white text-base font-semibold mb-4 leading-relaxed transition-colors">{m.role}</p>
         
         {m.license && (
-          <p className="text-[#0F3567] group-hover:text-white group-focus:text-white text-xs mb-4 leading-relaxed transition-colors font-medium">
+          <p className="text-primary group-hover:text-white group-focus:text-white text-xs mb-4 leading-relaxed transition-colors font-medium">
             {m.license}
           </p>
         )}
@@ -113,7 +113,7 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
             <a 
               key={i}
               href={s.href} 
-              className="w-10 h-10 bg-blue-600/20 group-hover:bg-white/20 group-focus:bg-white/20 hover:bg-blue-600/30 group-hover:hover:bg-white/30 group-focus:hover:bg-white/30 text-[#0F3567] group-hover:text-white group-focus:text-white rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
+              className="w-10 h-10 bg-primary/10 group-hover:bg-white/20 group-focus:bg-white/20 hover:bg-primary/20 group-hover:hover:bg-white/30 group-focus:hover:bg-white/30 text-primary group-hover:text-white group-focus:text-white rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
               style={{}}
               aria-label={s.iconClass}
             >
