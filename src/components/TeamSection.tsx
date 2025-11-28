@@ -86,13 +86,13 @@ const TeamSection: React.FC<TeamSectionProps> = ({
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-20"
+        className="absolute inset-0 w-full h-full object-cover opacity-40"
       >
         <source src="/videos/team-background.mp4" type="video/mp4" />
       </video>
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/60 z-[1]" />
       
       {/* Content Overlay */}
       <div className="relative z-10">
