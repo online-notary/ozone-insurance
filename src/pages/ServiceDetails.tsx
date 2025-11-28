@@ -26,13 +26,12 @@ interface ServiceData {
   id: string;
   slug: string;
   title: string;
-  subtitle: string;
   main_title: string;
   description: string;
   image_url: string;
   icon_name: string;
   features: string[];
-  benefits: Array<{ title: string; description: string }>;
+  benefits: string[];
   additional_features: string[];
   items: string[];
 }
@@ -78,7 +77,7 @@ const ServiceDetails = () => {
           const typedService: ServiceData = {
             ...data,
             features: Array.isArray(data.features) ? data.features as string[] : [],
-            benefits: Array.isArray(data.benefits) ? data.benefits as Array<{ title: string; description: string }> : [],
+            benefits: Array.isArray(data.benefits) ? data.benefits as string[] : [],
             additional_features: Array.isArray(data.additional_features) ? data.additional_features as string[] : [],
             items: Array.isArray(data.items) ? data.items as string[] : []
           };
@@ -187,7 +186,7 @@ const ServiceDetails = () => {
             {/* Content */}
             <div className="space-y-6">
               <div>
-                <p className="text-primary font-medium mb-2">{service.subtitle}</p>
+                <p className="text-primary font-medium mb-2">{service.title}</p>
                 <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                   {service.main_title}
                 </h2>
@@ -227,8 +226,7 @@ const ServiceDetails = () => {
                   <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                     <FileText className="w-8 h-8 text-primary" />
                   </div>
-                  <h4 className="text-xl font-semibold mb-3">{benefit.title}</h4>
-                  <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                  <p className="text-foreground">{benefit}</p>
                 </Card>
               ))}
             </div>
