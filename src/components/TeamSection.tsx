@@ -79,7 +79,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
   features
 }) => {
   return (
-    <section id="advisors" className="py-20">
+    <section id="team" className="py-20">
       {/* Team Members */}
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
