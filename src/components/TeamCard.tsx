@@ -60,7 +60,7 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
 
   return (
     <div 
-      className="group hover:bg-gradient-to-b hover:from-[#8e6f2f] hover:to-[#7d6129] focus:bg-gradient-to-b focus:from-[#8e6f2f] focus:to-[#7d6129] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl focus:shadow-xl transition-all duration-300 p-6 text-center max-w-sm mx-auto" 
+      className="group hover:bg-gradient-to-b hover:from-[#8e6f2f] hover:to-[#7d6129] focus:bg-gradient-to-b focus:from-[#8e6f2f] focus:to-[#7d6129] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl focus:shadow-xl transition-all duration-300 p-6 text-center max-w-md mx-auto"
       style={{backgroundColor: '#EDF7FE'}}
       onMouseEnter={play}
       onMouseLeave={stop}
@@ -70,7 +70,7 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
     >
       <div className="mb-4">
         <div 
-          className="w-64 h-72 mx-auto rounded-xl overflow-hidden shadow-md team-video-wrap"
+          className="w-80 h-80 mx-auto rounded-xl overflow-hidden shadow-md team-video-wrap"
         >
           <img src={m.imgSrc} alt={m.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
 
