@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import OptionPanel from "@/components/OptionPanel";
 import professionalTeam from "@/assets/professional-team.jpg";
 import businessmanProfessional from "@/assets/businessman-professional.png";
+import ashutoshShyam from "@/assets/ashutosh-shyam.gif";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -24,28 +25,14 @@ const Index = () => {
 
   const teamMembers = [
     {
-      name: "Carlos Rivera",
-      role: "Financial & Protection Specialist, Senior Marketing Director",
-      imgSrc: "/lovable-uploads/21f95c47-b29b-4622-924c-7ee2d2c569f0.png",
+      name: "Dr. Ashutosh Shyam, PhD",
+      role: "Insurance Advisor",
+      imgSrc: ashutoshShyam,
       profileHref: "#",
       socials: [
         { iconClass: "linkedin", href: "#" },
-        { iconClass: "twitter", href: "#" }
-      ],
-      videoSrc: "https://cwhwihjnhezgsbmkvbjf.supabase.co/storage/v1/object/public/Carlos%20Rivera/Carlos%20Rivera.mp4",
-      license: "CA Lic #1893774"
-    },
-    {
-      name: "Edward Avendano Navarrete",
-      role: "Senior Marketing Director, Financial & Protection Specialist",
-      imgSrc: "/lovable-uploads/f32b7a7d-1eeb-4cb9-b114-5929f088562b.png",
-      profileHref: "#",
-      socials: [
-        { iconClass: "linkedin", href: "#" },
-        { iconClass: "twitter", href: "#" }
-      ],
-      videoSrc: "https://cwhwihjnhezgsbmkvbjf.supabase.co/storage/v1/object/public/Edward%20Avendano%20Navarrete/Edward%20Avendano%20Navarrete.mp4",
-      license: "CA Lic #4377887"
+        { iconClass: "facebook", href: "#" }
+      ]
     }
   ];
 
