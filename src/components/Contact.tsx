@@ -106,106 +106,27 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Levitate Meeting Scheduler */}
           <div className="lg:col-span-2">
-            <Card className="p-8 shadow-medium">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Send us a Message</h3>
+            <Card className="p-4 shadow-medium overflow-hidden">
+              <div className="space-y-4">
+                <div className="px-4 pt-4">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">Schedule a Meeting</h3>
                   <p className="text-muted-foreground">
-                    Fill out the form below and we'll get back to you within 24 hours.
+                    Book a consultation with our team at your convenience.
                   </p>
                 </div>
 
-                <form className="space-y-6">
-                  {/* Name Fields */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        First Name *
-                      </label>
-                      <Input 
-                        placeholder="Enter your first name"
-                        className="h-12"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Last Name *
-                      </label>
-                      <Input 
-                        placeholder="Enter your last name"
-                        className="h-12"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Contact Fields */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Email Address *
-                      </label>
-                      <Input 
-                        type="email"
-                        placeholder="Enter your email"
-                        className="h-12"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Phone Number
-                      </label>
-                      <Input 
-                        type="tel"
-                        placeholder="Enter your phone number"
-                        className="h-12"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Service Interest */}
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Service Interest
-                    </label>
-                    <select className="w-full h-12 px-3 py-2 border border-input rounded-md bg-background text-foreground">
-                      <option value="">Select a service</option>
-                      <option value="life-insurance">Life Insurance</option>
-                      <option value="health-planning">Health Planning</option>
-                      <option value="retirement-planning">Retirement Planning</option>
-                      <option value="comprehensive">Comprehensive Planning</option>
-                    </select>
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Message *
-                    </label>
-                    <Textarea 
-                      placeholder="Tell us about your financial planning needs..."
-                      rows={5}
-                      className="resize-none"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full bg-[#8e6f2f] hover:bg-[#7d6129] text-white shadow-medium group"
-                  >
-                    Send Message
-                    <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-
-                  {/* Privacy Note */}
-                  <p className="text-xs text-muted-foreground text-center">
-                    By submitting this form, you agree to our privacy policy. 
-                    We'll never share your information with third parties.
-                  </p>
-                </form>
+                {/* Embedded Levitate Scheduler */}
+                <div className="relative w-full" style={{ minHeight: '600px' }}>
+                  <iframe
+                    src="https://meeting.levitate.ai/#/landing/9105df-4i4n1e"
+                    className="w-full h-full rounded-lg"
+                    style={{ minHeight: '600px', border: 'none' }}
+                    title="Schedule a Meeting"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </Card>
           </div>
