@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Mail, Phone, Linkedin, Facebook } from "lucide-react";
+import { ArrowLeft, Mail, Phone, Linkedin, Facebook, Twitter, Share2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamCard from "@/components/TeamCard";
@@ -12,6 +12,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { toast } from "sonner";
 import madhuGowda from "@/assets/madhu-gowda.gif";
 import ashutoshShyam from "@/assets/ashutosh-shyam.gif";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
@@ -160,6 +161,38 @@ const TeamMemberDetail = () => {
   const member = teamMembersData.find(m => m.id === memberId);
   const otherMembers = teamMembersData.filter(m => m.id !== memberId);
 
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const shareTitle = member ? `Meet ${member.name} - ${member.role} at Ozone Insurance` : '';
+  const shareText = member ? `Check out ${member.name}'s profile at Ozone Insurance Services` : '';
+
+  const handleShare = (platform: string) => {
+    if (!member) return;
+
+    let url = '';
+    switch (platform) {
+      case 'facebook':
+        url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+        break;
+      case 'twitter':
+        url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+        break;
+      case 'linkedin':
+        url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+        break;
+      case 'email':
+        url = `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+        break;
+      case 'copy':
+        navigator.clipboard.writeText(shareUrl);
+        toast.success('Link copied to clipboard!');
+        return;
+    }
+
+    if (url) {
+      window.open(url, '_blank', 'width=600,height=400');
+    }
+  };
+
   if (!member) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -287,7 +320,59 @@ const TeamMemberDetail = () => {
 
               {/* Right Column - Biography */}
               <div className="md:col-span-2">
-                <h2 className="text-2xl font-bold text-primary mb-6">About {member.name.split(' ')[0]}</h2>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-primary">About {member.name.split(' ')[0]}</h2>
+                  
+                  {/* Social Sharing Buttons */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground mr-2">Share:</span>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handleShare('facebook')}
+                      className="hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] transition-colors"
+                      title="Share on Facebook"
+                    >
+                      <Facebook size={18} />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handleShare('twitter')}
+                      className="hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2] transition-colors"
+                      title="Share on Twitter"
+                    >
+                      <Twitter size={18} />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handleShare('linkedin')}
+                      className="hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2] transition-colors"
+                      title="Share on LinkedIn"
+                    >
+                      <Linkedin size={18} />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handleShare('email')}
+                      className="hover:bg-primary hover:text-white hover:border-primary transition-colors"
+                      title="Share via Email"
+                    >
+                      <Mail size={18} />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => handleShare('copy')}
+                      className="hover:bg-primary hover:text-white hover:border-primary transition-colors"
+                      title="Copy Link"
+                    >
+                      <Share2 size={18} />
+                    </Button>
+                  </div>
+                </div>
                 
                 {member.bio ? (
                   <div className="space-y-4 text-foreground leading-relaxed">
