@@ -95,12 +95,12 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
       </div>
       
       <div className="px-2">
-        <h6 className="text-lg font-bold text-[#0F3567] group-hover:text-white group-focus:text-white transition-colors mb-2">
+        <h6 className="text-2xl font-bold text-[#0F3567] group-hover:text-white group-focus:text-white transition-colors mb-3">
           <a href={m.profileHref || "#"} className="text-inherit group-hover:text-white group-focus:text-white transition-colors">
             {m.name}
           </a>
         </h6>
-        <p className="text-[#0F3567] group-hover:text-white group-focus:text-white text-xs mb-4 leading-relaxed transition-colors">{m.role}</p>
+        <p className="text-[#0F3567] group-hover:text-white group-focus:text-white text-base font-semibold mb-4 leading-relaxed transition-colors">{m.role}</p>
         
         {m.license && (
           <p className="text-[#0F3567] group-hover:text-white group-focus:text-white text-xs mb-4 leading-relaxed transition-colors font-medium">
