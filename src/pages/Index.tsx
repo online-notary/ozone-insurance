@@ -107,10 +107,10 @@ const Index = () => {
       <Header onOptionPanelToggle={() => setIsOptionPanelOpen(!isOptionPanelOpen)} />
       <main>
         <Hero />
+        <Services />
         <TeamSection
           members={teamMembers}
         />
-        <Services />
         <About mainImageSrc={madhuAbout} />
         <Contact />
       </main>
