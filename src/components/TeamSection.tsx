@@ -91,6 +91,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({
         <source src="/videos/team-background.mp4" type="video/mp4" />
       </video>
       
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/60 z-[5]"></div>
+      
       {/* Content Overlay */}
       <div className="relative z-10">
         {/* Team Members */}
