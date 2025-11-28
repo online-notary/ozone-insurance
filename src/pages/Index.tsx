@@ -12,7 +12,7 @@ import madhuAbout from "@/assets/madhu-about.png";
 import ashutoshShyam from "@/assets/ashutosh-shyam-new.png";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda-new.png";
 import anitaMirchandani from "@/assets/anita-mirchandani-new.png";
-import sunithaPentapati from "@/assets/sunitha-pentapati.gif";
+import sunithaPentapati from "@/assets/sunitha-pentapati-new.png";
 import santhoshRaghunath from "@/assets/santhosh-raghunath.gif";
 import madhuGowda from "@/assets/madhu-gowda-new.png";
 import project1 from "@/assets/project-1.jpg";
