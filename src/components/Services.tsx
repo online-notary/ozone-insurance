@@ -201,7 +201,7 @@ const Services: React.FC<ServicesProps> = ({
               <article
                 key={service.id}
                 ref={(el) => { cardsRef.current[index] = el; }}
-                className={`service-card-pill relative transition-all duration-700 ${
+                className={`service-card-pill group/card relative transition-all duration-700 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ 
@@ -212,9 +212,12 @@ const Services: React.FC<ServicesProps> = ({
                 {/* Diagonal Light Streak */}
                 <div className="service-card-shine" />
                 
+                {/* Gradient Glow Effect on Hover */}
+                <div className="service-card-glow" />
+                
                 {/* Icon Container with Notches */}
                 <div className="service-icon-container">
-                  <IconComponent className="text-white text-6xl" size={96} strokeWidth={1.5} />
+                  <IconComponent className="service-card-icon text-white text-6xl" size={96} strokeWidth={1.5} />
                 </div>
 
                 {/* Content */}
