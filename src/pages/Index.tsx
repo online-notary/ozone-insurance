@@ -11,6 +11,7 @@ import professionalTeam from "@/assets/professional-team.jpg";
 import businessmanProfessional from "@/assets/businessman-professional.png";
 import ashutoshShyam from "@/assets/ashutosh-shyam.gif";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
+import anitaMirchandani from "@/assets/anita-mirchandani.gif";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -39,6 +40,16 @@ const Index = () => {
       name: "Rukmini Vemulakonda",
       role: "Insurance Advisor",
       imgSrc: rukminiVemulakonda,
+      profileHref: "#",
+      socials: [
+        { iconClass: "linkedin", href: "#" },
+        { iconClass: "facebook", href: "#" }
+      ]
+    },
+    {
+      name: "Anita Mirchandani",
+      role: "Insurance Advisor",
+      imgSrc: anitaMirchandani,
       profileHref: "#",
       socials: [
         { iconClass: "linkedin", href: "#" },
