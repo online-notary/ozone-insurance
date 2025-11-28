@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Mail, Phone, Linkedin, Facebook } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TeamCard from "@/components/TeamCard";
 import { Button } from "@/components/ui/button";
 import {
   Breadcrumb,
@@ -157,6 +158,7 @@ const getIcon = (iconClass: string) => {
 const TeamMemberDetail = () => {
   const { memberId } = useParams<{ memberId: string }>();
   const member = teamMembersData.find(m => m.id === memberId);
+  const otherMembers = teamMembersData.filter(m => m.id !== memberId);
 
   if (!member) {
     return (
@@ -301,6 +303,34 @@ const TeamMemberDetail = () => {
               </div>
             </div>
           </div>
+
+          {/* Other Team Members Section */}
+          {otherMembers.length > 0 && (
+            <div className="mt-16 pt-16 border-t border-border">
+              <h2 className="text-3xl font-bold text-primary text-center mb-4">
+                Meet Other Team Members
+              </h2>
+              <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+                Connect with our other talented advisors who are ready to help you with your insurance needs
+              </p>
+              
+              <div className="flex flex-wrap justify-center gap-8">
+                {otherMembers.map((m) => (
+                  <div key={m.id} className="w-full sm:w-auto">
+                    <TeamCard 
+                      m={{
+                        name: m.name,
+                        role: m.role,
+                        imgSrc: m.imgSrc,
+                        profileHref: `/team/${m.id}`,
+                        socials: m.socials
+                      }} 
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />
