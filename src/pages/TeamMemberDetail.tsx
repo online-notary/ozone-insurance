@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { ArrowLeft, Mail, Phone, Linkedin, Facebook, Twitter, Share2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -160,6 +161,10 @@ const TeamMemberDetail = () => {
   const { memberId } = useParams<{ memberId: string }>();
   const member = teamMembersData.find(m => m.id === memberId);
   const otherMembers = teamMembersData.filter(m => m.id !== memberId);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [memberId]);
 
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
   const shareTitle = member ? `Meet ${member.name} - ${member.role} at Ozone Insurance` : '';
