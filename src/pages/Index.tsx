@@ -8,7 +8,7 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import OptionPanel from "@/components/OptionPanel";
 import professionalTeam from "@/assets/professional-team.jpg";
-import businessmanProfessional from "@/assets/businessman-professional.png";
+import madhuAbout from "@/assets/madhu-about.png";
 import ashutoshShyam from "@/assets/ashutosh-shyam.gif";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
 import anitaMirchandani from "@/assets/anita-mirchandani.gif";
@@ -144,7 +144,7 @@ const Index = () => {
           features={features}
         />
         <Services />
-        <About mainImageSrc={businessmanProfessional} />
+        <About mainImageSrc={madhuAbout} />
         <Contact />
       </main>
       <Footer />
