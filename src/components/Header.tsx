@@ -34,7 +34,7 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
   const navigation = [
     { name: "Home", href: "#home", section: "home" },
     { name: "Services", href: "#services", section: "services" },
-    { name: "Advisors", href: "#advisors", section: "advisors" },
+    { name: "Advisors", href: "#team", section: "team" },
     { name: "About", href: "#about", section: "about" },
     { name: "Contact", href: "#contact", section: "contact" },
   ];
