@@ -14,108 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          company: string | null
-          created_at: string
-          email: string
-          first_name: string | null
-          id: string
-          last_name: string | null
-          phone: string | null
-          updated_at: string
-        }
-        Insert: {
-          company?: string | null
-          created_at?: string
-          email: string
-          first_name?: string | null
-          id: string
-          last_name?: string | null
-          phone?: string | null
-          updated_at?: string
-        }
-        Update: {
-          company?: string | null
-          created_at?: string
-          email?: string
-          first_name?: string | null
-          id?: string
-          last_name?: string | null
-          phone?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
       services: {
         Row: {
-          additional_features: Json | null
-          benefits: Json | null
+          additional_features: string[] | null
+          benefits: string[] | null
           created_at: string
           description: string
-          features: Json | null
-          icon_name: string | null
+          features: string[] | null
+          icon_name: string
           id: string
           image_url: string | null
-          items: Json | null
+          items: string[] | null
           main_title: string
           slug: string
-          subtitle: string | null
           title: string
           updated_at: string
         }
         Insert: {
-          additional_features?: Json | null
-          benefits?: Json | null
+          additional_features?: string[] | null
+          benefits?: string[] | null
           created_at?: string
           description: string
-          features?: Json | null
-          icon_name?: string | null
+          features?: string[] | null
+          icon_name: string
           id?: string
           image_url?: string | null
-          items?: Json | null
+          items?: string[] | null
           main_title: string
           slug: string
-          subtitle?: string | null
           title: string
           updated_at?: string
         }
         Update: {
-          additional_features?: Json | null
-          benefits?: Json | null
+          additional_features?: string[] | null
+          benefits?: string[] | null
           created_at?: string
           description?: string
-          features?: Json | null
-          icon_name?: string | null
+          features?: string[] | null
+          icon_name?: string
           id?: string
           image_url?: string | null
-          items?: Json | null
+          items?: string[] | null
           main_title?: string
           slug?: string
-          subtitle?: string | null
           title?: string
           updated_at?: string
-        }
-        Relationships: []
-      }
-      user_roles: {
-        Row: {
-          created_at: string
-          id: string
-          role: Database["public"]["Enums"]["app_role"]
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          role: Database["public"]["Enums"]["app_role"]
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          role?: Database["public"]["Enums"]["app_role"]
-          user_id?: string
         }
         Relationships: []
       }
@@ -124,16 +67,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      has_role: {
-        Args: {
-          _role: Database["public"]["Enums"]["app_role"]
-          _user_id: string
-        }
-        Returns: boolean
-      }
+      [_ in never]: never
     }
     Enums: {
-      app_role: "advisor" | "client" | "admin"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -260,8 +197,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      app_role: ["advisor", "client", "admin"],
-    },
+    Enums: {},
   },
 } as const
