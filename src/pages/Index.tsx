@@ -33,7 +33,7 @@ const Index = () => {
       name: "Madhu Gowda",
       role: "Founder",
       imgSrc: madhuGowda,
-      profileHref: "#",
+      profileHref: "/team/madhu-gowda",
       socials: [
         { iconClass: "linkedin", href: "#" },
         { iconClass: "facebook", href: "#" }
@@ -43,7 +43,7 @@ const Index = () => {
       name: "Dr. Ashutosh Shyam, PhD",
       role: "Insurance Advisor",
       imgSrc: ashutoshShyam,
-      profileHref: "#",
+      profileHref: "/team/ashutosh-shyam",
       socials: [
         { iconClass: "linkedin", href: "#" },
         { iconClass: "facebook", href: "#" }
@@ -53,7 +53,7 @@ const Index = () => {
       name: "Rukmini Vemulakonda",
       role: "Insurance Advisor",
       imgSrc: rukminiVemulakonda,
-      profileHref: "#",
+      profileHref: "/team/rukmini-vemulakonda",
       socials: [
         { iconClass: "linkedin", href: "#" },
         { iconClass: "facebook", href: "#" }
@@ -63,7 +63,7 @@ const Index = () => {
       name: "Anita Mirchandani",
       role: "Insurance Advisor",
       imgSrc: anitaMirchandani,
-      profileHref: "#",
+      profileHref: "/team/anita-mirchandani",
       socials: [
         { iconClass: "linkedin", href: "#" },
         { iconClass: "facebook", href: "#" }
@@ -73,7 +73,7 @@ const Index = () => {
       name: "Sunitha Pentapati",
       role: "Insurance Advisor",
       imgSrc: sunithaPentapati,
-      profileHref: "#",
+      profileHref: "/team/sunitha-pentapati",
       socials: [
         { iconClass: "linkedin", href: "#" },
         { iconClass: "facebook", href: "#" }
@@ -83,7 +83,7 @@ const Index = () => {
       name: "Santhosh Raghunath",
       role: "Insurance Advisor",
       imgSrc: santhoshRaghunath,
-      profileHref: "#",
+      profileHref: "/team/santhosh-raghunath",
       socials: [
         { iconClass: "linkedin", href: "#" },
         { iconClass: "facebook", href: "#" }
