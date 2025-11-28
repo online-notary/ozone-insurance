@@ -44,34 +44,34 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          
-          {/* Contact Information */}
-          
-
-          {/* Levitate Meeting Scheduler */}
-          <div className="lg:col-span-2">
-            <Card className="p-4 shadow-medium overflow-hidden">
-              <div className="space-y-4">
-                <div className="px-4 pt-4">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Schedule a Meeting</h3>
-                  <p className="text-muted-foreground">
-                    Book a consultation with our team at your convenience.
-                  </p>
-                </div>
-
-                {/* Embedded Levitate Scheduler */}
-                <div className="relative w-full" style={{
-                minHeight: '600px'
-              }}>
-                  <iframe src="https://meeting.levitate.ai/#/landing/9105df-4i4n1e" className="w-full h-full rounded-lg" style={{
-                  minHeight: '600px',
-                  border: 'none'
-                }} title="Schedule a Meeting" loading="lazy" />
-                </div>
+        {/* Levitate Meeting Scheduler - Full Width */}
+        <div className="w-full">
+          <Card className="p-4 shadow-medium overflow-hidden">
+            <div className="space-y-4">
+              <div className="px-4 pt-4">
+                <h3 className="text-2xl font-bold text-foreground mb-2">Schedule a Meeting</h3>
+                <p className="text-muted-foreground">
+                  Book a consultation with our team at your convenience.
+                </p>
               </div>
-            </Card>
-          </div>
+
+              {/* Embedded Levitate Scheduler */}
+              <div className="relative w-full" style={{
+                minHeight: '700px'
+              }}>
+                <iframe 
+                  src="https://meeting.levitate.ai/#/landing/9105df-4i4n1e" 
+                  className="w-full h-full rounded-lg" 
+                  style={{
+                    minHeight: '700px',
+                    border: 'none'
+                  }} 
+                  title="Schedule a Meeting" 
+                  loading="lazy" 
+                />
+              </div>
+            </div>
+          </Card>
         </div>
 
         {/* CTA Section */}
