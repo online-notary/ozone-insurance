@@ -31,7 +31,7 @@ const Hero = () => {
       type: "video",
       badge: "Ozone Insurance",
       title: ["Better Insurance", "For", "Everyone"],
-      videoUrl: "/videos/ozone-intro.mp4",
+      videoUrl: "/videos/hero-video.mp4",
       alt: "Ozone Insurance - Your trusted insurance partner"
     },
     {
