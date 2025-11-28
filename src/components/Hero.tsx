@@ -5,7 +5,6 @@ import banner12 from "@/assets/banner-1-2.jpg";
 import banner13 from "@/assets/banner-1-3.jpg";
 import { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
-import { useAnimatedVideo } from "@/hooks/useAnimatedVideo";
 
 // Import slick carousel CSS
 import "slick-carousel/slick/slick.css";
@@ -16,7 +15,6 @@ const Hero = () => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const { videoUrl, isLoading: videoLoading, error: videoError } = useAnimatedVideo();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Clear timeout on component unmount
@@ -31,10 +29,10 @@ const Hero = () => {
   const slides = [
     {
       type: "video",
-      badge: "Dynamic Showcase",
-      title: ["Experience", "Our", "Innovation"],
-      videoUrl: videoUrl,
-      alt: "Dynamic showcase of our innovative insurance solutions"
+      badge: "Ozone Insurance",
+      title: ["Better Insurance", "For", "Everyone"],
+      videoUrl: "/videos/ozone-intro.mp4",
+      alt: "Ozone Insurance - Your trusted insurance partner"
     },
     {
       type: "image",
@@ -148,7 +146,7 @@ const Hero = () => {
           <div key={`slide-${index}`} className="outline-none">
             <div className="slide-item-content relative">
               {/* Video or Image Layer - Background */}
-              {slide.type === "video" && slide.videoUrl && !videoLoading ? (
+              {slide.type === "video" && slide.videoUrl ? (
                 <video
                   ref={videoRef}
                   className="absolute inset-0 w-full h-screen object-cover"
