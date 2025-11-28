@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export type Social = { iconClass: string; href: string };
 export type TeamMember = {
@@ -59,14 +60,13 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
   };
 
   return (
-    <div 
-      className="group hover:bg-gradient-primary focus:bg-gradient-primary rounded-2xl overflow-hidden shadow-soft hover:shadow-medium focus:shadow-medium transition-all duration-300 p-6 text-center max-w-md mx-auto bg-muted"
-      style={{}}
+    <Link 
+      to={m.profileHref || "#"}
+      className="block group hover:bg-gradient-primary focus:bg-gradient-primary rounded-2xl overflow-hidden shadow-soft hover:shadow-medium focus:shadow-medium transition-all duration-300 p-6 text-center max-w-md mx-auto bg-muted"
       onMouseEnter={play}
       onMouseLeave={stop}
       onFocus={play}
       onBlur={stop}
-      tabIndex={0}
     >
       <div className="mb-4">
         <div 
@@ -96,9 +96,7 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
       
       <div className="px-2">
         <h6 className="text-2xl font-bold text-primary group-hover:text-white group-focus:text-white transition-colors mb-3">
-          <a href={m.profileHref || "#"} className="text-inherit group-hover:text-white group-focus:text-white transition-colors">
-            {m.name}
-          </a>
+          {m.name}
         </h6>
         <p className="text-primary group-hover:text-white group-focus:text-white text-base font-semibold mb-4 leading-relaxed transition-colors">{m.role}</p>
         
@@ -114,7 +112,7 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
               key={i}
               href={s.href} 
               className="w-10 h-10 bg-primary/10 group-hover:bg-white/20 group-focus:bg-white/20 hover:bg-primary/20 group-hover:hover:bg-white/30 group-focus:hover:bg-white/30 text-primary group-hover:text-white group-focus:text-white rounded-full flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
-              style={{}}
+              onClick={(e) => e.preventDefault()}
               aria-label={s.iconClass}
             >
               {getIcon(s.iconClass)}
@@ -122,7 +120,7 @@ const TeamCard: React.FC<{ m: TeamMember }> = ({ m }) => {
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
