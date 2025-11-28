@@ -2,46 +2,30 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock,
-  Send,
-  MessageCircle,
-  Calendar
-} from "lucide-react";
-
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Calendar } from "lucide-react";
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: "Call Us",
-      details: ["1-833-MY-OZONE", "(833) 696-9663"],
-      color: "bg-blue-500"
-    },
-    {
-      icon: Mail,
-      title: "Email Us", 
-      details: ["info@ozoneinsurance.com", "support@ozoneinsurance.com"],
-      color: "bg-green-500"
-    },
-    {
-      icon: MapPin,
-      title: "Visit Us",
-      details: ["California", "CA LIC# 0K48512"],
-      color: "bg-purple-500"
-    },
-    {
-      icon: Clock,
-      title: "Office Hours",
-      details: ["Sun-Monday: 9:00 AM - 5:00 PM", "Available for appointments"],
-      color: "bg-orange-500"
-    }
-  ];
-
-  return (
-    <section id="contact" className="py-24 bg-muted/30">
+  const contactInfo = [{
+    icon: Phone,
+    title: "Call Us",
+    details: ["1-833-MY-OZONE", "(833) 696-9663"],
+    color: "bg-blue-500"
+  }, {
+    icon: Mail,
+    title: "Email Us",
+    details: ["info@ozoneinsurance.com", "support@ozoneinsurance.com"],
+    color: "bg-green-500"
+  }, {
+    icon: MapPin,
+    title: "Visit Us",
+    details: ["California", "CA LIC# 0K48512"],
+    color: "bg-purple-500"
+  }, {
+    icon: Clock,
+    title: "Office Hours",
+    details: ["Sun-Monday: 9:00 AM - 5:00 PM", "Available for appointments"],
+    color: "bg-orange-500"
+  }];
+  return <section id="contact" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
         
         {/* Section Header */}
@@ -63,48 +47,7 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
           {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Get in Touch</h3>
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                We're always ready to help you with your insurance needs. 
-                Reach out to us through any of the following methods.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <div key={index} className="flex items-start space-x-4">
-                  <div className={`w-12 h-12 ${info.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                    <info.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">{info.title}</h4>
-                    {info.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-muted-foreground text-sm">
-                        {detail}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Quick Actions */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-foreground">Quick Actions</h4>
-              <div className="space-y-3">
-                <Button variant="outline" className="w-full justify-start" size="sm">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Schedule Consultation
-                </Button>
-                <Button variant="outline" className="w-full justify-start" size="sm">
-                  <Phone className="mr-2 h-4 w-4" />
-                  Request Callback
-                </Button>
-              </div>
-            </div>
-          </div>
+          
 
           {/* Levitate Meeting Scheduler */}
           <div className="lg:col-span-2">
@@ -118,14 +61,13 @@ const Contact = () => {
                 </div>
 
                 {/* Embedded Levitate Scheduler */}
-                <div className="relative w-full" style={{ minHeight: '600px' }}>
-                  <iframe
-                    src="https://meeting.levitate.ai/#/landing/9105df-4i4n1e"
-                    className="w-full h-full rounded-lg"
-                    style={{ minHeight: '600px', border: 'none' }}
-                    title="Schedule a Meeting"
-                    loading="lazy"
-                  />
+                <div className="relative w-full" style={{
+                minHeight: '600px'
+              }}>
+                  <iframe src="https://meeting.levitate.ai/#/landing/9105df-4i4n1e" className="w-full h-full rounded-lg" style={{
+                  minHeight: '600px',
+                  border: 'none'
+                }} title="Schedule a Meeting" loading="lazy" />
                 </div>
               </div>
             </Card>
@@ -153,8 +95,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;
