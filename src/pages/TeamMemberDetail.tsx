@@ -48,6 +48,15 @@ const teamMembersData: TeamMemberData[] = [
     name: "Dr. Ashutosh Shyam, PhD",
     role: "Insurance Advisor",
     imgSrc: ashutoshShyam,
+    license: "CA License # 2828993",
+    npn: "20307264",
+    email: "ashymnit@gmail.com",
+    phone: "515.708.5545",
+    bio: [
+      "Ashutosh joined the team from Austin, Texas in 2020. While interacting with the community as a Notary Public, he realized that financial education was quite lacking overall.",
+      "With his deep understanding of various financial products, he helps clients find solutions customized towards their specific goals. He strives to educate and empower each and every family with financial literacy. He is based in Texas, but licensed in 2 states (TX, AL) and counting.",
+      "Outside of work, Ashu has a passion for music and stringing away on his guitar whenever he can."
+    ],
     socials: [
       { iconClass: "linkedin", href: "#" },
       { iconClass: "facebook", href: "#" }
@@ -58,6 +67,14 @@ const teamMembersData: TeamMemberData[] = [
     name: "Rukmini Vemulakonda",
     role: "Insurance Advisor",
     imgSrc: rukminiVemulakonda,
+    license: "CA License # 4349904",
+    npn: "21043171",
+    email: "rukminivemulakonda@gmail.com",
+    phone: "408.784.0880",
+    bio: [
+      "Rukmini is a Bay Area insurance agent committed to helping families achieve financial security. She is passionate about educating women on the importance of financial planning and protection. By building trust and offering personalized service, Rukmini assists clients in finding insurance solutions that fit their needs.",
+      "Outside of work, she remains active in the technology sector, dedicates herself to educating her sons about the diverse paths to success, volunteers in her community, and raises funds for under-privileged and visually challenged students in India."
+    ],
     socials: [
       { iconClass: "linkedin", href: "#" },
       { iconClass: "facebook", href: "#" }
@@ -68,6 +85,16 @@ const teamMembersData: TeamMemberData[] = [
     name: "Anita Mirchandani",
     role: "Insurance Advisor",
     imgSrc: anitaMirchandani,
+    license: "CA License # 4183626",
+    npn: "20189231",
+    email: "anita@ozoneinsurance.com",
+    phone: "408.643.9702",
+    bio: [
+      "Anita is proficient in Life Insurance, Long-term Care, Property and Casualty and Commercial and Group Health Insurance. Her repertoire includes being a Notary Public with outreach to the South Bay community.",
+      "She brings a seamless experience in tailoring solutions to meet the unique needs of each client. Her commitment to exceptional customer service allows her to guide clients through the complexities of insurance, ensuring that they feel informed and confident in their choice.",
+      "Outside of work, she is a mother to a daughter (who is a lawyer with Farella Braun + Martell LLP, San Francisco) and a son (a senior at San Diego State University).",
+      "She has an avid interest in Geopolitics, Fado music and globetrotting. Her travel sojourns have taken her from the Norwegian Fjords to the Juneau glaciers, Flamenco dancers in Seville, palaces of the Czars in Moscow and St. Petersburg while absorbing the heritage of different cultures."
+    ],
     socials: [
       { iconClass: "linkedin", href: "#" },
       { iconClass: "facebook", href: "#" }
@@ -78,6 +105,16 @@ const teamMembersData: TeamMemberData[] = [
     name: "Sunitha Pentapati",
     role: "Insurance Advisor",
     imgSrc: sunithaPentapati,
+    license: "CA License # 4310114",
+    npn: "20844209",
+    email: "sunitha@ozoneinsurance.com",
+    phone: "408-596-0630",
+    bio: [
+      "Sunitha is a dedicated Insurance Advisor and Financial Planner based in the California Bay Area. She helps individuals manage the most fundamental insurance needs and navigate through financial planning processes to protect their future and prepare for unforeseen circumstances.",
+      "She believes in financial education and empowers her clients to make the right decisions.",
+      "She specializes in different types of insurance coverages and retirement plans, including travel and life insurance. With a passion for educating clients on the importance of comprehensive coverage, she strives to create strong relationships with them. She provides tailored solutions by understanding her clients' unique requirements. Sunitha is also a Notary Public.",
+      "Outside of work, Sunitha likes gardening, dancing, and spending time with her friends and family."
+    ],
     socials: [
       { iconClass: "linkedin", href: "#" },
       { iconClass: "facebook", href: "#" }
@@ -88,6 +125,14 @@ const teamMembersData: TeamMemberData[] = [
     name: "Santhosh Raghunath",
     role: "Insurance Advisor",
     imgSrc: santhoshRaghunath,
+    license: "CA License # 4206525",
+    email: "santhosh@ozoneinsurance.com",
+    phone: "408.833.8877",
+    bio: [
+      "Santhosh is a holistic personal finance planner. He has been campaigning for financial solutions and personal finance education since 2022. He strives to help individuals and families arrive at a suitable solution to address their financial goals and concerns, at various stages in their lifetime. Reach out to him to book an appointment to discuss your needs and learn how to protect and safely grow your hard-earned money. All consultations are complimentary.",
+      "Areas of Santhosh's expertise include Retirement Income Planning, Long-term Care, Life Insurance (Permanent/IUL and Term), Health insurance, Travel Insurance including Visitors Health, tax saving strategies and review of existing policies.",
+      "Santhosh is also currently helping build a new team of campaigners by helping them setup and grow their business in the finance industry. Since 2018, Santhosh is also a CA State Notary Public and a Loan Signing Agent."
+    ],
     socials: [
       { iconClass: "linkedin", href: "#" },
       { iconClass: "facebook", href: "#" }
