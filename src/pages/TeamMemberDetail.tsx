@@ -20,7 +20,7 @@ import ashutoshShyam from "@/assets/ashutosh-shyam-new.png";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda-new.png";
 import anitaMirchandani from "@/assets/anita-mirchandani-new.png";
 import sunithaPentapati from "@/assets/sunitha-pentapati-new.png";
-import santhoshRaghunath from "@/assets/santhosh-raghunath.gif";
+import santhoshRaghunath from "@/assets/santhosh-raghunath-new.png";
 
 interface TeamMemberData {
   id: string;
