@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Menu, X, Phone, Search, Facebook, Twitter, MessageCircle, Send, Grid3X3, User, LogOut, Settings } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import ozoneLogo from "@/assets/ozone-logo.png";
 
 const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -101,9 +102,9 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
             {/* Logo Section */}
             <div className="flex items-center">
               <img 
-                src="https://cwhwihjnhezgsbmkvbjf.supabase.co/storage/v1/object/public/logo/%20blf%20logo.png"
-                alt="BLF Logo"
-                className="object-contain h-16"
+                src={ozoneLogo}
+                alt="Ozone Insurance Services, Inc."
+                className="object-contain h-12"
               />
             </div>
 
