@@ -79,9 +79,22 @@ const TeamSection: React.FC<TeamSectionProps> = ({
   features
 }) => {
   return (
-    <section id="team" className="py-20">
-      {/* Team Members */}
-      <div className="container mx-auto px-4">
+    <section id="team" className="py-20 relative overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-10"
+      >
+        <source src="/videos/team-background.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Content Overlay */}
+      <div className="relative z-10">
+        {/* Team Members */}
+        <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h4 className="text-primary font-medium mb-4">{headingSmall}</h4>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground">{heading}</h2>
@@ -97,8 +110,8 @@ const TeamSection: React.FC<TeamSectionProps> = ({
         </div>
       </div>
 
-      {/* Skills Section */}
-      <div className="container mx-auto px-4">
+        {/* Skills Section */}
+        <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <div className="aspect-[4/3] rounded-lg overflow-hidden relative">
@@ -129,10 +142,10 @@ const TeamSection: React.FC<TeamSectionProps> = ({
             ))}
           </div>
         </div>
-      </div>
+        </div>
 
-      {/* Features Section */}
-      <div className="bg-secondary/30 mt-20 py-20">
+        {/* Features Section */}
+        <div className="bg-secondary/30 mt-20 py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h4 className="text-primary font-medium mb-4">{featuresHeadingSmall}</h4>
@@ -144,6 +157,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
               <FeatureCard key={i} f={f} />
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>
