@@ -97,7 +97,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({
         <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h4 className="text-primary font-medium mb-4">{headingSmall}</h4>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white">{heading}</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground">{heading}</h2>
         </div>
 
         {/* Team Members Row */}
