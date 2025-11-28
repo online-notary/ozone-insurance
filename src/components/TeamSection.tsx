@@ -39,12 +39,25 @@ const TeamSection: React.FC<TeamSectionProps> = ({
         </div>
 
         {/* Team Members Row */}
-        <div className="flex flex-wrap justify-center gap-8 mb-20">
+        <div className="flex flex-wrap justify-center gap-8 mb-12">
           {members.map((m, i) => (
             <div key={i} className="w-full sm:w-auto">
               <TeamCard m={m} />
             </div>
           ))}
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center">
+          <a 
+            href="#contact" 
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            Get in Touch with Our Team
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
         </div>
       </div>
       </div>
