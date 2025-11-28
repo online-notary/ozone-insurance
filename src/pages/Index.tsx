@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 import OptionPanel from "@/components/OptionPanel";
 import professionalTeam from "@/assets/professional-team.jpg";
 import madhuAbout from "@/assets/madhu-about.png";
-import ashutoshShyam from "@/assets/ashutosh-shyam.gif";
+import ashutoshShyam from "@/assets/ashutosh-shyam-new.png";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda.gif";
 import anitaMirchandani from "@/assets/anita-mirchandani.gif";
 import sunithaPentapati from "@/assets/sunitha-pentapati.gif";
