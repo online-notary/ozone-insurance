@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Plane, Heart, Car, Home, Shield, Briefcase, LucideIcon, ArrowRight } from "lucide-react";
 import professionalTeam from "@/assets/professional-team.jpg";
 
@@ -166,12 +167,13 @@ const Services: React.FC<ServicesProps> = ({
             const isVisible = visibleCards.has(index);
 
             return (
-              <article
+              <Link
                 key={service.id}
+                to={`/service/${service.slug}`}
                 ref={(el) => {
                   cardsRef.current[index] = el;
                 }}
-                className={`service-card-pill group/card relative transition-all duration-700 ${
+                className={`service-card-pill group/card relative transition-all duration-700 cursor-pointer ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{
@@ -195,7 +197,7 @@ const Services: React.FC<ServicesProps> = ({
                   <h2 className="text-white text-3xl font-bold uppercase mb-4 tracking-wide">{service.title}</h2>
                   <p className="text-white/90 leading-relaxed text-base">{service.description}</p>
                 </div>
-              </article>
+              </Link>
             );
           })}
         </div>
