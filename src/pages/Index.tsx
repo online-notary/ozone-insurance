@@ -90,27 +90,6 @@ const Index = () => {
     }
   ];
 
-  const features = [
-    {
-      iconClass: "consultation",
-      title: "Trained Workers",
-      desc: "Our highly trained professionals ensure top-quality service and expertise in every interaction.",
-      href: "#"
-    },
-    {
-      iconClass: "support",
-      title: "Authorized Company",
-      desc: "We are an authorized and certified insurance provider, committed to meeting and exceeding industry standards.",
-      href: "#"
-    },
-    {
-      iconClass: "analysis",
-      title: "Quick Response",
-      desc: "We respond quickly and efficiently to all your questions and insurance needs.",
-      href: "#"
-    }
-  ];
-
   const portfolioItems = [
     { title: "Former insures only the marine perils", href: "#portfolio", imgSrc: project1 },
     { title: "Insurance covers risk of fire absence", href: "#portfolio", imgSrc: project2 },
@@ -130,7 +109,6 @@ const Index = () => {
         <Hero />
         <TeamSection
           members={teamMembers}
-          features={features}
         />
         <Services />
         <About mainImageSrc={madhuAbout} />
