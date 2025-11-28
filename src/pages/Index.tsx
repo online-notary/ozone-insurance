@@ -136,7 +136,6 @@ const Index = () => {
       <Header onOptionPanelToggle={() => setIsOptionPanelOpen(!isOptionPanelOpen)} />
       <main>
         <Hero />
-        <Services />
         <TeamSection
           members={teamMembers}
           videoImgSrc={professionalTeam}
@@ -144,6 +143,7 @@ const Index = () => {
           skills={skills}
           features={features}
         />
+        <Services />
         <About mainImageSrc={businessmanProfessional} />
         <Contact />
       </main>
