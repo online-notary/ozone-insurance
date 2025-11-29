@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CheckCircle, Shield, Clock, Users, Star, Phone, Mail, ArrowLeft, Heart, TrendingUp, FileText, Calculator, LucideIcon } from 'lucide-react';
+import { CheckCircle, Shield, Clock, Users, Star, Phone, Mail, ArrowLeft, Heart, TrendingUp, FileText, Calculator, Maximize, Minimize, LucideIcon } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
@@ -37,6 +37,35 @@ const ServiceDetails = () => {
   const [service, setService] = useState<ServiceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const iframeContainerRef = useRef<HTMLDivElement>(null);
+
+  const toggleFullscreen = () => {
+    if (!iframeContainerRef.current) return;
+
+    if (!document.fullscreenElement) {
+      iframeContainerRef.current.requestFullscreen().then(() => {
+        setIsFullscreen(true);
+      }).catch((err) => {
+        console.error('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsFullscreen(false);
+      });
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
   useEffect(() => {
     const fetchService = async () => {
       if (!serviceId) {
@@ -253,7 +282,14 @@ const ServiceDetails = () => {
                   <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
                     Browse and compare dental insurance plans to find the perfect coverage for your smile.
                   </p>
-                  <div className="w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '800px' }}>
+                  <div ref={iframeContainerRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isFullscreen ? '100vh' : '800px' }}>
+                    <Button
+                      onClick={toggleFullscreen}
+                      className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                      size="icon"
+                    >
+                      {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                    </Button>
                     <iframe 
                       src="https://brokers.dentalforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
                       className="w-full h-full border-0"
@@ -273,7 +309,14 @@ const ServiceDetails = () => {
                   <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
                     Browse and compare vision insurance plans to find the perfect coverage for your eyecare needs.
                   </p>
-                  <div className="w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '800px' }}>
+                  <div ref={iframeContainerRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isFullscreen ? '100vh' : '800px' }}>
+                    <Button
+                      onClick={toggleFullscreen}
+                      className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                      size="icon"
+                    >
+                      {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                    </Button>
                     <iframe 
                       src="https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
                       className="w-full h-full border-0"
