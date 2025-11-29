@@ -55,10 +55,17 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
     if (location.pathname !== '/') {
       navigate(`/${item.href}`);
     } else {
-      // We're on the home page, just scroll to section
+      // We're on the home page, scroll to section with offset for fixed header
       const element = document.getElementById(item.section);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const headerOffset = 130; // Height of fixed header (top bar + nav)
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       }
     }
     
