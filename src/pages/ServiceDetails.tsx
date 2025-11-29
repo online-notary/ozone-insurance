@@ -45,6 +45,48 @@ const ServiceDetails = () => {
   const [visionIframeLoading, setVisionIframeLoading] = useState(true);
   const dentalIframeRef = useRef<HTMLDivElement>(null);
   const visionIframeRef = useRef<HTMLDivElement>(null);
+  const dentalTimeoutRef = useRef<NodeJS.Timeout>();
+  const visionTimeoutRef = useRef<NodeJS.Timeout>();
+
+  // Timeout fallback for dental iframe
+  useEffect(() => {
+    if (service?.slug === 'dental' && !dentalIframeError) {
+      dentalTimeoutRef.current = setTimeout(() => {
+        // If still loading after 5 seconds, assume it failed
+        if (dentalIframeLoading) {
+          console.log('Dental iframe timeout - switching to fallback button');
+          setDentalIframeError(true);
+          setDentalIframeLoading(false);
+        }
+      }, 5000);
+
+      return () => {
+        if (dentalTimeoutRef.current) {
+          clearTimeout(dentalTimeoutRef.current);
+        }
+      };
+    }
+  }, [service?.slug, dentalIframeLoading, dentalIframeError]);
+
+  // Timeout fallback for vision iframe
+  useEffect(() => {
+    if (service?.slug === 'vision' && !visionIframeError) {
+      visionTimeoutRef.current = setTimeout(() => {
+        // If still loading after 5 seconds, assume it failed
+        if (visionIframeLoading) {
+          console.log('Vision iframe timeout - switching to fallback button');
+          setVisionIframeError(true);
+          setVisionIframeLoading(false);
+        }
+      }, 5000);
+
+      return () => {
+        if (visionTimeoutRef.current) {
+          clearTimeout(visionTimeoutRef.current);
+        }
+      };
+    }
+  }, [service?.slug, visionIframeLoading, visionIframeError]);
 
   const toggleDentalFullscreen = () => {
     if (!dentalIframeRef.current) return;
@@ -348,8 +390,11 @@ const ServiceDetails = () => {
                         title="Dental Insurance Portal"
                         allow="geolocation"
                         onLoad={() => {
+                          console.log('Dental iframe loaded successfully');
                           setDentalIframeLoading(false);
-                          // Clear any timeout if iframe loads successfully
+                          if (dentalTimeoutRef.current) {
+                            clearTimeout(dentalTimeoutRef.current);
+                          }
                         }}
                         onError={() => {
                           console.error('Dental iframe failed to load');
@@ -412,7 +457,11 @@ const ServiceDetails = () => {
                         title="Vision Insurance Portal"
                         allow="geolocation"
                         onLoad={() => {
+                          console.log('Vision iframe loaded successfully');
                           setVisionIframeLoading(false);
+                          if (visionTimeoutRef.current) {
+                            clearTimeout(visionTimeoutRef.current);
+                          }
                         }}
                         onError={() => {
                           console.error('Vision iframe failed to load');
