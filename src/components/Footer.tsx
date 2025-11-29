@@ -94,7 +94,7 @@ export default function Footer() {
               </span>
               <div className="text-sm">
                 <div className="text-white/80">Need Help?</div>
-                <div className="font-bold text-lg">(415) 900-9086</div>
+                <div className="font-bold text-lg">1-833-MY-OZONE</div>
               </div>
             </div>
           </div>
