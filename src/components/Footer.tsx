@@ -169,22 +169,42 @@ export default function Footer() {
             <div className="col-span-6 lg:col-span-2">
               <h5 className="mb-6 font-semibold text-white text-lg">Services</h5>
               <ul className="space-y-3">
-                {[
-                  "House Insurance",
-                  "Medical Insurance",
-                  "Car Insurance",
-                  "Business Insurance",
-                  "Travel Insurance",
-                  "Fire Insurance",
-                  "Marrige Insurance",
-                ].map((service) => (
-                  <li key={service}>
-                    <a href="#" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
-                      <IconArrowRight />
-                      {service}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Travel Insurance
+                  </a>
+                </li>
+                <li>
+                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Health Insurance
+                  </a>
+                </li>
+                <li>
+                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Business Insurance
+                  </a>
+                </li>
+                <li>
+                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Umbrella Insurance
+                  </a>
+                </li>
+                <li>
+                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Auto Insurance
+                  </a>
+                </li>
+                <li>
+                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Home Insurance
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -192,21 +212,42 @@ export default function Footer() {
             <div className="col-span-6 lg:col-span-2">
               <h5 className="mb-6 font-semibold text-white text-lg">Other Pages</h5>
               <ul className="space-y-3">
-                {[
-                  "My Account",
-                  "Need A Career?",
-                  "News & Blog",
-                  "Payment Way",
-                  "Team Member",
-                  "About Us",
-                ].map((page) => (
-                  <li key={page}>
-                    <a href="#" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
-                      <IconArrowRight />
-                      {page}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <a href="/#home" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="/#team" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Advisors
+                  </a>
+                </li>
+                <li>
+                  <a href="/#about" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="/#contact" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a href="/privacy" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/sms-privacy" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                    <IconArrowRight />
+                    SMS Privacy Policy
+                  </a>
+                </li>
               </ul>
             </div>
 
