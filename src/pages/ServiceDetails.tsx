@@ -37,28 +37,49 @@ const ServiceDetails = () => {
   const [service, setService] = useState<ServiceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const iframeContainerRef = useRef<HTMLDivElement>(null);
+  const [isDentalFullscreen, setIsDentalFullscreen] = useState(false);
+  const [isVisionFullscreen, setIsVisionFullscreen] = useState(false);
+  const dentalIframeRef = useRef<HTMLDivElement>(null);
+  const visionIframeRef = useRef<HTMLDivElement>(null);
 
-  const toggleFullscreen = () => {
-    if (!iframeContainerRef.current) return;
+  const toggleDentalFullscreen = () => {
+    if (!dentalIframeRef.current) return;
 
     if (!document.fullscreenElement) {
-      iframeContainerRef.current.requestFullscreen().then(() => {
-        setIsFullscreen(true);
+      dentalIframeRef.current.requestFullscreen().then(() => {
+        setIsDentalFullscreen(true);
       }).catch((err) => {
         console.error('Error attempting to enable fullscreen:', err);
       });
     } else {
       document.exitFullscreen().then(() => {
-        setIsFullscreen(false);
+        setIsDentalFullscreen(false);
+      });
+    }
+  };
+
+  const toggleVisionFullscreen = () => {
+    if (!visionIframeRef.current) return;
+
+    if (!document.fullscreenElement) {
+      visionIframeRef.current.requestFullscreen().then(() => {
+        setIsVisionFullscreen(true);
+      }).catch((err) => {
+        console.error('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsVisionFullscreen(false);
       });
     }
   };
 
   useEffect(() => {
     const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+      if (!document.fullscreenElement) {
+        setIsDentalFullscreen(false);
+        setIsVisionFullscreen(false);
+      }
     };
 
     document.addEventListener('fullscreenchange', handleFullscreenChange);
@@ -282,13 +303,14 @@ const ServiceDetails = () => {
                   <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
                     Browse and compare dental insurance plans to find the perfect coverage for your smile.
                   </p>
-                  <div ref={iframeContainerRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isFullscreen ? '100vh' : '800px' }}>
+                  <div ref={dentalIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isDentalFullscreen ? '100vh' : '800px' }}>
                     <Button
-                      onClick={toggleFullscreen}
+                      onClick={toggleDentalFullscreen}
                       className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
                       size="icon"
+                      title={isDentalFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
                     >
-                      {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      {isDentalFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
                     </Button>
                     <iframe 
                       src="https://brokers.dentalforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
@@ -309,13 +331,14 @@ const ServiceDetails = () => {
                   <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
                     Browse and compare vision insurance plans to find the perfect coverage for your eyecare needs.
                   </p>
-                  <div ref={iframeContainerRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isFullscreen ? '100vh' : '800px' }}>
+                  <div ref={visionIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isVisionFullscreen ? '100vh' : '800px' }}>
                     <Button
-                      onClick={toggleFullscreen}
+                      onClick={toggleVisionFullscreen}
                       className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
                       size="icon"
+                      title={isVisionFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
                     >
-                      {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      {isVisionFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
                     </Button>
                     <iframe 
                       src="https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
