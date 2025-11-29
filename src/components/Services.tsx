@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Plane, Heart, Car, Home, Shield, Briefcase, LucideIcon, ArrowRight } from "lucide-react";
+import { Plane, Heart, Car, Home, Shield, Briefcase, Smile, Eye, ShieldCheck, LucideIcon, ArrowRight } from "lucide-react";
 import professionalTeam from "@/assets/professional-team.jpg";
 
 type ServiceCategory = {
@@ -94,6 +94,30 @@ const ozoneServices: ServiceCategory[] = [
     slug: "home",
     icon: Home,
   },
+  {
+    id: "dental",
+    title: "Dental Insurance",
+    description: "Trust us to help you achieve and maintain a healthy smile with reliable dental coverage.",
+    items: ["Routine Cleanings & Exams", "Fillings & Extractions", "Root Canals & Crowns", "Braces & Aligners"],
+    slug: "dental",
+    icon: Smile,
+  },
+  {
+    id: "vision",
+    title: "Vision Insurance",
+    description: "Trust us to help you see the world clearly with reliable vision coverage.",
+    items: ["Annual Eye Exams", "Designer Frame Options", "Lens Upgrades", "LASIK Discounts"],
+    slug: "vision",
+    icon: Eye,
+  },
+  {
+    id: "identity",
+    title: "Identity Insurance",
+    description: "Helps you if someone steals your personal info and uses it to commit fraud.",
+    items: ["24/7 Monitoring", "Dark Web Surveillance", "Credit Report Access", "Identity Restoration"],
+    slug: "identity",
+    icon: ShieldCheck,
+  },
 ];
 
 // Service card gradients matching CodePen design
@@ -104,6 +128,9 @@ const serviceGradients = [
   "linear-gradient(to bottom, #ff6b2a, #ff2ae0)", // Home: Orange to Pink
   "linear-gradient(to bottom, #2affe0, #145ba6)", // Umbrella: Teal to Blue
   "linear-gradient(to bottom, #6ffa12, #2affe0)", // Business: Green to Teal
+  "linear-gradient(to bottom, #4facfe, #00f2fe)", // Dental: Blue gradient
+  "linear-gradient(to bottom, #fa709a, #fee140)", // Vision: Pink to Yellow
+  "linear-gradient(to bottom, #667eea, #764ba2)", // Identity: Purple gradient
 ];
 
 const Services: React.FC<ServicesProps> = ({
