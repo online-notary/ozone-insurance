@@ -211,6 +211,43 @@ const ServiceDetails = () => {
             </div>
           </div>
 
+          {/* Health Coverage Options - Only for Health Service */}
+          {service.slug === 'health' && (
+            <div className="mb-16">
+              <div className="text-center mb-12">
+                <p className="text-primary font-medium mb-2">Coverage Options</p>
+                <h3 className="text-3xl font-bold text-foreground">
+                  Explore Our Health Insurance Plans
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { id: 1, image: '/images/health-plan-1.png', title: 'Individual Health Plans' },
+                  { id: 2, image: '/images/health-plan-2.png', title: 'Family Health Plans' },
+                  { id: 3, image: '/images/health-plan-3.png', title: 'Medicare Plans' },
+                  { id: 4, image: '/images/health-plan-4.png', title: 'Supplemental Coverage' }
+                ].map((plan) => (
+                  <Card 
+                    key={plan.id} 
+                    className="group cursor-pointer overflow-hidden hover:shadow-xl transition-all duration-300"
+                  >
+                    <div className="aspect-square relative">
+                      <img 
+                        src={plan.image}
+                        alt={plan.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-4 text-center">
+                      <h4 className="font-semibold text-foreground">{plan.title}</h4>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Service Benefits */}
           <div className="mb-16">
             <div className="text-center mb-12">
