@@ -39,6 +39,10 @@ const ServiceDetails = () => {
   const [error, setError] = useState<string | null>(null);
   const [isDentalFullscreen, setIsDentalFullscreen] = useState(false);
   const [isVisionFullscreen, setIsVisionFullscreen] = useState(false);
+  const [dentalIframeError, setDentalIframeError] = useState(false);
+  const [visionIframeError, setVisionIframeError] = useState(false);
+  const [dentalIframeLoading, setDentalIframeLoading] = useState(true);
+  const [visionIframeLoading, setVisionIframeLoading] = useState(true);
   const dentalIframeRef = useRef<HTMLDivElement>(null);
   const visionIframeRef = useRef<HTMLDivElement>(null);
 
@@ -303,22 +307,58 @@ const ServiceDetails = () => {
                   <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
                     Browse and compare dental insurance plans to find the perfect coverage for your smile.
                   </p>
-                  <div ref={dentalIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isDentalFullscreen ? '100vh' : '800px' }}>
-                    <Button
-                      onClick={toggleDentalFullscreen}
-                      className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                      size="icon"
-                      title={isDentalFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                    >
-                      {isDentalFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                    </Button>
-                    <iframe 
-                      src="https://brokers.dentalforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
-                      className="w-full h-full border-0"
-                      title="Dental Insurance Portal"
-                      allow="geolocation"
-                    />
-                  </div>
+                  
+                  {dentalIframeError ? (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground mb-6">
+                        The dental portal couldn't be loaded directly. Click below to open it in a new window.
+                      </p>
+                      <Button 
+                        size="lg" 
+                        onClick={() => {
+                          window.open('https://brokers.dentalforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer');
+                        }}
+                        className="inline-flex items-center gap-2"
+                      >
+                        <FileText className="w-5 h-5" />
+                        View Dental Insurance Plans
+                      </Button>
+                    </div>
+                  ) : (
+                    <div ref={dentalIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isDentalFullscreen ? '100vh' : '800px' }}>
+                      {dentalIframeLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                          <div className="text-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                            <p className="text-muted-foreground">Loading dental portal...</p>
+                          </div>
+                        </div>
+                      )}
+                      <Button
+                        onClick={toggleDentalFullscreen}
+                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                        size="icon"
+                        title={isDentalFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                      >
+                        {isDentalFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      </Button>
+                      <iframe 
+                        src="https://brokers.dentalforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
+                        className="w-full h-full border-0"
+                        title="Dental Insurance Portal"
+                        allow="geolocation"
+                        onLoad={() => {
+                          setDentalIframeLoading(false);
+                          // Clear any timeout if iframe loads successfully
+                        }}
+                        onError={() => {
+                          console.error('Dental iframe failed to load');
+                          setDentalIframeError(true);
+                          setDentalIframeLoading(false);
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               </Card>
             </div>}
@@ -326,21 +366,62 @@ const ServiceDetails = () => {
           {/* Vision Insurance Portal - Only for Vision Service */}
           {service.slug === 'vision' && <div className="mb-16">
               <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6 text-center">
-                  <h3 className="text-3xl font-bold text-foreground mb-4">Explore Vision Plans</h3>
-                  <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Explore Vision Plans</h3>
+                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
                     Browse and compare vision insurance plans to find the perfect coverage for your eyecare needs.
                   </p>
-                  <Button 
-                    size="lg" 
-                    onClick={() => {
-                      window.open('https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer');
-                    }}
-                    className="inline-flex items-center gap-2"
-                  >
-                    <FileText className="w-5 h-5" />
-                    View Vision Insurance Plans
-                  </Button>
+                  
+                  {visionIframeError ? (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground mb-6">
+                        The vision portal couldn't be loaded directly. Click below to open it in a new window.
+                      </p>
+                      <Button 
+                        size="lg" 
+                        onClick={() => {
+                          window.open('https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer');
+                        }}
+                        className="inline-flex items-center gap-2"
+                      >
+                        <FileText className="w-5 h-5" />
+                        View Vision Insurance Plans
+                      </Button>
+                    </div>
+                  ) : (
+                    <div ref={visionIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isVisionFullscreen ? '100vh' : '800px' }}>
+                      {visionIframeLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                          <div className="text-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                            <p className="text-muted-foreground">Loading vision portal...</p>
+                          </div>
+                        </div>
+                      )}
+                      <Button
+                        onClick={toggleVisionFullscreen}
+                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                        size="icon"
+                        title={isVisionFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                      >
+                        {isVisionFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      </Button>
+                      <iframe 
+                        src="https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
+                        className="w-full h-full border-0"
+                        title="Vision Insurance Portal"
+                        allow="geolocation"
+                        onLoad={() => {
+                          setVisionIframeLoading(false);
+                        }}
+                        onError={() => {
+                          console.error('Vision iframe failed to load');
+                          setVisionIframeError(true);
+                          setVisionIframeLoading(false);
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               </Card>
             </div>}
