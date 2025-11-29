@@ -164,9 +164,7 @@ const ServiceDetails = () => {
           {service.slug === 'health' && <div className="mb-16">
               <div className="text-center mb-12">
                 <p className="text-primary font-medium mb-2">Coverage Options</p>
-                <h3 className="text-3xl font-bold text-foreground">
-                  Explore Our Health Insurance Plans
-                </h3>
+                <h3 className="text-3xl font-bold text-foreground">Explore Health Plans On Your Own</h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -193,11 +191,7 @@ const ServiceDetails = () => {
               title: 'Kaiser Permanente',
               description: 'Quality healthcare coverage with competitive rates and benefits',
               url: 'https://apply-individual-family.kaiserpermanente.org/validate-consumer?ln=en&guid=1f0d6f22-1280-4fb7-9d9a-f0ada7fb16c1'
-            }].map(plan => <Card
-                    key={plan.id} 
-                    className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col"
-                    onClick={() => plan.url && window.open(plan.url, '_blank', 'noopener,noreferrer')}
-                  >
+            }].map(plan => <Card key={plan.id} className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col" onClick={() => plan.url && window.open(plan.url, '_blank', 'noopener,noreferrer')}>
                     <div className="aspect-[4/3] relative overflow-hidden bg-muted">
                       <img src={plan.image} alt={plan.title} className="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105" />
                     </div>
@@ -225,8 +219,7 @@ const ServiceDetails = () => {
           
 
           {/* Individual Health Insurance Quote Request - Only for Health Service */}
-          {service.slug === 'health' && (
-            <div className="mb-16">
+          {service.slug === 'health' && <div className="mb-16">
               <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
                 <div className="p-8 md:p-12 text-center">
                   <h3 className="text-3xl font-bold text-foreground mb-4">
@@ -235,24 +228,15 @@ const ServiceDetails = () => {
                   <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
                     Get personalized health insurance quotes tailored to your needs. Fill out our quick form and our team will help you find the perfect coverage.
                   </p>
-                  <Button
-                    size="lg"
-                    onClick={() => {
-                      window.open(
-                        'https://form.jotform.com/253316970682059',
-                        'blank',
-                        'scrollbars=yes,toolbar=no,width=700,height=500'
-                      );
-                    }}
-                    className="inline-flex items-center gap-2"
-                  >
+                  <Button size="lg" onClick={() => {
+                window.open('https://form.jotform.com/253316970682059', 'blank', 'scrollbars=yes,toolbar=no,width=700,height=500');
+              }} className="inline-flex items-center gap-2">
                     <FileText className="w-5 h-5" />
                     Get Your Quote
                   </Button>
                 </div>
               </Card>
-            </div>
-          )}
+            </div>}
 
           {/* Back to Services */}
           <div className="text-center mt-12">
