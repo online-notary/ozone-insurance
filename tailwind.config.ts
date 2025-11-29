@@ -95,19 +95,28 @@ export default {
             height: "0",
           },
         },
-        "blink": {
-          "0%, 100%": {
+        "wink": {
+          "0%, 45%, 55%, 100%": {
             opacity: "1",
           },
-          "50%": {
-            opacity: "0.2",
+          "48%, 52%": {
+            opacity: "0",
+          },
+        },
+        "wink-closed": {
+          "0%, 45%, 55%, 100%": {
+            opacity: "0",
+          },
+          "48%, 52%": {
+            opacity: "1",
           },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "blink": "blink 0.5s ease-in-out infinite",
+        "wink": "wink 1s ease-in-out infinite",
+        "wink-closed": "wink-closed 1s ease-in-out infinite",
       },
     },
   },
