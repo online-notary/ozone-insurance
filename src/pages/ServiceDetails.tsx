@@ -265,6 +265,26 @@ const ServiceDetails = () => {
               </Card>
             </div>}
 
+          {/* Vision Insurance Portal - Only for Vision Service */}
+          {service.slug === 'vision' && <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Explore Vision Plans</h3>
+                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                    Browse and compare vision insurance plans to find the perfect coverage for your eyecare needs.
+                  </p>
+                  <div className="w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '800px' }}>
+                    <iframe 
+                      src="https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
+                      className="w-full h-full border-0"
+                      title="Vision Insurance Portal"
+                      allow="geolocation"
+                    />
+                  </div>
+                </div>
+              </Card>
+            </div>}
+
           {/* Back to Services */}
           <div className="text-center mt-12">
             <Link to="/#services">
