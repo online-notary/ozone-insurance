@@ -191,8 +191,9 @@ const ServiceDetails = () => {
               id: 4,
               image: '/images/health-plan-4.png',
               title: 'Health Net',
-              description: 'Quality healthcare coverage with competitive rates and benefits'
-            }].map(plan => <Card 
+              description: 'Quality healthcare coverage with competitive rates and benefits',
+              url: 'https://apply-individual-family.kaiserpermanente.org/validate-consumer?ln=en&guid=1f0d6f22-1280-4fb7-9d9a-f0ada7fb16c1'
+            }].map(plan => <Card
                     key={plan.id} 
                     className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col"
                     onClick={() => plan.url && window.open(plan.url, '_blank', 'noopener,noreferrer')}
