@@ -222,10 +222,10 @@ const Services: React.FC<ServicesProps> = ({
                       <Laugh className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={96} strokeWidth={1.5} />
                     </>
                   ) : service.id === 'vision' ? (
-                    <div className="relative">
-                      <Eye className="service-card-icon text-white text-6xl group-hover/card:animate-[wink_1s_ease-in-out_infinite]" size={96} strokeWidth={1.5} />
-                      <EyeOff className="service-card-icon text-white text-6xl absolute inset-0 opacity-0 group-hover/card:animate-[wink-closed_1s_ease-in-out_infinite]" size={96} strokeWidth={1.5} />
-                    </div>
+                    <>
+                      <Eye className="service-card-icon text-white text-6xl group-hover/card:hidden" size={96} strokeWidth={1.5} />
+                      <EyeOff className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={96} strokeWidth={1.5} />
+                    </>
                   ) : (
                     <IconComponent className="service-card-icon text-white text-6xl" size={96} strokeWidth={1.5} />
                   )}
