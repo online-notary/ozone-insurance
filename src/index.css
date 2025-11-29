@@ -148,6 +148,11 @@
     font-family: var(--font-heading);
     @apply font-semibold;
   }
+  
+  /* Scroll offset for fixed header */
+  section[id] {
+    scroll-margin-top: 140px;
+  }
 }
 
 @layer components {
