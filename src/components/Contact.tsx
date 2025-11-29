@@ -89,7 +89,7 @@ const Contact = () => {
                 Schedule Free Consultation
               </Button>
               <Button size="lg" variant="outline" className="btn-hero-outline text-lg px-8 py-4 h-auto">
-                Call Now: (415) 900-9086
+                Call Now: 1-833-MY-OZONE
               </Button>
             </div>
           </div>

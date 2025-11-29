@@ -99,7 +99,7 @@ export function AppSidebar() {
             <div className="space-y-4">
               <div className="flex items-center space-x-3 text-sm">
                 <Phone className="h-4 w-4 text-blue-600" />
-                <span className="text-slate-700">(415) 900-9086</span>
+                <span className="text-slate-700">1-833-MY-OZONE</span>
               </div>
               <div className="flex items-center space-x-3 text-sm">
                 <Clock className="h-4 w-4 text-blue-600" />
