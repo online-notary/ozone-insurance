@@ -326,27 +326,21 @@ const ServiceDetails = () => {
           {/* Vision Insurance Portal - Only for Vision Service */}
           {service.slug === 'vision' && <div className="mb-16">
               <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6">
-                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Explore Vision Plans</h3>
-                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                <div className="p-4 md:p-6 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">Explore Vision Plans</h3>
+                  <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
                     Browse and compare vision insurance plans to find the perfect coverage for your eyecare needs.
                   </p>
-                  <div ref={visionIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isVisionFullscreen ? '100vh' : '800px' }}>
-                    <Button
-                      onClick={toggleVisionFullscreen}
-                      className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                      size="icon"
-                      title={isVisionFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                    >
-                      {isVisionFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                    </Button>
-                    <iframe 
-                      src="https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
-                      className="w-full h-full border-0"
-                      title="Vision Insurance Portal"
-                      allow="geolocation"
-                    />
-                  </div>
+                  <Button 
+                    size="lg" 
+                    onClick={() => {
+                      window.open('https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer');
+                    }}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <FileText className="w-5 h-5" />
+                    View Vision Insurance Plans
+                  </Button>
                 </div>
               </Card>
             </div>}
