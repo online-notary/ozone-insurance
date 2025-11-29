@@ -224,6 +224,36 @@ const ServiceDetails = () => {
           {/* Additional Features */}
           
 
+          {/* Individual Health Insurance Quote Request - Only for Health Service */}
+          {service.slug === 'health' && (
+            <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="p-8 md:p-12 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">
+                    Request Your Individual Health Insurance Quote
+                  </h3>
+                  <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Get personalized health insurance quotes tailored to your needs. Fill out our quick form and our team will help you find the perfect coverage.
+                  </p>
+                  <Button
+                    size="lg"
+                    onClick={() => {
+                      window.open(
+                        'https://form.jotform.com/253316970682059',
+                        'blank',
+                        'scrollbars=yes,toolbar=no,width=700,height=500'
+                      );
+                    }}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <FileText className="w-5 h-5" />
+                    Get Your Quote
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          )}
+
           {/* Back to Services */}
           <div className="text-center mt-12">
             <Link to="/#services">
