@@ -184,14 +184,23 @@ const ServiceDetails = () => {
               id: 3,
               image: '/images/health-plan-3.png',
               title: 'Covered California',
-              description: 'Affordable Care Act marketplace plans with premium assistance'
+              description: 'Affordable Care Act marketplace plans with premium assistance',
+              url: 'https://form.jotform.com/253316970682059'
             }, {
               id: 4,
               image: '/images/health-plan-4.png',
               title: 'Kaiser Permanente',
               description: 'Quality healthcare coverage with competitive rates and benefits',
               url: 'https://apply-individual-family.kaiserpermanente.org/validate-consumer?ln=en&guid=1f0d6f22-1280-4fb7-9d9a-f0ada7fb16c1'
-            }].map(plan => <Card key={plan.id} className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col" onClick={() => plan.url && window.open(plan.url, '_blank', 'noopener,noreferrer')}>
+            }].map(plan => <Card key={plan.id} className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col" onClick={() => {
+                if (plan.url) {
+                  if (plan.id === 3) {
+                    window.open(plan.url, 'blank', 'scrollbars=yes,toolbar=no,width=700,height=500');
+                  } else {
+                    window.open(plan.url, '_blank', 'noopener,noreferrer');
+                  }
+                }
+              }}>
                     <div className="aspect-[4/3] relative overflow-hidden bg-muted">
                       <img src={plan.image} alt={plan.title} className="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105" />
                     </div>
