@@ -180,7 +180,8 @@ const ServiceDetails = () => {
               id: 2,
               image: '/images/health-plan-2.png',
               title: 'Blue Shield of California',
-              description: 'Flexible health insurance options for individuals and families'
+              description: 'Flexible health insurance options for individuals and families',
+              url: 'https://www.blueshieldca.com/buyblue/unauth/shopping?broker_id=I%2BM785yypW3g&role=broker&filterEndorsedBroker=TRUE'
             }, {
               id: 3,
               image: '/images/health-plan-3.png',
