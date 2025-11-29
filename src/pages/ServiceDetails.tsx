@@ -223,24 +223,60 @@ const ServiceDetails = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  { id: 1, image: '/images/health-plan-1.png', title: 'Individual Health Plans' },
-                  { id: 2, image: '/images/health-plan-2.png', title: 'Family Health Plans' },
-                  { id: 3, image: '/images/health-plan-3.png', title: 'Medicare Plans' },
-                  { id: 4, image: '/images/health-plan-4.png', title: 'Supplemental Coverage' }
+                  { 
+                    id: 1, 
+                    image: '/images/health-plan-1.png', 
+                    title: 'Anthem Blue Cross',
+                    description: 'Comprehensive PPO and HMO plans with extensive provider networks'
+                  },
+                  { 
+                    id: 2, 
+                    image: '/images/health-plan-2.png', 
+                    title: 'Blue Shield of California',
+                    description: 'Flexible health insurance options for individuals and families'
+                  },
+                  { 
+                    id: 3, 
+                    image: '/images/health-plan-3.png', 
+                    title: 'Covered California',
+                    description: 'Affordable Care Act marketplace plans with premium assistance'
+                  },
+                  { 
+                    id: 4, 
+                    image: '/images/health-plan-4.png', 
+                    title: 'Health Net',
+                    description: 'Quality healthcare coverage with competitive rates and benefits'
+                  }
                 ].map((plan) => (
                   <Card 
                     key={plan.id} 
-                    className="group cursor-pointer overflow-hidden hover:shadow-xl transition-all duration-300"
+                    className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col"
                   >
-                    <div className="aspect-square relative">
+                    <div className="aspect-[4/3] relative overflow-hidden bg-muted">
                       <img 
                         src={plan.image}
                         alt={plan.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
-                    <div className="p-4 text-center">
-                      <h4 className="font-semibold text-foreground">{plan.title}</h4>
+                    <div className="p-6 flex-1 flex flex-col">
+                      <h4 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                        {plan.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground flex-1 mb-4">
+                        {plan.description}
+                      </p>
+                      <div className="flex justify-end">
+                        <svg 
+                          width="24" 
+                          height="24" 
+                          viewBox="0 -960 960 960" 
+                          className="text-primary group-hover:translate-x-1 transition-transform"
+                          fill="currentColor"
+                        >
+                          <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/>
+                        </svg>
+                      </div>
                     </div>
                   </Card>
                 ))}
