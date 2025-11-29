@@ -85,7 +85,7 @@ export default function Footer() {
               href="#"
               className="inline-flex items-center gap-2 bg-white/10 text-white border border-white/30 rounded-full px-6 py-3 font-semibold hover:bg-white/20 transition-colors"
             >
-              Track Your Claim <IconArrowNE />
+              Get a Quote <IconArrowNE />
             </a>
 
             <div className="flex items-center gap-3">
