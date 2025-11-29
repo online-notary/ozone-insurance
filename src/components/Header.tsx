@@ -186,18 +186,9 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
                   </DropdownMenu>
                 </>
               ) : (
-                <>
-                  <Link to="/auth">
-                    <Button variant="ghost" className="text-slate-700 hover:text-primary px-4">
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link to="/auth">
-                    <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-md font-medium text-sm shadow-sm">
-                      Get A Quote
-                    </Button>
-                  </Link>
-                </>
+                <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-md font-medium text-sm shadow-sm">
+                  Get A Quote
+                </Button>
               )}
               
               <Grid3X3 
@@ -262,18 +253,9 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
                       </Button>
                     </>
                   ) : (
-                    <>
-                      <Link to="/auth">
-                        <Button variant="ghost" className="text-slate-700 hover:text-primary px-4">
-                          Sign In
-                        </Button>
-                      </Link>
-                      <Link to="/auth">
-                        <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium">
-                          Get A Quote
-                        </Button>
-                      </Link>
-                    </>
+                    <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium">
+                      Get A Quote
+                    </Button>
                   )}
                   
                   <Grid3X3 
