@@ -37,11 +37,19 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
     { name: "Advisors", href: "#team", section: "team" },
     { name: "About", href: "#about", section: "about" },
     { name: "Contact", href: "#contact", section: "contact" },
+    { name: "Privacy", href: "/privacy", section: "privacy", isRoute: true },
   ];
 
   // Handle navigation click
-  const handleNavClick = (e: React.MouseEvent, item: { name: string; href: string; section: string }) => {
+  const handleNavClick = (e: React.MouseEvent, item: { name: string; href: string; section: string; isRoute?: boolean }) => {
     e.preventDefault();
+    
+    // If it's a route, navigate directly
+    if (item.isRoute) {
+      navigate(item.href);
+      setIsMenuOpen(false);
+      return;
+    }
     
     // If we're not on the home page, navigate there first
     if (location.pathname !== '/') {
@@ -111,7 +119,9 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8 flex-1 justify-center">
               {navigation.map((item) => {
-                const isActive = activeSection === item.section && location.pathname === '/';
+                const isActive = item.isRoute 
+                  ? location.pathname === item.href
+                  : activeSection === item.section && location.pathname === '/';
                 return (
                   <a
                     key={item.name}
@@ -214,7 +224,9 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
             <nav className="lg:hidden mt-4 py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-4">
                 {navigation.map((item) => {
-                  const isActive = activeSection === item.section && location.pathname === '/';
+                  const isActive = item.isRoute 
+                    ? location.pathname === item.href
+                    : activeSection === item.section && location.pathname === '/';
                   return (
                     <a
                       key={item.name}

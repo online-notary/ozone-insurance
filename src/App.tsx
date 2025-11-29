@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import ServiceDetails from "./pages/ServiceDetails";
 import UpdateServices from "./pages/UpdateServices";
 import TeamMemberDetail from "./pages/TeamMemberDetail";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/service/:serviceId" element={<ServiceDetails />} />
             <Route path="/update-services" element={<UpdateServices />} />
             <Route path="/team/:memberId" element={<TeamMemberDetail />} />
+            <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
