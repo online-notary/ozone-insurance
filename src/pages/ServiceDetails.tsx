@@ -39,14 +39,19 @@ const ServiceDetails = () => {
   const [error, setError] = useState<string | null>(null);
   const [isDentalFullscreen, setIsDentalFullscreen] = useState(false);
   const [isVisionFullscreen, setIsVisionFullscreen] = useState(false);
+  const [isIdentityFullscreen, setIsIdentityFullscreen] = useState(false);
   const [dentalIframeError, setDentalIframeError] = useState(false);
   const [visionIframeError, setVisionIframeError] = useState(false);
+  const [identityIframeError, setIdentityIframeError] = useState(false);
   const [dentalIframeLoading, setDentalIframeLoading] = useState(true);
   const [visionIframeLoading, setVisionIframeLoading] = useState(true);
+  const [identityIframeLoading, setIdentityIframeLoading] = useState(true);
   const dentalIframeRef = useRef<HTMLDivElement>(null);
   const visionIframeRef = useRef<HTMLDivElement>(null);
+  const identityIframeRef = useRef<HTMLDivElement>(null);
   const dentalTimeoutRef = useRef<NodeJS.Timeout>();
   const visionTimeoutRef = useRef<NodeJS.Timeout>();
+  const identityTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Timeout fallback for dental iframe
   useEffect(() => {
@@ -88,6 +93,26 @@ const ServiceDetails = () => {
     }
   }, [service?.slug, visionIframeLoading, visionIframeError]);
 
+  // Timeout fallback for identity iframe
+  useEffect(() => {
+    if (service?.slug === 'identity' && !identityIframeError) {
+      identityTimeoutRef.current = setTimeout(() => {
+        // If still loading after 5 seconds, assume it failed
+        if (identityIframeLoading) {
+          console.log('Identity iframe timeout - switching to fallback button');
+          setIdentityIframeError(true);
+          setIdentityIframeLoading(false);
+        }
+      }, 5000);
+
+      return () => {
+        if (identityTimeoutRef.current) {
+          clearTimeout(identityTimeoutRef.current);
+        }
+      };
+    }
+  }, [service?.slug, identityIframeLoading, identityIframeError]);
+
   const toggleDentalFullscreen = () => {
     if (!dentalIframeRef.current) return;
 
@@ -120,11 +145,28 @@ const ServiceDetails = () => {
     }
   };
 
+  const toggleIdentityFullscreen = () => {
+    if (!identityIframeRef.current) return;
+
+    if (!document.fullscreenElement) {
+      identityIframeRef.current.requestFullscreen().then(() => {
+        setIsIdentityFullscreen(true);
+      }).catch((err) => {
+        console.error('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsIdentityFullscreen(false);
+      });
+    }
+  };
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
         setIsDentalFullscreen(false);
         setIsVisionFullscreen(false);
+        setIsIdentityFullscreen(false);
       }
     };
 
@@ -467,6 +509,73 @@ const ServiceDetails = () => {
                           console.error('Vision iframe failed to load');
                           setVisionIframeError(true);
                           setVisionIframeLoading(false);
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </Card>
+            </div>}
+
+          {/* Identity Insurance Portal - Only for Identity Service */}
+          {service.slug === 'identity' && <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Explore Identity Insurance Plans</h3>
+                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                    Protect yourself from identity theft and fraud with comprehensive identity insurance coverage.
+                  </p>
+                  
+                  {identityIframeError ? (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground mb-6">
+                        The identity insurance portal couldn't be loaded directly. Click below to open it in a new window.
+                      </p>
+                      <Button 
+                        size="lg" 
+                        onClick={() => {
+                          window.open('https://brokers.insuranceforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer');
+                        }}
+                        className="inline-flex items-center gap-2"
+                      >
+                        <FileText className="w-5 h-5" />
+                        View Identity Insurance Plans
+                      </Button>
+                    </div>
+                  ) : (
+                    <div ref={identityIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isIdentityFullscreen ? '100vh' : '800px' }}>
+                      {identityIframeLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                          <div className="text-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                            <p className="text-muted-foreground">Loading identity insurance portal...</p>
+                          </div>
+                        </div>
+                      )}
+                      <Button
+                        onClick={toggleIdentityFullscreen}
+                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                        size="icon"
+                        title={isIdentityFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                      >
+                        {isIdentityFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      </Button>
+                      <iframe 
+                        src="https://brokers.insuranceforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
+                        className="w-full h-full border-0"
+                        title="Identity Insurance Portal"
+                        allow="geolocation"
+                        onLoad={() => {
+                          console.log('Identity iframe loaded successfully');
+                          setIdentityIframeLoading(false);
+                          if (identityTimeoutRef.current) {
+                            clearTimeout(identityTimeoutRef.current);
+                          }
+                        }}
+                        onError={() => {
+                          console.error('Identity iframe failed to load');
+                          setIdentityIframeError(true);
+                          setIdentityIframeLoading(false);
                         }}
                       />
                     </div>
