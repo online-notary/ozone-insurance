@@ -226,6 +226,8 @@ const Services: React.FC<ServicesProps> = ({
                       <Eye className="service-card-icon text-white text-6xl group-hover/card:hidden" size={96} strokeWidth={1.5} />
                       <EyeOff className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={96} strokeWidth={1.5} />
                     </>
+                  ) : service.id === 'travel' ? (
+                    <IconComponent className="service-card-icon text-white text-6xl group-hover/card:animate-[fly-around_3s_ease-in-out_infinite]" size={96} strokeWidth={1.5} />
                   ) : (
                     <IconComponent className="service-card-icon text-white text-6xl" size={96} strokeWidth={1.5} />
                   )}
