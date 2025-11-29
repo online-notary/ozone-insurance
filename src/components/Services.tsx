@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Plane, Heart, Car, Home, Shield, Briefcase, Smile, Laugh, Eye, ShieldCheck, LucideIcon, ArrowRight } from "lucide-react";
+import { Plane, Heart, Car, Home, Shield, Briefcase, Smile, Laugh, Eye, EyeOff, ShieldCheck, LucideIcon, ArrowRight } from "lucide-react";
 import professionalTeam from "@/assets/professional-team.jpg";
 
 type ServiceCategory = {
@@ -221,6 +221,10 @@ const Services: React.FC<ServicesProps> = ({
                       <Smile className="service-card-icon text-white text-6xl group-hover/card:hidden" size={96} strokeWidth={1.5} />
                       <Laugh className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={96} strokeWidth={1.5} />
                     </>
+                  ) : service.id === 'vision' ? (
+                    <div className="relative">
+                      <Eye className="service-card-icon text-white text-6xl group-hover/card:animate-[blink_0.5s_ease-in-out_infinite]" size={96} strokeWidth={1.5} />
+                    </div>
                   ) : (
                     <IconComponent className="service-card-icon text-white text-6xl" size={96} strokeWidth={1.5} />
                   )}
