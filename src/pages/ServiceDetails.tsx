@@ -169,7 +169,7 @@ const ServiceDetails = () => {
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[{
               id: 1,
               image: '/images/health-plan-1.png',
@@ -192,13 +192,7 @@ const ServiceDetails = () => {
               image: '/images/health-plan-4.png',
               title: 'Health Net',
               description: 'Quality healthcare coverage with competitive rates and benefits'
-            }, {
-              id: 5,
-              image: '/images/health-plan-5.png',
-              title: 'Kaiser Permanente',
-              description: 'Integrated healthcare with coordinated care and comprehensive benefits',
-              url: 'https://apply-individual-family.kaiserpermanente.org/validate-consumer?ln=en&guid=1f0d6f22-1280-4fb7-9d9a-f0ada7fb16c1'
-            }].map(plan => <Card
+            }].map(plan => <Card 
                     key={plan.id} 
                     className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col"
                     onClick={() => plan.url && window.open(plan.url, '_blank', 'noopener,noreferrer')}
