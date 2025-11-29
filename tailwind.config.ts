@@ -111,12 +111,30 @@ export default {
             opacity: "1",
           },
         },
+        "fly-around": {
+          "0%": {
+            transform: "translate(0, 0) rotate(-45deg)",
+          },
+          "25%": {
+            transform: "translate(100px, -50px) rotate(0deg)",
+          },
+          "50%": {
+            transform: "translate(100px, 100px) rotate(45deg)",
+          },
+          "75%": {
+            transform: "translate(-100px, 100px) rotate(90deg)",
+          },
+          "100%": {
+            transform: "translate(0, 0) rotate(-45deg)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "wink": "wink 1s ease-in-out infinite",
         "wink-closed": "wink-closed 1s ease-in-out infinite",
+        "fly-around": "fly-around 3s ease-in-out infinite",
       },
     },
   },
