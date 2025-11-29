@@ -174,7 +174,8 @@ const ServiceDetails = () => {
               id: 1,
               image: '/images/health-plan-1.png',
               title: 'Anthem Blue Cross',
-              description: 'Comprehensive PPO and HMO plans with extensive provider networks'
+              description: 'Comprehensive PPO and HMO plans with extensive provider networks',
+              url: 'https://shop.anthem.com/individuals/shop/basics?locale=en_US&parenttin=LMJQRQNVTY&agentType=Agent&partnerID=ATK&ffm=&certificationNO=&channel=AC&licenseNO=&state=CA&phone=6502852264&cid=&addr=PO%20BOX%20789&agency=OZONE%20INSURANCE%20SERVICES%20INC&brand=abc&appState=CA&Faxext=&id=CKDNNPMSMZ&lname=Gowda&npn=17569517&email=MADHU.GOWDA@GMAIL.COM&language=en&lobState=&city=MOUNTAIN%20VIEW&zip=94042&agentCode=&fax=&fname=Madhu&paidTIN=LMJQRQNVTY&phoneext='
             }, {
               id: 2,
               image: '/images/health-plan-2.png',
@@ -190,7 +191,11 @@ const ServiceDetails = () => {
               image: '/images/health-plan-4.png',
               title: 'Health Net',
               description: 'Quality healthcare coverage with competitive rates and benefits'
-            }].map(plan => <Card key={plan.id} className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col">
+            }].map(plan => <Card 
+                    key={plan.id} 
+                    className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col"
+                    onClick={() => plan.url && window.open(plan.url, '_blank', 'noopener,noreferrer')}
+                  >
                     <div className="aspect-[4/3] relative overflow-hidden bg-muted">
                       <img src={plan.image} alt={plan.title} className="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105" />
                     </div>
