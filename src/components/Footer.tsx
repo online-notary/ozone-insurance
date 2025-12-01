@@ -133,18 +133,21 @@ export default function Footer() {
                 CA LIC# 0K48512
               </p>
 
-              <form className="mb-6 flex gap-2" onSubmit={(e)=>e.preventDefault()}>
-                <input
-                  className="flex-1 rounded-lg bg-white text-gray-800 placeholder:text-gray-500 px-4 py-3 outline-none"
-                  placeholder="Your email address"
-                />
-                <button
-                  type="submit"
-                  className="rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 transition-colors"
-                >
-                  Sign up
-                </button>
-              </form>
+              <a
+                href="javascript:void(
+                  window.open(
+                    'https://form.jotform.com/253238885115159',
+                    'blank',
+                    'scrollbars=yes,
+                    toolbar=no,
+                    width=700,
+                    height=500'
+                  )
+                )"
+                className="mb-6 inline-flex items-center justify-center rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 transition-colors cursor-pointer"
+              >
+                Madhu Gowda Newsletter
+              </a>
 
               <div className="flex gap-3">
                 {[
