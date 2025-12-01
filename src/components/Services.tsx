@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Plane, Heart, Car, Home, Shield, Briefcase, Smile, Laugh, Eye, EyeOff, ShieldCheck, LucideIcon, ArrowRight } from "lucide-react";
+import { Plane, Heart, Car, Home, Shield, Briefcase, Smile, Laugh, Eye, EyeOff, ShieldCheck, Users, LucideIcon, ArrowRight } from "lucide-react";
 import professionalTeam from "@/assets/professional-team.jpg";
 type ServiceCategory = {
   id: string;
@@ -88,6 +88,13 @@ const ozoneServices: ServiceCategory[] = [{
   items: ["24/7 Monitoring", "Dark Web Surveillance", "Credit Report Access", "Identity Restoration"],
   slug: "identity",
   icon: ShieldCheck
+}, {
+  id: "group-health",
+  title: "Group Health Insurance",
+  description: "Comprehensive health coverage solutions for businesses and organizations.",
+  items: ["Employee Benefits", "Flexible Plan Options", "Wellness Programs", "Provider Networks"],
+  slug: "group-health",
+  icon: Users
 }];
 
 // Service card gradients matching CodePen design
@@ -96,18 +103,20 @@ const serviceGradients = ["linear-gradient(to bottom, #ff2ae0, #645bf6)",
 "linear-gradient(to bottom, #3f2ae0, #6ffa12)",
 // Health: Blue to Green
 "linear-gradient(to bottom, #af2ae0, #145ba6)",
-// Auto: Purple to Blue
-"linear-gradient(to bottom, #ff6b2a, #ff2ae0)",
-// Home: Orange to Pink
+// Business: Purple to Blue
 "linear-gradient(to bottom, #2affe0, #145ba6)",
 // Umbrella: Teal to Blue
+"linear-gradient(to bottom, #ff6b2a, #ff2ae0)",
+// Auto: Orange to Pink
 "linear-gradient(to bottom, #6ffa12, #2affe0)",
-// Business: Green to Teal
+// Home: Green to Teal
 "linear-gradient(to bottom, #4facfe, #00f2fe)",
 // Dental: Blue gradient
 "linear-gradient(to bottom, #fa709a, #fee140)",
 // Vision: Pink to Yellow
-"linear-gradient(to bottom, #667eea, #764ba2)" // Identity: Purple gradient
+"linear-gradient(to bottom, #667eea, #764ba2)",
+// Identity: Purple gradient
+"linear-gradient(to bottom, #00c6ff, #0072ff)" // Group Health: Blue gradient
 ];
 const Services: React.FC<ServicesProps> = ({
   smallTitle = "Our Services",
