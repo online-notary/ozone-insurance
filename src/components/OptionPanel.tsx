@@ -180,7 +180,7 @@ export default function OptionPanel({
               </div>
             </div>
 
-            <div className="c_pan text-slate-500 text-sm">© 2022 Vankine. All Rights Reserved.</div>
+            <div className="c_pan text-slate-500 text-sm">© {new Date().getFullYear()} Ozone Insurance Services, Inc. All Rights Reserved.</div>
           </div>
         </div>
       </div>
