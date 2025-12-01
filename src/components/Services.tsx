@@ -140,7 +140,7 @@ const Services: React.FC<ServicesProps> = ({
   }, []);
   return <section id="services" className={`service-section relative overflow-hidden ${className}`}>
       {/* Dark Purple Background */}
-      <div className="absolute inset-0 bg-[#3c2846]" />
+      <div className="absolute inset-0 bg-[#003b7ae6]" />
 
       {/* top spacing */}
       <div className="pt-4" />
