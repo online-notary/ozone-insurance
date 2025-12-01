@@ -115,13 +115,13 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
         <div className="large-container py-0">
           <div className="flex items-center justify-between" style={{ height: '84px' }}>
             {/* Logo Section */}
-            <div className="flex items-center">
+            <Link to="/" className="flex items-center cursor-pointer">
               <img 
                 src={ozoneLogo}
                 alt="Ozone Insurance Services, Inc."
                 className="object-contain h-12"
               />
-            </div>
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8 flex-1 justify-center">
