@@ -156,7 +156,7 @@ const Services: React.FC<ServicesProps> = ({
         </div>
 
         {/* Cards Grid */}
-        <div className="flex justify-center flex-wrap gap-12 mb-8 px-4">
+        <div className="flex justify-center flex-wrap gap-9 mb-8 px-4">
           {ozoneServices.map((service, index) => {
           const IconComponent = service.icon;
           const isVisible = visibleCards.has(index);
@@ -175,18 +175,18 @@ const Services: React.FC<ServicesProps> = ({
                 {/* Icon Container with Notches */}
                 <div className="service-icon-container">
                   {service.id === 'dental' ? <>
-                      <Smile className="service-card-icon text-white text-6xl group-hover/card:hidden" size={64} strokeWidth={1.5} />
-                      <Laugh className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={64} strokeWidth={1.5} />
+                      <Smile className="service-card-icon text-white" size={48} strokeWidth={1.5} />
+                      <Laugh className="service-card-icon text-white hidden group-hover/card:block" size={48} strokeWidth={1.5} />
                     </> : service.id === 'vision' ? <>
-                      <Eye className="service-card-icon text-white text-6xl group-hover/card:hidden" size={64} strokeWidth={1.5} />
-                      <EyeOff className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={64} strokeWidth={1.5} />
-                    </> : service.id === 'travel' ? <IconComponent className="service-card-icon text-white text-6xl group-hover/card:animate-[fly-around_3s_ease-in-out_infinite]" size={64} strokeWidth={1.5} /> : <IconComponent className="service-card-icon text-white text-6xl" size={64} strokeWidth={1.5} />}
+                      <Eye className="service-card-icon text-white group-hover/card:hidden" size={48} strokeWidth={1.5} />
+                      <EyeOff className="service-card-icon text-white hidden group-hover/card:block" size={48} strokeWidth={1.5} />
+                    </> : service.id === 'travel' ? <IconComponent className="service-card-icon text-white group-hover/card:animate-[fly-around_3s_ease-in-out_infinite]" size={48} strokeWidth={1.5} /> : <IconComponent className="service-card-icon text-white" size={48} strokeWidth={1.5} />}
                 </div>
 
                 {/* Content */}
                 <div className="service-card-content">
-                  <h2 className="text-white text-3xl font-bold uppercase mb-4 tracking-wide">{service.title}</h2>
-                  <p className="text-white/90 leading-relaxed text-base">{service.description}</p>
+                  <h2 className="text-white text-2xl font-bold uppercase mb-3 tracking-wide">{service.title}</h2>
+                  <p className="text-white/90 leading-relaxed text-sm">{service.description}</p>
                 </div>
               </Link>;
         })}
