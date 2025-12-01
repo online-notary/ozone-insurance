@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import WavePattern from "@/components/WavePattern";
 import heroFamily from "@/assets/hero-family.jpg";
 import professionalTeam from "@/assets/professional-team.jpg";
@@ -64,9 +65,22 @@ const IconIg = () => (
 );
 
 export default function Footer() {
+  const navigate = useNavigate();
+  
   const backToTop = (e: React.MouseEvent) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleBookMeeting = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate("/");
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
 
   return (
@@ -81,12 +95,12 @@ export default function Footer() {
             </h2>
           </div>
           <div className="flex items-center gap-6 md:ml-auto">
-            <a
-              href="/#contact"
+            <button
+              onClick={handleBookMeeting}
               className="inline-flex items-center gap-2 bg-white/10 text-white border border-white/30 rounded-full px-6 py-3 font-semibold hover:bg-white/20 transition-colors"
             >
               Book a Meeting <IconArrowNE />
-            </a>
+            </button>
 
             <div className="flex items-center gap-3">
               <span className="w-12 h-12 rounded-full bg-green-400 flex items-center justify-center">
