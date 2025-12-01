@@ -82,7 +82,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-6 md:ml-auto">
             <a
-              href="#"
+              href="/#contact"
               className="inline-flex items-center gap-2 bg-white/10 text-white border border-white/30 rounded-full px-6 py-3 font-semibold hover:bg-white/20 transition-colors"
             >
               Get a Quote <IconArrowNE />
