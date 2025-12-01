@@ -27,23 +27,6 @@ const Contact = () => {
   }];
   return <section id="contact" className="pt-8 pb-24 bg-muted/30">
       <div className="container mx-auto px-4">
-        
-        {/* Section Header */}
-        <div className="text-center space-y-4 mb-16">
-          <div className="inline-flex items-center space-x-2 bg-success/10 rounded-full px-4 py-2">
-            <MessageCircle className="h-5 w-5 text-success" />
-            <span className="text-sm font-medium text-success">Get In Touch</span>
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
-            Ready to Get
-            <br />
-            <span className="text-gradient">Better Insurance?</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Contact us today for a free quote. As independent agents, we'll help you find the best insurance solutions at the most competitive rates.
-          </p>
-        </div>
-
         {/* Levitate Meeting Scheduler - Full Width */}
         <div className="w-full">
           <Card className="p-4 shadow-medium overflow-hidden">
