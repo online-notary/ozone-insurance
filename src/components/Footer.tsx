@@ -170,37 +170,37 @@ export default function Footer() {
               <h5 className="mb-6 font-semibold text-white text-lg">Services</h5>
               <ul className="space-y-3">
                 <li>
-                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                  <a href="/service/travel" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
                     <IconArrowRight />
                     Travel Insurance
                   </a>
                 </li>
                 <li>
-                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                  <a href="/service/health" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
                     <IconArrowRight />
                     Health Insurance
                   </a>
                 </li>
                 <li>
-                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                  <a href="/service/business" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
                     <IconArrowRight />
                     Business Insurance
                   </a>
                 </li>
                 <li>
-                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                  <a href="/service/umbrella" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
                     <IconArrowRight />
                     Umbrella Insurance
                   </a>
                 </li>
                 <li>
-                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                  <a href="/service/auto" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
                     <IconArrowRight />
                     Auto Insurance
                   </a>
                 </li>
                 <li>
-                  <a href="/#services" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
+                  <a href="/service/home" className="flex items-center gap-2 text-white/80 hover:text-blue-400 transition-colors">
                     <IconArrowRight />
                     Home Insurance
                   </a>
