@@ -121,14 +121,17 @@ const Hero = () => {
             <div className="slide-item-content relative">
               {/* Image Layer - Background */}
               <div 
-                className="image-layer absolute inset-0 bg-cover bg-center bg-no-repeat h-screen"
+                className="image-layer absolute inset-0 bg-cover bg-center bg-no-repeat h-[50vh]"
                 style={{
                   backgroundImage: `url(${slide.image})`,
                 }}
               ></div>
               
+              {/* Background Overlay - Lighter for better image visibility */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/10 to-transparent h-[50vh]"></div>
+              
               {/* Slide Content */}
-              <div className="slide-item content_left relative h-screen">
+              <div className="slide-item content_left relative h-[50vh]">
                 <div className="auto-container container mx-auto px-4 sm:px-6 lg:px-8 h-full">
                   <div className="row flex items-center h-full">
                     <div className="col-md-6 max-w-2xl w-full">
