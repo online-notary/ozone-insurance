@@ -15,7 +15,6 @@ const Hero = () => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Clear timeout on component unmount
   useEffect(() => {
@@ -27,13 +26,6 @@ const Hero = () => {
   }, []);
 
   const slides = [
-    {
-      type: "video",
-      badge: "Ozone Insurance",
-      title: ["Better Insurance", "For", "Everyone"],
-      videoUrl: "/videos/hero-video.mp4",
-      alt: "Ozone Insurance - Your trusted insurance partner"
-    },
     {
       type: "image",
       badge: "Independent Agents",
@@ -69,27 +61,9 @@ const Hero = () => {
     arrows: false,
     cssEase: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
     beforeChange: (current: number, next: number) => {
-      // Safely pause video when leaving video slide
-      if (slides[current]?.type === "video" && videoRef.current) {
-        try {
-          videoRef.current.pause();
-        } catch (error) {
-          console.warn('Error pausing video:', error);
-        }
-      }
       setCurrentSlide(next);
     },
     afterChange: (current: number) => {
-      // Safely play video when entering video slide
-      if (slides[current]?.type === "video" && videoRef.current) {
-        try {
-          videoRef.current.play().catch(error => {
-            console.warn('Error playing video:', error);
-          });
-        } catch (error) {
-          console.warn('Error accessing video:', error);
-        }
-      }
       setCurrentSlide(current);
     },
     pauseOnHover: true,
@@ -145,82 +119,57 @@ const Hero = () => {
         {slides.map((slide, index) => (
           <div key={`slide-${index}`} className="outline-none">
             <div className="slide-item-content relative">
-              {/* Video or Image Layer - Background */}
-              {slide.type === "video" && slide.videoUrl ? (
-                <video
-                  ref={videoRef}
-                  className="absolute inset-0 w-full h-screen object-cover"
-                  autoPlay
-                  muted
-                  playsInline
-                  onEnded={() => {
-                    // Reset video to beginning when it ends so carousel can continue normally
-                    if (videoRef.current) {
-                      videoRef.current.currentTime = 0;
-                    }
-                  }}
-                >
-                  <source src={slide.videoUrl} type="video/mp4" />
-                </video>
-              ) : slide.type === "image" ? (
-                <div 
-                  className="image-layer absolute inset-0 bg-cover bg-center bg-no-repeat h-screen"
-                  style={{
-                    backgroundImage: `url(${slide.image})`,
-                  }}
-                ></div>
-              ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 h-screen"></div>
-              )}
-              
-              {/* Background Overlay - Lighter for better image visibility */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/10 to-transparent h-screen"></div>
+              {/* Image Layer - Background */}
+              <div 
+                className="image-layer absolute inset-0 bg-cover bg-center bg-no-repeat h-screen"
+                style={{
+                  backgroundImage: `url(${slide.image})`,
+                }}
+              ></div>
               
               {/* Slide Content */}
               <div className="slide-item content_left relative h-screen">
                 <div className="auto-container container mx-auto px-4 sm:px-6 lg:px-8 h-full">
                   <div className="row flex items-center h-full">
                     <div className="col-md-6 max-w-2xl w-full">
-                      {slide.type === "image" ? (
-                        /* Shape Background Container - Only for image slides */
-                        <div className="relative bg-transparent max-w-4xl">
-                          <div 
-                            className="absolute inset-0 bg-contain bg-left bg-no-repeat w-full h-full min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]"
-                            style={{
-                              backgroundImage: `url(/lovable-uploads/76051c9e-2951-4125-a29c-44eab67f0ee6.png)`,
-                            }}
-                          ></div>
-                          <div className="relative z-10 p-8 sm:p-12 lg:p-16 xl:p-20 max-w-2xl">
-                            <div className="slider_content text-white">
-                              {/* Subtitle with Icon */}
-                              <h6 className="animate_up flex items-center space-x-2 sm:space-x-3 text-sm sm:text-base lg:text-lg font-semibold mb-4 sm:mb-6">
-                                <Shield className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white flex-shrink-0" />
-                                <span>{slide.badge}</span>
-                              </h6>
+                      {/* Shape Background Container */}
+                      <div className="relative bg-transparent max-w-4xl">
+                        <div 
+                          className="absolute inset-0 bg-contain bg-left bg-no-repeat w-full h-full min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]"
+                          style={{
+                            backgroundImage: `url(/lovable-uploads/76051c9e-2951-4125-a29c-44eab67f0ee6.png)`,
+                          }}
+                        ></div>
+                        <div className="relative z-10 p-8 sm:p-12 lg:p-16 xl:p-20 max-w-2xl">
+                          <div className="slider_content text-white">
+                            {/* Subtitle with Icon */}
+                            <h6 className="animate_up flex items-center space-x-2 sm:space-x-3 text-sm sm:text-base lg:text-lg font-semibold mb-4 sm:mb-6">
+                              <Shield className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white flex-shrink-0" />
+                              <span>{slide.badge}</span>
+                            </h6>
 
-                              {/* Multi-line Title */}
-                              <h1 className="animate_left text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-heading mb-6 sm:mb-8">
-                                {slide.title.map((line, lineIndex) => (
-                                  <span key={lineIndex} className="block">
-                                    {line}
-                                    {lineIndex < slide.title.length - 1 && <br />}
-                                  </span>
-                                ))}
-                              </h1>
+                            {/* Multi-line Title */}
+                            <h1 className="animate_left text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-heading mb-6 sm:mb-8">
+                              {slide.title.map((line, lineIndex) => (
+                                <span key={lineIndex} className="block">
+                                  {line}
+                                  {lineIndex < slide.title.length - 1 && <br />}
+                                </span>
+                              ))}
+                            </h1>
 
-                              {/* Single Button */}
-                              <div className="button_all animate_down">
-                                <Button 
-                                  size="lg" 
-                                  className="theme_btn color_white bg-white text-primary hover:bg-white/90 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 h-auto text-sm sm:text-base lg:text-lg font-bold rounded-lg transition-all duration-300 hover:shadow-xl"
-                                >
-                                  Read More
-                                </Button>
-                              </div>
+                            {/* Single Button */}
+                            <div className="button_all animate_down">
+                              <Button 
+                                size="lg" 
+                                className="theme_btn color_white bg-white text-primary hover:bg-white/90 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 h-auto text-sm sm:text-base lg:text-lg font-bold rounded-lg transition-all duration-300 hover:shadow-xl"
+                              >
+                                Read More
+                              </Button>
                             </div>
                           </div>
                         </div>
-                      ) : null}
+                      </div>
                     </div>
                   </div>
                 </div>
