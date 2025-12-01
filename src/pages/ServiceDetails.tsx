@@ -42,26 +42,31 @@ const ServiceDetails = () => {
   const [isIdentityFullscreen, setIsIdentityFullscreen] = useState(false);
   const [isAutoFullscreen, setIsAutoFullscreen] = useState(false);
   const [isHomeFullscreen, setIsHomeFullscreen] = useState(false);
+  const [isGroupHealthFullscreen, setIsGroupHealthFullscreen] = useState(false);
   const [dentalIframeError, setDentalIframeError] = useState(false);
   const [visionIframeError, setVisionIframeError] = useState(false);
   const [identityIframeError, setIdentityIframeError] = useState(false);
   const [autoIframeError, setAutoIframeError] = useState(false);
   const [homeIframeError, setHomeIframeError] = useState(false);
+  const [groupHealthIframeError, setGroupHealthIframeError] = useState(false);
   const [dentalIframeLoading, setDentalIframeLoading] = useState(true);
   const [visionIframeLoading, setVisionIframeLoading] = useState(true);
   const [identityIframeLoading, setIdentityIframeLoading] = useState(true);
   const [autoIframeLoading, setAutoIframeLoading] = useState(true);
   const [homeIframeLoading, setHomeIframeLoading] = useState(true);
+  const [groupHealthIframeLoading, setGroupHealthIframeLoading] = useState(true);
   const dentalIframeRef = useRef<HTMLDivElement>(null);
   const visionIframeRef = useRef<HTMLDivElement>(null);
   const identityIframeRef = useRef<HTMLDivElement>(null);
   const autoIframeRef = useRef<HTMLDivElement>(null);
   const homeIframeRef = useRef<HTMLDivElement>(null);
+  const groupHealthIframeRef = useRef<HTMLDivElement>(null);
   const dentalTimeoutRef = useRef<NodeJS.Timeout>();
   const visionTimeoutRef = useRef<NodeJS.Timeout>();
   const identityTimeoutRef = useRef<NodeJS.Timeout>();
   const autoTimeoutRef = useRef<NodeJS.Timeout>();
   const homeTimeoutRef = useRef<NodeJS.Timeout>();
+  const groupHealthTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Timeout fallback for dental iframe
   useEffect(() => {
@@ -163,6 +168,26 @@ const ServiceDetails = () => {
     }
   }, [service?.slug, homeIframeLoading, homeIframeError]);
 
+  // Timeout fallback for group health iframe
+  useEffect(() => {
+    if (service?.slug === 'group-health' && !groupHealthIframeError) {
+      groupHealthTimeoutRef.current = setTimeout(() => {
+        // If still loading after 5 seconds, assume it failed
+        if (groupHealthIframeLoading) {
+          console.log('Group Health iframe timeout - switching to fallback button');
+          setGroupHealthIframeError(true);
+          setGroupHealthIframeLoading(false);
+        }
+      }, 5000);
+
+      return () => {
+        if (groupHealthTimeoutRef.current) {
+          clearTimeout(groupHealthTimeoutRef.current);
+        }
+      };
+    }
+  }, [service?.slug, groupHealthIframeLoading, groupHealthIframeError]);
+
   const toggleDentalFullscreen = () => {
     if (!dentalIframeRef.current) return;
 
@@ -243,6 +268,22 @@ const ServiceDetails = () => {
     }
   };
 
+  const toggleGroupHealthFullscreen = () => {
+    if (!groupHealthIframeRef.current) return;
+
+    if (!document.fullscreenElement) {
+      groupHealthIframeRef.current.requestFullscreen().then(() => {
+        setIsGroupHealthFullscreen(true);
+      }).catch((err) => {
+        console.error('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsGroupHealthFullscreen(false);
+      });
+    }
+  };
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
@@ -251,6 +292,7 @@ const ServiceDetails = () => {
         setIsIdentityFullscreen(false);
         setIsAutoFullscreen(false);
         setIsHomeFullscreen(false);
+        setIsGroupHealthFullscreen(false);
       }
     };
 
@@ -792,6 +834,72 @@ const ServiceDetails = () => {
                           console.error('Home form iframe failed to load');
                           setHomeIframeError(true);
                           setHomeIframeLoading(false);
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </Card>
+            </div>}
+
+          {/* Group Health Insurance Form - Only for Group Health Service */}
+          {service.slug === 'group-health' && <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Get Your Group Health Insurance Quote</h3>
+                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                    Fill out the form below to receive a personalized group health insurance quote for your organization.
+                  </p>
+                  
+                  {groupHealthIframeError ? (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground mb-6">
+                        The form couldn't be loaded directly. Click below to open it in a new window.
+                      </p>
+                      <Button 
+                        size="lg" 
+                        onClick={() => {
+                          window.open('https://forms.monday.com/forms/346b024b1b2521abb30be53c4f0dc5a5?r=use1', '_blank', 'noopener,noreferrer');
+                        }}
+                        className="inline-flex items-center gap-2"
+                      >
+                        <FileText className="w-5 h-5" />
+                        Open Group Health Insurance Form
+                      </Button>
+                    </div>
+                  ) : (
+                    <div ref={groupHealthIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isGroupHealthFullscreen ? '100vh' : '800px' }}>
+                      {groupHealthIframeLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                          <div className="text-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                            <p className="text-muted-foreground">Loading form...</p>
+                          </div>
+                        </div>
+                      )}
+                      <Button
+                        onClick={toggleGroupHealthFullscreen}
+                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                        size="icon"
+                        title={isGroupHealthFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                      >
+                        {isGroupHealthFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      </Button>
+                      <iframe 
+                        src="https://forms.monday.com/forms/embed/346b024b1b2521abb30be53c4f0dc5a5?r=use1"
+                        className="w-full h-full border-0"
+                        title="Group Health Insurance Quote Form"
+                        onLoad={() => {
+                          console.log('Group Health form iframe loaded successfully');
+                          setGroupHealthIframeLoading(false);
+                          if (groupHealthTimeoutRef.current) {
+                            clearTimeout(groupHealthTimeoutRef.current);
+                          }
+                        }}
+                        onError={() => {
+                          console.error('Group Health form iframe failed to load');
+                          setGroupHealthIframeError(true);
+                          setGroupHealthIframeLoading(false);
                         }}
                       />
                     </div>
