@@ -40,18 +40,23 @@ const ServiceDetails = () => {
   const [isDentalFullscreen, setIsDentalFullscreen] = useState(false);
   const [isVisionFullscreen, setIsVisionFullscreen] = useState(false);
   const [isIdentityFullscreen, setIsIdentityFullscreen] = useState(false);
+  const [isAutoFullscreen, setIsAutoFullscreen] = useState(false);
   const [dentalIframeError, setDentalIframeError] = useState(false);
   const [visionIframeError, setVisionIframeError] = useState(false);
   const [identityIframeError, setIdentityIframeError] = useState(false);
+  const [autoIframeError, setAutoIframeError] = useState(false);
   const [dentalIframeLoading, setDentalIframeLoading] = useState(true);
   const [visionIframeLoading, setVisionIframeLoading] = useState(true);
   const [identityIframeLoading, setIdentityIframeLoading] = useState(true);
+  const [autoIframeLoading, setAutoIframeLoading] = useState(true);
   const dentalIframeRef = useRef<HTMLDivElement>(null);
   const visionIframeRef = useRef<HTMLDivElement>(null);
   const identityIframeRef = useRef<HTMLDivElement>(null);
+  const autoIframeRef = useRef<HTMLDivElement>(null);
   const dentalTimeoutRef = useRef<NodeJS.Timeout>();
   const visionTimeoutRef = useRef<NodeJS.Timeout>();
   const identityTimeoutRef = useRef<NodeJS.Timeout>();
+  const autoTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Timeout fallback for dental iframe
   useEffect(() => {
@@ -113,6 +118,26 @@ const ServiceDetails = () => {
     }
   }, [service?.slug, identityIframeLoading, identityIframeError]);
 
+  // Timeout fallback for auto iframe
+  useEffect(() => {
+    if (service?.slug === 'auto' && !autoIframeError) {
+      autoTimeoutRef.current = setTimeout(() => {
+        // If still loading after 5 seconds, assume it failed
+        if (autoIframeLoading) {
+          console.log('Auto iframe timeout - switching to fallback button');
+          setAutoIframeError(true);
+          setAutoIframeLoading(false);
+        }
+      }, 5000);
+
+      return () => {
+        if (autoTimeoutRef.current) {
+          clearTimeout(autoTimeoutRef.current);
+        }
+      };
+    }
+  }, [service?.slug, autoIframeLoading, autoIframeError]);
+
   const toggleDentalFullscreen = () => {
     if (!dentalIframeRef.current) return;
 
@@ -161,12 +186,29 @@ const ServiceDetails = () => {
     }
   };
 
+  const toggleAutoFullscreen = () => {
+    if (!autoIframeRef.current) return;
+
+    if (!document.fullscreenElement) {
+      autoIframeRef.current.requestFullscreen().then(() => {
+        setIsAutoFullscreen(true);
+      }).catch((err) => {
+        console.error('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsAutoFullscreen(false);
+      });
+    }
+  };
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
         setIsDentalFullscreen(false);
         setIsVisionFullscreen(false);
         setIsIdentityFullscreen(false);
+        setIsAutoFullscreen(false);
       }
     };
 
@@ -576,6 +618,72 @@ const ServiceDetails = () => {
                           console.error('Identity iframe failed to load');
                           setIdentityIframeError(true);
                           setIdentityIframeLoading(false);
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </Card>
+            </div>}
+
+          {/* Auto Insurance Form - Only for Auto Service */}
+          {service.slug === 'auto' && <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Get Your Auto Insurance Quote</h3>
+                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                    Fill out the form below to receive a personalized auto insurance quote tailored to your needs.
+                  </p>
+                  
+                  {autoIframeError ? (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground mb-6">
+                        The form couldn't be loaded directly. Click below to open it in a new window.
+                      </p>
+                      <Button 
+                        size="lg" 
+                        onClick={() => {
+                          window.open('https://forms.monday.com/forms/50cd81705c249bac4ec9804fd41f7336?r=use1', '_blank', 'noopener,noreferrer');
+                        }}
+                        className="inline-flex items-center gap-2"
+                      >
+                        <FileText className="w-5 h-5" />
+                        Open Auto Insurance Form
+                      </Button>
+                    </div>
+                  ) : (
+                    <div ref={autoIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isAutoFullscreen ? '100vh' : '800px' }}>
+                      {autoIframeLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                          <div className="text-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                            <p className="text-muted-foreground">Loading form...</p>
+                          </div>
+                        </div>
+                      )}
+                      <Button
+                        onClick={toggleAutoFullscreen}
+                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                        size="icon"
+                        title={isAutoFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                      >
+                        {isAutoFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      </Button>
+                      <iframe 
+                        src="https://forms.monday.com/forms/embed/50cd81705c249bac4ec9804fd41f7336?r=use1"
+                        className="w-full h-full border-0"
+                        title="Auto Insurance Quote Form"
+                        onLoad={() => {
+                          console.log('Auto form iframe loaded successfully');
+                          setAutoIframeLoading(false);
+                          if (autoTimeoutRef.current) {
+                            clearTimeout(autoTimeoutRef.current);
+                          }
+                        }}
+                        onError={() => {
+                          console.error('Auto form iframe failed to load');
+                          setAutoIframeError(true);
+                          setAutoIframeLoading(false);
                         }}
                       />
                     </div>
