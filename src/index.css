@@ -276,12 +276,12 @@
     position: relative;
     width: 105px;
     height: 90px;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.15);
     border-bottom-left-radius: 75px;
     border-bottom-right-radius: 75px;
     box-shadow: 
       0 8px 0 rgba(0, 0, 0, 0.1),
-      inset 0 -6px 0 #fff;
+      inset 0 -6px 0 rgba(255, 255, 255, 0.4);
     z-index: 10;
     display: flex;
     justify-content: center;
@@ -299,7 +299,7 @@
     height: 38px;
     background: transparent;
     border-top-right-radius: 38px;
-    box-shadow: 11px -11px 0 11px rgba(0, 0, 0, 0.15);
+    box-shadow: 11px -11px 0 11px rgba(255, 255, 255, 0.15);
   }
   
   /* Right Notch */
@@ -312,7 +312,7 @@
     height: 38px;
     background: transparent;
     border-top-left-radius: 38px;
-    box-shadow: -11px -11px 0 11px rgba(0, 0, 0, 0.15);
+    box-shadow: -11px -11px 0 11px rgba(255, 255, 255, 0.15);
   }
   
   /* Card Content */
