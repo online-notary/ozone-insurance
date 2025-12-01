@@ -31,6 +31,24 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
     return '';
   };
 
+  const handleBookMeeting = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const navigation = [
     { name: "Home", href: "#home", section: "home" },
     { name: "Services", href: "#services", section: "services" },
@@ -154,8 +172,11 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
               
               {user ? (
                 <>
-                  <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-md font-medium text-sm shadow-sm">
-                    Get A Quote
+                  <Button 
+                    onClick={handleBookMeeting}
+                    className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-md font-medium text-sm shadow-sm"
+                  >
+                    Book a Meeting
                   </Button>
                   
                   {/* User Dropdown */}
@@ -193,8 +214,11 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
                   </DropdownMenu>
                 </>
               ) : (
-                <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-md font-medium text-sm shadow-sm">
-                  Get A Quote
+                <Button 
+                  onClick={handleBookMeeting}
+                  className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-md font-medium text-sm shadow-sm"
+                >
+                  Book a Meeting
                 </Button>
               )}
               
@@ -247,8 +271,11 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
                   
                   {user ? (
                     <>
-                      <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium">
-                        Get A Quote
+                      <Button 
+                        onClick={handleBookMeeting}
+                        className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium"
+                      >
+                        Book a Meeting
                       </Button>
                       <Button 
                         onClick={handleSignOut} 
@@ -260,8 +287,11 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
                       </Button>
                     </>
                   ) : (
-                    <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium">
-                      Get A Quote
+                    <Button 
+                      onClick={handleBookMeeting}
+                      className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium"
+                    >
+                      Book a Meeting
                     </Button>
                   )}
                   
