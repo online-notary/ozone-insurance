@@ -125,7 +125,7 @@ const Index = () => {
         phone="1-833-MY-OZONE"
         email="info@ozoneinsurance.com"
         hoursLabel="Working Hours :"
-        hoursValue="Sun-Monday, 09am-5pm"
+        hoursValue="Monday-Saturday, 9am–5pm"
         portfolioHeading="Latest Portfolio"
         helpHeading="Need Any Help? Or Looking For an Agent"
         items={portfolioItems}

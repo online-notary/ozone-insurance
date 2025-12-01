@@ -296,7 +296,7 @@ export default function Footer() {
 
             <div className="flex items-center gap-2">
               <IconClock />
-              <span className="text-white/80 text-sm">Working Hours : Sun-Monday, 09am–5pm</span>
+              <span className="text-white/80 text-sm">Working Hours : Monday-Saturday, 9am–5pm</span>
             </div>
 
             <button
