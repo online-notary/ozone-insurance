@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CheckCircle, Shield, Clock, Users, Star, Phone, Mail, ArrowLeft, Heart, TrendingUp, FileText, Calculator, Maximize, Minimize, LucideIcon } from 'lucide-react';
+import { CheckCircle, Shield, Clock, Users, Star, Phone, Mail, ArrowLeft, Heart, TrendingUp, FileText, Calculator, Maximize, Minimize, LucideIcon, Plane, MapPin, Globe } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
@@ -907,6 +907,69 @@ const ServiceDetails = () => {
                 </div>
               </Card>
             </div>}
+
+          {/* Travel Insurance Options - Only for Travel Service */}
+          {service.slug === 'travel' && (
+            <div className="mb-16">
+              <div className="text-center mb-12">
+                <p className="text-primary font-medium mb-2">Travel Coverage Options</p>
+                <h3 className="text-3xl font-bold text-foreground">Choose Your Travel Insurance Plan</h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  {
+                    id: 1,
+                    icon: MapPin,
+                    title: 'USA Visitors Insurance',
+                    description: 'Medical coverage for visitors to the USA',
+                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=visitorUSA'
+                  },
+                  {
+                    id: 2,
+                    icon: Plane,
+                    title: 'Outside USA Insurance',
+                    description: 'Medical coverage for destinations excluding the USA',
+                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=travelOutsideUSA'
+                  },
+                  {
+                    id: 3,
+                    icon: Globe,
+                    title: 'Travel Insurance',
+                    description: 'Trip cancellation coverage for US residents',
+                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=trip'
+                  }
+                ].map((plan) => {
+                  const IconComponent = plan.icon;
+                  return (
+                    <Card 
+                      key={plan.id} 
+                      className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col"
+                      onClick={() => window.open(plan.url, '_blank', 'noopener,noreferrer')}
+                    >
+                      <div className="p-8 flex-1 flex flex-col items-center text-center">
+                        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                          <IconComponent className="w-8 h-8 text-primary" />
+                        </div>
+                        <h4 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                          {plan.title}
+                        </h4>
+                        <p className="text-base text-muted-foreground flex-1 mb-6">
+                          {plan.description}
+                        </p>
+                        <div className="flex justify-center items-center gap-2 text-primary font-medium">
+                          Get Quote
+                          <svg width="20" height="20" viewBox="0 -960 960 960" className="group-hover:translate-x-1 transition-transform" fill="currentColor">
+                            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Back to Services */}
           <div className="text-center mt-12">
