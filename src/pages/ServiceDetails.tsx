@@ -55,18 +55,34 @@ const ServiceDetails = () => {
   const [autoIframeLoading, setAutoIframeLoading] = useState(true);
   const [homeIframeLoading, setHomeIframeLoading] = useState(true);
   const [groupHealthIframeLoading, setGroupHealthIframeLoading] = useState(true);
+  const [selectedTravelOption, setSelectedTravelOption] = useState<string | null>(null);
+  const [travelUsaIframeError, setTravelUsaIframeError] = useState(false);
+  const [travelOutsideIframeError, setTravelOutsideIframeError] = useState(false);
+  const [travelTripIframeError, setTravelTripIframeError] = useState(false);
+  const [travelUsaIframeLoading, setTravelUsaIframeLoading] = useState(true);
+  const [travelOutsideIframeLoading, setTravelOutsideIframeLoading] = useState(true);
+  const [travelTripIframeLoading, setTravelTripIframeLoading] = useState(true);
+  const [isTravelUsaFullscreen, setIsTravelUsaFullscreen] = useState(false);
+  const [isTravelOutsideFullscreen, setIsTravelOutsideFullscreen] = useState(false);
+  const [isTravelTripFullscreen, setIsTravelTripFullscreen] = useState(false);
   const dentalIframeRef = useRef<HTMLDivElement>(null);
   const visionIframeRef = useRef<HTMLDivElement>(null);
   const identityIframeRef = useRef<HTMLDivElement>(null);
   const autoIframeRef = useRef<HTMLDivElement>(null);
   const homeIframeRef = useRef<HTMLDivElement>(null);
   const groupHealthIframeRef = useRef<HTMLDivElement>(null);
+  const travelUsaIframeRef = useRef<HTMLDivElement>(null);
+  const travelOutsideIframeRef = useRef<HTMLDivElement>(null);
+  const travelTripIframeRef = useRef<HTMLDivElement>(null);
   const dentalTimeoutRef = useRef<NodeJS.Timeout>();
   const visionTimeoutRef = useRef<NodeJS.Timeout>();
   const identityTimeoutRef = useRef<NodeJS.Timeout>();
   const autoTimeoutRef = useRef<NodeJS.Timeout>();
   const homeTimeoutRef = useRef<NodeJS.Timeout>();
   const groupHealthTimeoutRef = useRef<NodeJS.Timeout>();
+  const travelUsaTimeoutRef = useRef<NodeJS.Timeout>();
+  const travelOutsideTimeoutRef = useRef<NodeJS.Timeout>();
+  const travelTripTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Timeout fallback for dental iframe
   useEffect(() => {
@@ -284,6 +300,82 @@ const ServiceDetails = () => {
     }
   };
 
+  // Travel timeouts
+  useEffect(() => {
+    if (selectedTravelOption === 'usa' && !travelUsaIframeError) {
+      travelUsaTimeoutRef.current = setTimeout(() => {
+        if (travelUsaIframeLoading) {
+          setTravelUsaIframeError(true);
+          setTravelUsaIframeLoading(false);
+        }
+      }, 5000);
+      return () => {
+        if (travelUsaTimeoutRef.current) clearTimeout(travelUsaTimeoutRef.current);
+      };
+    }
+  }, [selectedTravelOption, travelUsaIframeLoading, travelUsaIframeError]);
+
+  useEffect(() => {
+    if (selectedTravelOption === 'outside' && !travelOutsideIframeError) {
+      travelOutsideTimeoutRef.current = setTimeout(() => {
+        if (travelOutsideIframeLoading) {
+          setTravelOutsideIframeError(true);
+          setTravelOutsideIframeLoading(false);
+        }
+      }, 5000);
+      return () => {
+        if (travelOutsideTimeoutRef.current) clearTimeout(travelOutsideTimeoutRef.current);
+      };
+    }
+  }, [selectedTravelOption, travelOutsideIframeLoading, travelOutsideIframeError]);
+
+  useEffect(() => {
+    if (selectedTravelOption === 'trip' && !travelTripIframeError) {
+      travelTripTimeoutRef.current = setTimeout(() => {
+        if (travelTripIframeLoading) {
+          setTravelTripIframeError(true);
+          setTravelTripIframeLoading(false);
+        }
+      }, 5000);
+      return () => {
+        if (travelTripTimeoutRef.current) clearTimeout(travelTripTimeoutRef.current);
+      };
+    }
+  }, [selectedTravelOption, travelTripIframeLoading, travelTripIframeError]);
+
+  const toggleTravelUsaFullscreen = () => {
+    if (!travelUsaIframeRef.current) return;
+    if (!document.fullscreenElement) {
+      travelUsaIframeRef.current.requestFullscreen().then(() => {
+        setIsTravelUsaFullscreen(true);
+      }).catch((err) => console.error('Error attempting to enable fullscreen:', err));
+    } else {
+      document.exitFullscreen().then(() => setIsTravelUsaFullscreen(false));
+    }
+  };
+
+  const toggleTravelOutsideFullscreen = () => {
+    if (!travelOutsideIframeRef.current) return;
+    if (!document.fullscreenElement) {
+      travelOutsideIframeRef.current.requestFullscreen().then(() => {
+        setIsTravelOutsideFullscreen(true);
+      }).catch((err) => console.error('Error attempting to enable fullscreen:', err));
+    } else {
+      document.exitFullscreen().then(() => setIsTravelOutsideFullscreen(false));
+    }
+  };
+
+  const toggleTravelTripFullscreen = () => {
+    if (!travelTripIframeRef.current) return;
+    if (!document.fullscreenElement) {
+      travelTripIframeRef.current.requestFullscreen().then(() => {
+        setIsTravelTripFullscreen(true);
+      }).catch((err) => console.error('Error attempting to enable fullscreen:', err));
+    } else {
+      document.exitFullscreen().then(() => setIsTravelTripFullscreen(false));
+    }
+  };
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
@@ -293,6 +385,9 @@ const ServiceDetails = () => {
         setIsAutoFullscreen(false);
         setIsHomeFullscreen(false);
         setIsGroupHealthFullscreen(false);
+        setIsTravelUsaFullscreen(false);
+        setIsTravelOutsideFullscreen(false);
+        setIsTravelTripFullscreen(false);
       }
     };
 
@@ -916,58 +1011,233 @@ const ServiceDetails = () => {
                 <h3 className="text-3xl font-bold text-foreground">Choose Your Travel Insurance Plan</h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 {[
                   {
-                    id: 1,
+                    id: 'usa',
                     icon: MapPin,
                     title: 'USA Visitors Insurance',
                     description: 'Medical coverage for visitors to the USA',
-                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=visitorUSA'
                   },
                   {
-                    id: 2,
+                    id: 'outside',
                     icon: Plane,
                     title: 'Outside USA Insurance',
                     description: 'Medical coverage for destinations excluding the USA',
-                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=travelOutsideUSA'
                   },
                   {
-                    id: 3,
+                    id: 'trip',
                     icon: Globe,
                     title: 'Travel Insurance',
                     description: 'Trip cancellation coverage for US residents',
-                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=trip'
                   }
                 ].map((plan) => {
                   const IconComponent = plan.icon;
+                  const isSelected = selectedTravelOption === plan.id;
                   return (
                     <Card 
                       key={plan.id} 
-                      className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col"
-                      onClick={() => window.open(plan.url, '_blank', 'noopener,noreferrer')}
+                      className={`group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col ${isSelected ? 'ring-2 ring-primary shadow-2xl' : ''}`}
+                      onClick={() => setSelectedTravelOption(plan.id)}
                     >
                       <div className="p-8 flex-1 flex flex-col items-center text-center">
-                        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                          <IconComponent className="w-8 h-8 text-primary" />
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-colors ${isSelected ? 'bg-primary text-white' : 'bg-primary/10 group-hover:bg-primary/20'}`}>
+                          <IconComponent className={`w-8 h-8 ${isSelected ? 'text-white' : 'text-primary'}`} />
                         </div>
-                        <h4 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                        <h4 className={`text-xl font-bold mb-3 transition-colors ${isSelected ? 'text-primary' : 'text-foreground group-hover:text-primary'}`}>
                           {plan.title}
                         </h4>
                         <p className="text-base text-muted-foreground flex-1 mb-6">
                           {plan.description}
                         </p>
                         <div className="flex justify-center items-center gap-2 text-primary font-medium">
-                          Get Quote
-                          <svg width="20" height="20" viewBox="0 -960 960 960" className="group-hover:translate-x-1 transition-transform" fill="currentColor">
-                            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z" />
-                          </svg>
+                          {isSelected ? 'Selected' : 'Select Plan'}
                         </div>
                       </div>
                     </Card>
                   );
                 })}
               </div>
+
+              {/* USA Visitors Insurance Form */}
+              {selectedTravelOption === 'usa' && (
+                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
+                  <div className="p-4 md:p-6">
+                    <h3 className="text-3xl font-bold text-foreground mb-4 text-center">USA Visitors Insurance Quote</h3>
+                    <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                      Get comprehensive medical coverage for visitors to the USA.
+                    </p>
+                    
+                    {travelUsaIframeError ? (
+                      <div className="text-center py-12">
+                        <p className="text-muted-foreground mb-6">
+                          The form couldn't be loaded directly. Click below to open it in a new window.
+                        </p>
+                        <Button 
+                          size="lg" 
+                          onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=visitorUSA', '_blank', 'noopener,noreferrer')}
+                          className="inline-flex items-center gap-2"
+                        >
+                          <FileText className="w-5 h-5" />
+                          Open Form
+                        </Button>
+                      </div>
+                    ) : (
+                      <div ref={travelUsaIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isTravelUsaFullscreen ? '100vh' : '800px' }}>
+                        {travelUsaIframeLoading && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                            <div className="text-center">
+                              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                              <p className="text-muted-foreground">Loading form...</p>
+                            </div>
+                          </div>
+                        )}
+                        <Button
+                          onClick={toggleTravelUsaFullscreen}
+                          className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                          size="icon"
+                          title={isTravelUsaFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                        >
+                          {isTravelUsaFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                        </Button>
+                        <iframe 
+                          src="https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=visitorUSA"
+                          className="w-full h-full border-0"
+                          title="USA Visitors Insurance Quote Form"
+                          onLoad={() => {
+                            setTravelUsaIframeLoading(false);
+                            if (travelUsaTimeoutRef.current) clearTimeout(travelUsaTimeoutRef.current);
+                          }}
+                          onError={() => {
+                            setTravelUsaIframeError(true);
+                            setTravelUsaIframeLoading(false);
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              )}
+
+              {/* Outside USA Insurance Form */}
+              {selectedTravelOption === 'outside' && (
+                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
+                  <div className="p-4 md:p-6">
+                    <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Outside USA Insurance Quote</h3>
+                    <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                      Get medical coverage for destinations excluding the USA.
+                    </p>
+                    
+                    {travelOutsideIframeError ? (
+                      <div className="text-center py-12">
+                        <p className="text-muted-foreground mb-6">
+                          The form couldn't be loaded directly. Click below to open it in a new window.
+                        </p>
+                        <Button 
+                          size="lg" 
+                          onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=travelOutsideUSA', '_blank', 'noopener,noreferrer')}
+                          className="inline-flex items-center gap-2"
+                        >
+                          <FileText className="w-5 h-5" />
+                          Open Form
+                        </Button>
+                      </div>
+                    ) : (
+                      <div ref={travelOutsideIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isTravelOutsideFullscreen ? '100vh' : '800px' }}>
+                        {travelOutsideIframeLoading && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                            <div className="text-center">
+                              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                              <p className="text-muted-foreground">Loading form...</p>
+                            </div>
+                          </div>
+                        )}
+                        <Button
+                          onClick={toggleTravelOutsideFullscreen}
+                          className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                          size="icon"
+                          title={isTravelOutsideFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                        >
+                          {isTravelOutsideFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                        </Button>
+                        <iframe 
+                          src="https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=travelOutsideUSA"
+                          className="w-full h-full border-0"
+                          title="Outside USA Insurance Quote Form"
+                          onLoad={() => {
+                            setTravelOutsideIframeLoading(false);
+                            if (travelOutsideTimeoutRef.current) clearTimeout(travelOutsideTimeoutRef.current);
+                          }}
+                          onError={() => {
+                            setTravelOutsideIframeError(true);
+                            setTravelOutsideIframeLoading(false);
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              )}
+
+              {/* Trip Cancellation Insurance Form */}
+              {selectedTravelOption === 'trip' && (
+                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
+                  <div className="p-4 md:p-6">
+                    <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Trip Cancellation Insurance Quote</h3>
+                    <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                      Get trip cancellation coverage for US residents.
+                    </p>
+                    
+                    {travelTripIframeError ? (
+                      <div className="text-center py-12">
+                        <p className="text-muted-foreground mb-6">
+                          The form couldn't be loaded directly. Click below to open it in a new window.
+                        </p>
+                        <Button 
+                          size="lg" 
+                          onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=trip', '_blank', 'noopener,noreferrer')}
+                          className="inline-flex items-center gap-2"
+                        >
+                          <FileText className="w-5 h-5" />
+                          Open Form
+                        </Button>
+                      </div>
+                    ) : (
+                      <div ref={travelTripIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isTravelTripFullscreen ? '100vh' : '800px' }}>
+                        {travelTripIframeLoading && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                            <div className="text-center">
+                              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                              <p className="text-muted-foreground">Loading form...</p>
+                            </div>
+                          </div>
+                        )}
+                        <Button
+                          onClick={toggleTravelTripFullscreen}
+                          className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                          size="icon"
+                          title={isTravelTripFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                        >
+                          {isTravelTripFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                        </Button>
+                        <iframe 
+                          src="https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=trip"
+                          className="w-full h-full border-0"
+                          title="Trip Cancellation Insurance Quote Form"
+                          onLoad={() => {
+                            setTravelTripIframeLoading(false);
+                            if (travelTripTimeoutRef.current) clearTimeout(travelTripTimeoutRef.current);
+                          }}
+                          onError={() => {
+                            setTravelTripIframeError(true);
+                            setTravelTripIframeLoading(false);
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              )}
             </div>
           )}
 
