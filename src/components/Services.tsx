@@ -116,7 +116,7 @@ const serviceGradients = ["linear-gradient(to bottom, #ff2ae0, #645bf6)",
 // Vision: Pink to Yellow
 "linear-gradient(to bottom, #667eea, #764ba2)",
 // Identity: Purple gradient
-"linear-gradient(to bottom, #00c6ff, #0072ff)" // Group Health: Blue gradient
+"linear-gradient(to bottom, #0d5fb8, #1e88e5)" // Group Health: Consistent blue gradient
 ];
 const Services: React.FC<ServicesProps> = ({
   smallTitle = "Our Services",
