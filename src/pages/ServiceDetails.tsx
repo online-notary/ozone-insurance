@@ -65,6 +65,9 @@ const ServiceDetails = () => {
   const [isTravelUsaFullscreen, setIsTravelUsaFullscreen] = useState(false);
   const [isTravelOutsideFullscreen, setIsTravelOutsideFullscreen] = useState(false);
   const [isTravelTripFullscreen, setIsTravelTripFullscreen] = useState(false);
+  const [isBusinessFullscreen, setIsBusinessFullscreen] = useState(false);
+  const [businessIframeError, setBusinessIframeError] = useState(false);
+  const [businessIframeLoading, setBusinessIframeLoading] = useState(true);
   const dentalIframeRef = useRef<HTMLDivElement>(null);
   const visionIframeRef = useRef<HTMLDivElement>(null);
   const identityIframeRef = useRef<HTMLDivElement>(null);
@@ -74,6 +77,7 @@ const ServiceDetails = () => {
   const travelUsaIframeRef = useRef<HTMLDivElement>(null);
   const travelOutsideIframeRef = useRef<HTMLDivElement>(null);
   const travelTripIframeRef = useRef<HTMLDivElement>(null);
+  const businessIframeRef = useRef<HTMLDivElement>(null);
   const dentalTimeoutRef = useRef<NodeJS.Timeout>();
   const visionTimeoutRef = useRef<NodeJS.Timeout>();
   const identityTimeoutRef = useRef<NodeJS.Timeout>();
@@ -83,6 +87,7 @@ const ServiceDetails = () => {
   const travelUsaTimeoutRef = useRef<NodeJS.Timeout>();
   const travelOutsideTimeoutRef = useRef<NodeJS.Timeout>();
   const travelTripTimeoutRef = useRef<NodeJS.Timeout>();
+  const businessTimeoutRef = useRef<NodeJS.Timeout>();
 
   // Timeout fallback for dental iframe
   useEffect(() => {
@@ -203,6 +208,26 @@ const ServiceDetails = () => {
       };
     }
   }, [service?.slug, groupHealthIframeLoading, groupHealthIframeError]);
+
+  // Timeout fallback for business iframe
+  useEffect(() => {
+    if (service?.slug === 'business' && !businessIframeError) {
+      businessTimeoutRef.current = setTimeout(() => {
+        // If still loading after 5 seconds, assume it failed
+        if (businessIframeLoading) {
+          console.log('Business iframe timeout - switching to fallback button');
+          setBusinessIframeError(true);
+          setBusinessIframeLoading(false);
+        }
+      }, 5000);
+
+      return () => {
+        if (businessTimeoutRef.current) {
+          clearTimeout(businessTimeoutRef.current);
+        }
+      };
+    }
+  }, [service?.slug, businessIframeLoading, businessIframeError]);
 
   const toggleDentalFullscreen = () => {
     if (!dentalIframeRef.current) return;
@@ -376,6 +401,17 @@ const ServiceDetails = () => {
     }
   };
 
+  const toggleBusinessFullscreen = () => {
+    if (!businessIframeRef.current) return;
+    if (!document.fullscreenElement) {
+      businessIframeRef.current.requestFullscreen().then(() => {
+        setIsBusinessFullscreen(true);
+      }).catch((err) => console.error('Error attempting to enable fullscreen:', err));
+    } else {
+      document.exitFullscreen().then(() => setIsBusinessFullscreen(false));
+    }
+  };
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
@@ -388,6 +424,7 @@ const ServiceDetails = () => {
         setIsTravelUsaFullscreen(false);
         setIsTravelOutsideFullscreen(false);
         setIsTravelTripFullscreen(false);
+        setIsBusinessFullscreen(false);
       }
     };
 
@@ -995,6 +1032,72 @@ const ServiceDetails = () => {
                           console.error('Group Health form iframe failed to load');
                           setGroupHealthIframeError(true);
                           setGroupHealthIframeLoading(false);
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              </Card>
+            </div>}
+
+          {/* Business Insurance Form - Only for Business Service */}
+          {service.slug === 'business' && <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
+                <div className="p-4 md:p-6">
+                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Get Your Business Insurance Quote</h3>
+                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+                    Fill out the form below to receive a personalized business insurance quote tailored to your company's needs.
+                  </p>
+                  
+                  {businessIframeError ? (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground mb-6">
+                        The form couldn't be loaded directly. Click below to open it in a new window.
+                      </p>
+                      <Button 
+                        size="lg" 
+                        onClick={() => {
+                          window.open('https://forms.monday.com/forms/3e204bacbc35930c1cbd3fe6dc7b2433?r=use1', '_blank', 'noopener,noreferrer');
+                        }}
+                        className="inline-flex items-center gap-2"
+                      >
+                        <FileText className="w-5 h-5" />
+                        Open Business Insurance Form
+                      </Button>
+                    </div>
+                  ) : (
+                    <div ref={businessIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isBusinessFullscreen ? '100vh' : '800px' }}>
+                      {businessIframeLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
+                          <div className="text-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                            <p className="text-muted-foreground">Loading form...</p>
+                          </div>
+                        </div>
+                      )}
+                      <Button
+                        onClick={toggleBusinessFullscreen}
+                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
+                        size="icon"
+                        title={isBusinessFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                      >
+                        {isBusinessFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      </Button>
+                      <iframe 
+                        src="https://forms.monday.com/forms/embed/3e204bacbc35930c1cbd3fe6dc7b2433?r=use1"
+                        className="w-full h-full border-0"
+                        title="Business Insurance Quote Form"
+                        onLoad={() => {
+                          console.log('Business form iframe loaded successfully');
+                          setBusinessIframeLoading(false);
+                          if (businessTimeoutRef.current) {
+                            clearTimeout(businessTimeoutRef.current);
+                          }
+                        }}
+                        onError={() => {
+                          console.error('Business form iframe failed to load');
+                          setBusinessIframeError(true);
+                          setBusinessIframeLoading(false);
                         }}
                       />
                     </div>
