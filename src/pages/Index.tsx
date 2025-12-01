@@ -7,6 +7,7 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import OptionPanel from "@/components/OptionPanel";
+import ozoneLogo from "@/assets/ozone-logo.png";
 import madhuAbout from "@/assets/madhu-about.png";
 import ashutoshShyam from "@/assets/ashutosh-shyam-new.png";
 import rukminiVemulakonda from "@/assets/rukmini-vemulakonda-new.png";
@@ -119,7 +120,7 @@ const Index = () => {
       <OptionPanel
         isOpen={isOptionPanelOpen}
         onClose={() => setIsOptionPanelOpen(false)}
-        logoSrc="https://cwhwihjnhezgsbmkvbjf.supabase.co/storage/v1/object/public/logo/%20blf%20logo.png"
+        logoSrc={ozoneLogo}
         aboutText="As independent agents, we review quotes from multiple insurance companies to provide you with the best rates and solutions that meet your personal or business needs. We are your one-stop shop for all things insurance related."
         phone="1-833-MY-OZONE"
         email="info@ozoneinsurance.com"
