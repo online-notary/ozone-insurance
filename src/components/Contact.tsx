@@ -25,7 +25,7 @@ const Contact = () => {
     details: ["Sun-Monday: 9:00 AM - 5:00 PM", "Available for appointments"],
     color: "bg-orange-500"
   }];
-  return <section id="contact" className="py-24 bg-muted/30">
+  return <section id="contact" className="pt-8 pb-24 bg-muted/30">
       <div className="container mx-auto px-4">
         
         {/* Section Header */}
