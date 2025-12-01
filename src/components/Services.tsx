@@ -175,7 +175,7 @@ const Services: React.FC<ServicesProps> = ({
       <div className="absolute inset-0 bg-[#3c2846]" />
 
       {/* top spacing */}
-      <div className="pt-20" />
+      <div className="pt-4" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         {/* Header */}
@@ -218,18 +218,18 @@ const Services: React.FC<ServicesProps> = ({
                 <div className="service-icon-container">
                   {service.id === 'dental' ? (
                     <>
-                      <Smile className="service-card-icon text-white text-6xl group-hover/card:hidden" size={96} strokeWidth={1.5} />
-                      <Laugh className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={96} strokeWidth={1.5} />
+                      <Smile className="service-card-icon text-white text-6xl group-hover/card:hidden" size={64} strokeWidth={1.5} />
+                      <Laugh className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={64} strokeWidth={1.5} />
                     </>
                   ) : service.id === 'vision' ? (
                     <>
-                      <Eye className="service-card-icon text-white text-6xl group-hover/card:hidden" size={96} strokeWidth={1.5} />
-                      <EyeOff className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={96} strokeWidth={1.5} />
+                      <Eye className="service-card-icon text-white text-6xl group-hover/card:hidden" size={64} strokeWidth={1.5} />
+                      <EyeOff className="service-card-icon text-white text-6xl hidden group-hover/card:block" size={64} strokeWidth={1.5} />
                     </>
                   ) : service.id === 'travel' ? (
-                    <IconComponent className="service-card-icon text-white text-6xl group-hover/card:animate-[fly-around_3s_ease-in-out_infinite]" size={96} strokeWidth={1.5} />
+                    <IconComponent className="service-card-icon text-white text-6xl group-hover/card:animate-[fly-around_3s_ease-in-out_infinite]" size={64} strokeWidth={1.5} />
                   ) : (
-                    <IconComponent className="service-card-icon text-white text-6xl" size={96} strokeWidth={1.5} />
+                    <IconComponent className="service-card-icon text-white text-6xl" size={64} strokeWidth={1.5} />
                   )}
                 </div>
 
