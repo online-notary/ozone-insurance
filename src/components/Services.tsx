@@ -194,7 +194,7 @@ const Services: React.FC<ServicesProps> = ({
 
                 {/* Content */}
                 <div className="service-card-content">
-                  <h2 className="text-white text-2xl font-bold uppercase mb-3 tracking-wide">{service.title}</h2>
+                  <h2 className="text-white text-lg font-bold uppercase mb-3 tracking-wide">{service.title}</h2>
                   <p className="text-white/90 leading-relaxed text-sm">{service.description}</p>
                 </div>
               </Link>;
