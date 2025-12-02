@@ -151,14 +151,8 @@ const Hero = () => {
                 <div className="auto-container container mx-auto px-4 sm:px-6 lg:px-8 h-full">
                   <div className="row flex items-center h-full">
                     <div className="col-md-6 max-w-2xl w-full">
-                      {/* Shape Background Container */}
-                      <div className="relative bg-transparent max-w-4xl">
-                        <div 
-                          className="absolute inset-0 bg-contain bg-left bg-no-repeat w-full h-full min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]"
-                          style={{
-                            backgroundImage: `url(/lovable-uploads/76051c9e-2951-4125-a29c-44eab67f0ee6.png)`,
-                          }}
-                        ></div>
+                      {/* Content Container */}
+                      <div className="relative max-w-4xl">
                         <div className="relative z-10 p-8 sm:p-12 lg:p-16 xl:p-20 max-w-2xl">
                           <div className="slider_content text-white">
                             {/* Subtitle with Icon */}
