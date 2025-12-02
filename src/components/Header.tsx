@@ -111,10 +111,10 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
           <div className="flex items-center justify-between text-sm text-white">
             <div className="flex items-center space-x-6">
               <span className="text-gray-300">CA LIC# 0K48512 | Working Hours: Monday-Saturday, 9am-5pm</span>
-              <div className="flex items-center bg-primary hover:bg-primary/90 px-3 py-1 rounded-full transition-colors cursor-pointer">
+              <a href="tel:+18336969663" className="flex items-center bg-primary hover:bg-primary/90 px-3 py-1 rounded-full transition-colors">
                 <Phone className="h-3 w-3 mr-2" />
                 <span className="font-medium text-white">Call: 1-833-MY-OZONE</span>
-              </div>
+              </a>
             </div>
             <div className="hidden md:flex items-center space-x-4">
               <div className="flex items-center space-x-3">
