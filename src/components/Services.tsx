@@ -62,7 +62,7 @@ const ozoneServices: ServiceCategory[] = [{
   icon: Car
 }, {
   id: "home",
-  title: "Home Insurance",
+  title: "Home, Rental & Landlord Insurance",
   description: "Safeguard your home and belongings with complete protection",
   items: ["Dwelling Coverage", "Personal Property Protection", "Liability Coverage", "Additional Living Expenses"],
   slug: "home",
