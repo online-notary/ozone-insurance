@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Shield, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import banner11 from "@/assets/banner-1-1.jpg";
 import banner12 from "@/assets/banner-1-2.jpg";
 import banner13 from "@/assets/banner-1-3.jpg";
@@ -146,47 +145,8 @@ const Hero = () => {
               {/* Background Overlay - Lighter for better image visibility */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/10 to-transparent h-[50vh]"></div>
               
-              {/* Slide Content */}
-              <div className="slide-item content_left relative h-[50vh]">
-                <div className="auto-container container mx-auto px-4 sm:px-6 lg:px-8 h-full">
-                  <div className="row flex items-center h-full">
-                    <div className="col-md-6 max-w-2xl w-full">
-                      {/* Content Container */}
-                      <div className="relative max-w-4xl">
-                        <div className="relative z-10 p-8 sm:p-12 lg:p-16 xl:p-20 max-w-2xl">
-                          <div className="slider_content text-white">
-                            {/* Subtitle with Icon */}
-                            <h6 className="animate_up flex items-center space-x-2 sm:space-x-3 text-sm sm:text-base lg:text-lg font-semibold mb-4 sm:mb-6">
-                              <Shield className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white flex-shrink-0" />
-                              <span>{slide.badge}</span>
-                            </h6>
-
-                            {/* Multi-line Title */}
-                            <h1 className="animate_left text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-heading mb-6 sm:mb-8">
-                              {slide.title.map((line, lineIndex) => (
-                                <span key={lineIndex} className="block">
-                                  {line}
-                                  {lineIndex < slide.title.length - 1 && <br />}
-                                </span>
-                              ))}
-                            </h1>
-
-                            {/* Single Button */}
-                            <div className="button_all animate_down">
-                              <Button 
-                                size="lg" 
-                                className="theme_btn color_white bg-white text-primary hover:bg-white/90 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 h-auto text-sm sm:text-base lg:text-lg font-bold rounded-lg transition-all duration-300 hover:shadow-xl"
-                              >
-                                Read More
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* Empty content area for slide height */}
+              <div className="relative h-[50vh]"></div>
             </div>
           </div>
         ))}
