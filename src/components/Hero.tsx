@@ -128,6 +128,9 @@ const Hero = () => {
                   loop
                   playsInline
                   className="absolute inset-0 w-full h-[50vh] object-cover"
+                  onLoadedMetadata={(e) => {
+                    (e.target as HTMLVideoElement).playbackRate = 0.5;
+                  }}
                 >
                   <source src={slide.video} type="video/mp4" />
                 </video>
