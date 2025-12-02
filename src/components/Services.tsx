@@ -42,7 +42,7 @@ const ozoneServices: ServiceCategory[] = [{
 }, {
   id: "business",
   title: "Business Insurance",
-  description: "Comprehensive coverage solutions for your business needs",
+  description: "Coverage for businesses such as General Liability, Professional Liability, Workers Comp, Business Umbrella",
   items: ["General Liability", "Property Coverage", "Workers Compensation", "Professional Liability"],
   slug: "business",
   icon: Briefcase
