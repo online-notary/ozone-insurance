@@ -49,6 +49,16 @@ const Hero = () => {
     }
   ];
 
+  // Auto-advance video slide after 5 seconds
+  useEffect(() => {
+    if (currentSlide === 0 && slides[0].type === "video") {
+      const videoTimer = setTimeout(() => {
+        sliderRef.current?.slickNext();
+      }, 5000);
+      return () => clearTimeout(videoTimer);
+    }
+  }, [currentSlide]);
+
   const slickSettings = {
     dots: false,
     infinite: true,
@@ -66,8 +76,8 @@ const Hero = () => {
     afterChange: (current: number) => {
       setCurrentSlide(current);
     },
-    pauseOnHover: true,
-    pauseOnFocus: true,
+    pauseOnHover: false,
+    pauseOnFocus: false,
     waitForAnimate: true,
   };
 
