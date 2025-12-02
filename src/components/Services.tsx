@@ -34,8 +34,8 @@ const ozoneServices: ServiceCategory[] = [{
   icon: Plane
 }, {
   id: "health",
-  title: "Health Insurance",
-  description: "Quality healthcare coverage for you and your family",
+  title: "Individual Health Insurance",
+  description: "Health insurance for US residents and their families",
   items: ["Individual & Family Plans", "Medicare Advantage", "Dental & Vision Coverage", "Prescription Drug Coverage"],
   slug: "health",
   icon: Heart
