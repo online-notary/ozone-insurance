@@ -71,8 +71,8 @@ const Contact = () => {
               <Button size="lg" className="btn-hero text-lg px-8 py-4 h-auto">
                 Schedule Free Consultation
               </Button>
-              <Button size="lg" variant="outline" className="btn-hero-outline text-lg px-8 py-4 h-auto">
-                Call Now: 1-833-MY-OZONE
+              <Button size="lg" variant="outline" className="btn-hero-outline text-lg px-8 py-4 h-auto" asChild>
+                <a href="tel:+18336969663">Call Now: 1-833-MY-OZONE</a>
               </Button>
             </div>
           </div>
