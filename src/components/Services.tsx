@@ -48,8 +48,8 @@ const ozoneServices: ServiceCategory[] = [{
   icon: Briefcase
 }, {
   id: "umbrella",
-  title: "Umbrella Insurance",
-  description: "Extra liability protection beyond your standard policies",
+  title: "Personal Umbrella Insurance",
+  description: "Protect your personal assets above and beyond coverage offered by typical home and auto policies",
   items: ["Extended Liability Coverage", "Personal Injury Protection", "Property Damage Coverage", "Legal Defense Costs"],
   slug: "umbrella",
   icon: Shield
