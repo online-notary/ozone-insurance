@@ -27,8 +27,8 @@ const Check: React.FC<{
 // Ozone Insurance Services
 const ozoneServices: ServiceCategory[] = [{
   id: "travel",
-  title: "Travel Insurance",
-  description: "Comprehensive coverage for your domestic and international trips",
+  title: "Travel Health & Trip Insurance",
+  description: "Health insurance for travel/vacation and coverage for trip interruptions/cancellations",
   items: ["Trip Cancellation Coverage", "Medical Emergency Protection", "Lost Luggage Reimbursement", "Emergency Evacuation"],
   slug: "travel",
   icon: Plane
