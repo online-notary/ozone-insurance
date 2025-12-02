@@ -29,7 +29,7 @@ const Hero = () => {
       type: "video",
       badge: "Independent Agents",
       title: ["Better Insurance", "For", "Everyone"],
-      video: "/videos/hero-slider-1.mp4",
+      video: "/videos/hero-intro.mp4",
       image: banner11, // fallback
       alt: "Professional insurance services for a better world"
     },
