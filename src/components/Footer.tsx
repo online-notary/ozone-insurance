@@ -102,7 +102,7 @@ export default function Footer() {
               Book a Meeting <IconArrowNE />
             </button>
 
-            <div className="flex items-center gap-3">
+            <a href="tel:+18336969663" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
               <span className="w-12 h-12 rounded-full bg-green-400 flex items-center justify-center">
                 <IconPhone />
               </span>
@@ -110,7 +110,7 @@ export default function Footer() {
                 <div className="text-white/80">Need Help?</div>
                 <div className="font-bold text-lg">1-833-MY-OZONE</div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </section>
