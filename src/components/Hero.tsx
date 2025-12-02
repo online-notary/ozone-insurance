@@ -27,10 +27,11 @@ const Hero = () => {
 
   const slides = [
     {
-      type: "image",
+      type: "video",
       badge: "Independent Agents",
       title: ["Better Insurance", "For", "Everyone"],
-      image: banner11,
+      video: "/videos/hero-slider-1.mp4",
+      image: banner11, // fallback
       alt: "Professional insurance services for a better world"
     },
     {
@@ -119,13 +120,25 @@ const Hero = () => {
         {slides.map((slide, index) => (
           <div key={`slide-${index}`} className="outline-none">
             <div className="slide-item-content relative">
-              {/* Image Layer - Background */}
-              <div 
-                className="image-layer absolute inset-0 bg-cover bg-center bg-no-repeat h-[50vh]"
-                style={{
-                  backgroundImage: `url(${slide.image})`,
-                }}
-              ></div>
+              {/* Background Layer - Video or Image */}
+              {slide.type === "video" && slide.video ? (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-[50vh] object-cover"
+                >
+                  <source src={slide.video} type="video/mp4" />
+                </video>
+              ) : (
+                <div 
+                  className="image-layer absolute inset-0 bg-cover bg-center bg-no-repeat h-[50vh]"
+                  style={{
+                    backgroundImage: `url(${slide.image})`,
+                  }}
+                ></div>
+              )}
               
               {/* Background Overlay - Lighter for better image visibility */}
               <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/10 to-transparent h-[50vh]"></div>
