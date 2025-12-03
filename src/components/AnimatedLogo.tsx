@@ -20,50 +20,45 @@ const AnimatedLogo = ({ onAnimationComplete, className = "" }: AnimatedLogoProps
   useEffect(() => {
     const fetchAnimatedLogo = async (attempt = 0) => {
       try {
-        setLoadingProgress(`Loading animated logo${attempt > 0 ? ` (attempt ${attempt + 1})` : ''}...`);
+        setLoadingProgress(`Loading animated logo${attempt > 0 ? ` (attempt ${attempt + 1})` : ""}...`);
         console.log(`Fetching animated logo (attempt ${attempt + 1})`);
 
         // Set timeout for the entire operation
         timeoutRef.current = setTimeout(() => {
-          console.warn('Logo loading timeout');
-          setLoadingProgress('Loading timeout - using fallback');
-          handleLoadError('Timeout loading animated logo', attempt);
+          console.warn("Logo loading timeout");
+          setLoadingProgress("Loading timeout - using fallback");
+          handleLoadError("Timeout loading animated logo", attempt);
         }, LOAD_TIMEOUT);
 
         // List files in the logo bucket
-        const { data: files, error: listError } = await supabase.storage
-          .from('logo')
-          .list('', {
-            limit: 1,
-            sortBy: { column: 'created_at', order: 'desc' }
-          });
+        const { data: files, error: listError } = await supabase.storage.from("logo").list("", {
+          limit: 1,
+          sortBy: { column: "created_at", order: "desc" },
+        });
 
         if (listError) {
-          console.error('Error listing files:', listError);
+          console.error("Error listing files:", listError);
           throw new Error(`Failed to list files: ${listError.message}`);
         }
 
         if (files && files.length > 0) {
           // Get the public URL for the most recent file
-          const { data } = supabase.storage
-            .from('logo')
-            .getPublicUrl(files[0].name);
-          
-          console.log('Found logo:', data.publicUrl);
+          const { data } = supabase.storage.from("logo").getPublicUrl(files[0].name);
+
+          console.log("Found logo:", data.publicUrl);
           setLogoUrl(data.publicUrl);
-          setLoadingProgress('Loading logo...');
+          setLoadingProgress("Loading logo...");
         } else {
-          throw new Error('No logo found in bucket');
+          throw new Error("No logo found in bucket");
         }
-        
+
         // Clear timeout if successful
         if (timeoutRef.current) {
           clearTimeout(timeoutRef.current);
         }
-        
       } catch (err) {
-        console.error('Error fetching animated logo:', err);
-        handleLoadError(err instanceof Error ? err.message : 'Unknown error', attempt);
+        console.error("Error fetching animated logo:", err);
+        handleLoadError(err instanceof Error ? err.message : "Unknown error", attempt);
       }
     };
 
@@ -77,7 +72,7 @@ const AnimatedLogo = ({ onAnimationComplete, className = "" }: AnimatedLogoProps
         setRetryCount(attempt + 1);
         setTimeout(() => fetchAnimatedLogo(attempt + 1), 2000);
       } else {
-        console.warn('All retry attempts failed, using fallback');
+        console.warn("All retry attempts failed, using fallback");
         setError(errorMessage);
         setIsLoading(false);
       }
@@ -94,14 +89,14 @@ const AnimatedLogo = ({ onAnimationComplete, className = "" }: AnimatedLogoProps
   }, []);
 
   const handleVideoEnd = () => {
-    console.log('Animation completed');
+    console.log("Animation completed");
     setTimeout(() => {
       onAnimationComplete();
     }, 500); // Small delay for smooth transition
   };
 
   const handleVideoLoad = () => {
-    console.log('Video loaded successfully');
+    console.log("Video loaded successfully");
     setIsLoading(false);
     if (videoRef.current) {
       videoRef.current.play().catch(console.error);
@@ -109,22 +104,22 @@ const AnimatedLogo = ({ onAnimationComplete, className = "" }: AnimatedLogoProps
   };
 
   const handleImageLoad = () => {
-    console.log('Logo loaded successfully');
+    console.log("Logo loaded successfully");
     setIsLoading(false);
     // Show the static logo briefly then complete the "animation"
     setTimeout(handleVideoEnd, 1500);
   };
 
   const handleImageError = () => {
-    console.error('Failed to load logo image');
-    setError('Failed to load logo image');
+    console.error("Failed to load logo image");
+    setError("Failed to load logo image");
     setIsLoading(false);
   };
 
   // Handle error state with useEffect to avoid render-time updates
   useEffect(() => {
     if (error && !isLoading) {
-      console.log('Using fallback due to error:', error);
+      console.log("Using fallback due to error:", error);
       setTimeout(() => {
         onAnimationComplete();
       }, 100);
@@ -136,11 +131,7 @@ const AnimatedLogo = ({ onAnimationComplete, className = "" }: AnimatedLogoProps
       <div className={`flex items-center justify-center ${className}`}>
         <div className="flex flex-col items-center space-y-2">
           <div className="w-20 h-20 bg-primary/20 rounded animate-pulse"></div>
-          {loadingProgress && (
-            <div className="text-xs text-muted-foreground animate-pulse">
-              {loadingProgress}
-            </div>
-          )}
+          {loadingProgress && <div className="text-xs text-muted-foreground animate-pulse">{loadingProgress}</div>}
           {retryCount > 0 && (
             <div className="text-xs text-yellow-600">
               Retry {retryCount}/{MAX_RETRIES}
@@ -188,7 +179,7 @@ const AnimatedLogo = ({ onAnimationComplete, className = "" }: AnimatedLogoProps
       <div className={`flex items-center justify-center ${className}`}>
         <img
           src={logoUrl}
-          alt="Brightness Financial Logo"
+          alt="Ozone Financial Logo"
           className="w-20 h-20 object-contain"
           onLoad={handleImageLoad}
           onError={handleImageError}
