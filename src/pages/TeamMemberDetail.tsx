@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect } from "react";
 import TeamMemberContactForm from "@/components/TeamMemberContactForm";
-import { ArrowLeft, Mail, Phone, Linkedin, Facebook, Twitter, Share2 } from "lucide-react";
+import { ArrowLeft, Mail, Phone, Linkedin, Facebook, Twitter, Share2, Globe, MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamCard from "@/components/TeamCard";
@@ -21,6 +21,7 @@ import rukminiVemulakonda from "@/assets/rukmini-vemulakonda-new.png";
 import anitaMirchandani from "@/assets/anita-mirchandani-new.png";
 import sunithaPentapati from "@/assets/sunitha-pentapati-new.png";
 import santhoshRaghunath from "@/assets/santhosh-raghunath-new.png";
+import raMohan from "@/assets/ra-mohan.png";
 
 interface TeamMemberData {
   id: string;
@@ -31,6 +32,8 @@ interface TeamMemberData {
   npn?: string;
   email?: string;
   phone?: string;
+  website?: string;
+  address?: string;
   bio?: string[];
   socials?: { iconClass: string; href: string }[];
 }
@@ -144,6 +147,25 @@ const teamMembersData: TeamMemberData[] = [
       "Santhosh is a holistic personal finance planner. He has been campaigning for financial solutions and personal finance education since 2022. He strives to help individuals and families arrive at a suitable solution to address their financial goals and concerns, at various stages in their lifetime. Reach out to him to book an appointment to discuss your needs and learn how to protect and safely grow your hard-earned money. All consultations are complimentary.",
       "Areas of Santhosh's expertise include Retirement Income Planning, Long-term Care, Life Insurance (Permanent/IUL and Term), Health insurance, Travel Insurance including Visitors Health, tax saving strategies and review of existing policies.",
       "Santhosh is also currently helping build a new team of campaigners by helping them setup and grow their business in the finance industry. Since 2018, Santhosh is also a CA State Notary Public and a Loan Signing Agent."
+    ],
+    socials: [
+      { iconClass: "linkedin", href: "#" },
+      { iconClass: "facebook", href: "#" }
+    ]
+  },
+  {
+    id: "ra-mohan",
+    name: "R.A. Mohan",
+    role: "Realtor | Financial Services | Notary Public",
+    imgSrc: raMohan,
+    license: "DRE# 02111565",
+    email: "mohan@fastagents.com",
+    phone: "(209) 362-9933",
+    website: "https://ramapuramohan.exprealty.com/",
+    address: "eXp Realty Inc., 2603 Camino Ramon Suite 200, San Ramon, CA 94583",
+    bio: [
+      "R.A. Mohan is a versatile professional offering comprehensive services in real estate, financial services, and notary public services. With expertise across multiple domains, he provides clients with a seamless experience for their real estate transactions and financial planning needs.",
+      "As a licensed realtor with eXp Realty Inc., R.A. Mohan brings dedication and expertise to help clients navigate the real estate market. His financial services background enables him to provide valuable insights into investment properties and wealth-building strategies through real estate."
     ],
     socials: [
       { iconClass: "linkedin", href: "#" },
@@ -299,11 +321,30 @@ const TeamMemberDetail = () => {
                     {member.phone && (
                       <a 
                         href={`tel:${member.phone}`}
-                        className="flex items-center gap-2 text-primary hover:text-secondary transition-colors"
+                        className="flex items-center gap-2 text-primary hover:text-secondary transition-colors mb-2"
                       >
                         <Phone size={20} />
                         <span className="text-base">{member.phone}</span>
                       </a>
+                    )}
+
+                    {member.website && (
+                      <a 
+                        href={member.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-primary hover:text-secondary transition-colors mb-2"
+                      >
+                        <Globe size={20} />
+                        <span className="text-base">Website</span>
+                      </a>
+                    )}
+
+                    {member.address && (
+                      <div className="flex items-start gap-2 text-muted-foreground">
+                        <MapPin size={20} className="mt-0.5 flex-shrink-0" />
+                        <span className="text-base">{member.address}</span>
+                      </div>
                     )}
 
                     {member.socials && member.socials.length > 0 && (

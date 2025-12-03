@@ -15,6 +15,7 @@ import anitaMirchandani from "@/assets/anita-mirchandani-new.png";
 import sunithaPentapati from "@/assets/sunitha-pentapati-new.png";
 import santhoshRaghunath from "@/assets/santhosh-raghunath-new.png";
 import madhuGowda from "@/assets/madhu-gowda-new.png";
+import raMohan from "@/assets/ra-mohan.png";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -84,6 +85,16 @@ const Index = () => {
       role: "Insurance Advisor",
       imgSrc: santhoshRaghunath,
       profileHref: "/team/santhosh-raghunath",
+      socials: [
+        { iconClass: "linkedin", href: "#" },
+        { iconClass: "facebook", href: "#" }
+      ]
+    },
+    {
+      name: "R.A. Mohan",
+      role: "Insurance Advisor",
+      imgSrc: raMohan,
+      profileHref: "/team/ra-mohan",
       socials: [
         { iconClass: "linkedin", href: "#" },
         { iconClass: "facebook", href: "#" }
