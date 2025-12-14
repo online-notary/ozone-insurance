@@ -658,10 +658,12 @@ const ServiceDetails = () => {
                     Browse and compare dental insurance plans to find the perfect coverage for your smile.
                   </p>
                   
-                  {dentalIframeError ? (
+                  {isMobile || dentalIframeError ? (
                     <div className="text-center py-12">
                       <p className="text-muted-foreground mb-6">
-                        The dental portal couldn't be loaded directly. Click below to open it in a new window.
+                        {isMobile 
+                          ? "For the best experience, open the dental portal in a new window."
+                          : "The dental portal couldn't be loaded directly. Click below to open it in a new window."}
                       </p>
                       <Button 
                         size="lg" 
@@ -670,7 +672,7 @@ const ServiceDetails = () => {
                         }}
                         className="inline-flex items-center gap-2"
                       >
-                        <FileText className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5" />
                         View Dental Insurance Plans
                       </Button>
                     </div>
@@ -725,10 +727,12 @@ const ServiceDetails = () => {
                     Browse and compare vision insurance plans to find the perfect coverage for your eyecare needs.
                   </p>
                   
-                  {visionIframeError ? (
+                  {isMobile || visionIframeError ? (
                     <div className="text-center py-12">
                       <p className="text-muted-foreground mb-6">
-                        The vision portal couldn't be loaded directly. Click below to open it in a new window.
+                        {isMobile 
+                          ? "For the best experience, open the vision portal in a new window."
+                          : "The vision portal couldn't be loaded directly. Click below to open it in a new window."}
                       </p>
                       <Button 
                         size="lg" 
@@ -737,7 +741,7 @@ const ServiceDetails = () => {
                         }}
                         className="inline-flex items-center gap-2"
                       >
-                        <FileText className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5" />
                         View Vision Insurance Plans
                       </Button>
                     </div>
@@ -861,10 +865,12 @@ const ServiceDetails = () => {
                     Fill out the form below to receive a personalized auto insurance quote tailored to your needs.
                   </p>
                   
-                  {autoIframeError ? (
+                  {isMobile || autoIframeError ? (
                     <div className="text-center py-12">
                       <p className="text-muted-foreground mb-6">
-                        The form couldn't be loaded directly. Click below to open it in a new window.
+                        {isMobile 
+                          ? "For the best experience, open the quote form in a new window."
+                          : "The form couldn't be loaded directly. Click below to open it in a new window."}
                       </p>
                       <Button 
                         size="lg" 
@@ -873,7 +879,7 @@ const ServiceDetails = () => {
                         }}
                         className="inline-flex items-center gap-2"
                       >
-                        <FileText className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5" />
                         Open Auto Insurance Form
                       </Button>
                     </div>
@@ -927,10 +933,12 @@ const ServiceDetails = () => {
                     Fill out the form below to receive a personalized home insurance quote tailored to your needs.
                   </p>
                   
-                  {homeIframeError ? (
+                  {isMobile || homeIframeError ? (
                     <div className="text-center py-12">
                       <p className="text-muted-foreground mb-6">
-                        The form couldn't be loaded directly. Click below to open it in a new window.
+                        {isMobile 
+                          ? "For the best experience, open the quote form in a new window."
+                          : "The form couldn't be loaded directly. Click below to open it in a new window."}
                       </p>
                       <Button 
                         size="lg" 
@@ -939,7 +947,7 @@ const ServiceDetails = () => {
                         }}
                         className="inline-flex items-center gap-2"
                       >
-                        <FileText className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5" />
                         Open Home Insurance Form
                       </Button>
                     </div>
@@ -993,10 +1001,12 @@ const ServiceDetails = () => {
                     Fill out the form below to receive a personalized group health insurance quote for your organization.
                   </p>
                   
-                  {groupHealthIframeError ? (
+                  {isMobile || groupHealthIframeError ? (
                     <div className="text-center py-12">
                       <p className="text-muted-foreground mb-6">
-                        The form couldn't be loaded directly. Click below to open it in a new window.
+                        {isMobile 
+                          ? "For the best experience, open the quote form in a new window."
+                          : "The form couldn't be loaded directly. Click below to open it in a new window."}
                       </p>
                       <Button 
                         size="lg" 
@@ -1005,7 +1015,7 @@ const ServiceDetails = () => {
                         }}
                         className="inline-flex items-center gap-2"
                       >
-                        <FileText className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5" />
                         Open Group Health Insurance Form
                       </Button>
                     </div>
@@ -1059,10 +1069,12 @@ const ServiceDetails = () => {
                     Fill out the form below to receive a personalized business insurance quote tailored to your company's needs.
                   </p>
                   
-                  {businessIframeError ? (
+                  {isMobile || businessIframeError ? (
                     <div className="text-center py-12">
                       <p className="text-muted-foreground mb-6">
-                        The form couldn't be loaded directly. Click below to open it in a new window.
+                        {isMobile 
+                          ? "For the best experience, open the quote form in a new window."
+                          : "The form couldn't be loaded directly. Click below to open it in a new window."}
                       </p>
                       <Button 
                         size="lg" 
@@ -1071,7 +1083,7 @@ const ServiceDetails = () => {
                         }}
                         className="inline-flex items-center gap-2"
                       >
-                        <FileText className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5" />
                         Open Business Insurance Form
                       </Button>
                     </div>
