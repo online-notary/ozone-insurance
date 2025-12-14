@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Calendar } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ExternalLink } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+
 const Contact = () => {
+  const isMobile = useIsMobile();
+  
   const contactInfo = [{
     icon: Phone,
     title: "Call Us",
@@ -25,6 +27,7 @@ const Contact = () => {
     details: ["Sun-Monday: 9:00 AM - 5:00 PM", "Available for appointments"],
     color: "bg-orange-500"
   }];
+  
   return <section id="contact" className="pt-8 pb-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Levitate Meeting Scheduler - Full Width */}
@@ -39,20 +42,36 @@ const Contact = () => {
               </div>
 
               {/* Embedded Levitate Scheduler */}
-              <div className="relative w-full" style={{
-                minHeight: '700px'
-              }}>
-                <iframe 
-                  src="https://meeting.levitate.ai/#/landing/9105df-4i4n1e" 
-                  className="w-full h-full rounded-lg" 
-                  style={{
-                    minHeight: '700px',
-                    border: 'none'
-                  }} 
-                  title="Schedule a Meeting" 
-                  loading="lazy" 
-                />
-              </div>
+              {isMobile ? (
+                <div className="text-center py-12">
+                  <p className="text-muted-foreground mb-6">
+                    For the best experience, open the scheduler in a new window.
+                  </p>
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://meeting.levitate.ai/#/landing/9105df-4i4n1e', '_blank', 'noopener,noreferrer')}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    Open Meeting Scheduler
+                  </Button>
+                </div>
+              ) : (
+                <div className="relative w-full" style={{
+                  minHeight: '700px'
+                }}>
+                  <iframe 
+                    src="https://meeting.levitate.ai/#/landing/9105df-4i4n1e" 
+                    className="w-full h-full rounded-lg" 
+                    style={{
+                      minHeight: '700px',
+                      border: 'none'
+                    }} 
+                    title="Schedule a Meeting" 
+                    loading="lazy" 
+                  />
+                </div>
+              )}
             </div>
           </Card>
         </div>
