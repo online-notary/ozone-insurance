@@ -105,8 +105,8 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      {/* Top Contact Bar */}
-      <div className="bg-slate-900 py-2.5">
+      {/* Top Contact Bar - Hidden on mobile for cleaner UX */}
+      <div className="hidden md:block bg-slate-900 py-2.5">
         <div className="large-container">
           <div className="flex items-center justify-between text-sm text-white">
             <div className="flex items-center space-x-6">
@@ -116,7 +116,7 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
                 <span className="font-medium text-white">Call: 1-833-MY-OZONE</span>
               </a>
             </div>
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
                 <Facebook className="h-4 w-4 hover:text-primary cursor-pointer transition-colors" />
                 <Twitter className="h-4 w-4 hover:text-primary cursor-pointer transition-colors" />
@@ -131,13 +131,13 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
       {/* Main Navigation */}
       <div className="bg-white border-b border-gray-100">
         <div className="large-container py-0">
-          <div className="flex items-center justify-between" style={{ height: '84px' }}>
+          <div className="flex items-center justify-between h-16 md:h-[84px]">
             {/* Logo Section */}
             <Link to="/" className="flex items-center cursor-pointer">
               <img 
                 src={ozoneLogo}
                 alt="Ozone Insurance Services, Inc."
-                className="object-contain h-12"
+                className="object-contain h-10 md:h-12"
               />
             </Link>
 
@@ -230,21 +230,28 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2"
+              className="lg:hidden p-3 -mr-2 touch-manipulation"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? (
-                <X className="h-6 w-6 text-slate-700" />
+                <X className="h-7 w-7 text-slate-700" />
               ) : (
-                <Menu className="h-6 w-6 text-slate-700" />
+                <Menu className="h-7 w-7 text-slate-700" />
               )}
             </button>
           </div>
 
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <nav className="lg:hidden mt-4 py-4 border-t border-gray-200">
-              <div className="flex flex-col space-y-4">
+          {/* Mobile Menu - Full Screen Overlay */}
+          <div 
+            className={`
+              lg:hidden fixed inset-0 top-16 bg-white z-40 transition-all duration-300 ease-in-out
+              ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}
+            `}
+          >
+            <nav className="flex flex-col h-full overflow-y-auto pb-24">
+              {/* Navigation Items */}
+              <div className="flex flex-col p-4 space-y-1">
                 {navigation.map((item) => {
                   const isActive = item.isRoute 
                     ? location.pathname === item.href
@@ -255,10 +262,10 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
                       href={item.href}
                       onClick={(e) => handleNavClick(e, item)}
                       className={`
-                        px-4 py-2 rounded-md font-medium transition-all duration-200 cursor-pointer
+                        flex items-center px-5 py-4 rounded-xl font-medium text-lg transition-all duration-200 cursor-pointer touch-manipulation
                         ${isActive 
-                          ? "bg-primary text-white" 
-                          : "text-slate-700 hover:text-primary"
+                          ? "bg-primary text-white shadow-md" 
+                          : "text-slate-700 hover:bg-primary/5 active:bg-primary/10"
                         }
                       `}
                     >
@@ -266,43 +273,68 @@ const Header = ({ onOptionPanelToggle }: { onOptionPanelToggle?: () => void }) =
                     </a>
                   );
                 })}
-                <div className="flex items-center space-x-4 pt-4">
-                  <Search className="h-5 w-5 text-slate-600" />
-                  
-                  {user ? (
-                    <>
-                      <Button 
-                        onClick={handleBookMeeting}
-                        className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium"
-                      >
-                        Book a Meeting
-                      </Button>
-                      <Button 
-                        onClick={handleSignOut} 
-                        variant="ghost" 
-                        className="text-red-600 hover:text-red-700 px-4"
-                      >
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Sign Out
-                      </Button>
-                    </>
-                  ) : (
-                    <Button 
-                      onClick={handleBookMeeting}
-                      className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md font-medium"
+              </div>
+              
+              {/* Divider */}
+              <div className="mx-4 border-t border-gray-200 my-2" />
+              
+              {/* Action Buttons */}
+              <div className="flex flex-col p-4 space-y-3">
+                <Button 
+                  onClick={handleBookMeeting}
+                  className="w-full bg-primary hover:bg-primary/90 text-white py-4 rounded-xl font-semibold text-base shadow-sm touch-manipulation"
+                  size="lg"
+                >
+                  Book a Meeting
+                </Button>
+                
+                <a
+                  href="tel:+18336969663"
+                  className="flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 text-white py-4 rounded-xl font-semibold text-base shadow-sm touch-manipulation transition-colors"
+                >
+                  <Phone className="h-5 w-5" />
+                  Call: 1-833-MY-OZONE
+                </a>
+                
+                {user && (
+                  <>
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex items-center justify-center gap-2 w-full bg-primary/10 text-primary py-4 rounded-xl font-semibold text-base touch-manipulation"
                     >
-                      Book a Meeting
+                      <Settings className="h-5 w-5" />
+                      Dashboard
+                    </Link>
+                    <Button 
+                      onClick={() => {
+                        handleSignOut();
+                        setIsMenuOpen(false);
+                      }} 
+                      variant="ghost" 
+                      className="w-full text-red-600 hover:text-red-700 hover:bg-red-50 py-4 rounded-xl font-semibold text-base touch-manipulation"
+                      size="lg"
+                    >
+                      <LogOut className="h-5 w-5 mr-2" />
+                      Sign Out
                     </Button>
-                  )}
-                  
-                  <Grid3X3 
-                    className="h-5 w-5 text-slate-600 hover:text-primary cursor-pointer transition-colors" 
-                    onClick={onOptionPanelToggle}
-                  />
+                  </>
+                )}
+              </div>
+              
+              {/* Social Links */}
+              <div className="mt-auto p-4 border-t border-gray-200">
+                <p className="text-sm text-muted-foreground text-center mb-3">Follow Us</p>
+                <div className="flex items-center justify-center space-x-6">
+                  <Facebook className="h-6 w-6 text-slate-600 hover:text-primary cursor-pointer transition-colors" />
+                  <Twitter className="h-6 w-6 text-slate-600 hover:text-primary cursor-pointer transition-colors" />
+                  <MessageCircle className="h-6 w-6 text-slate-600 hover:text-primary cursor-pointer transition-colors" />
+                  <Send className="h-6 w-6 text-slate-600 hover:text-primary cursor-pointer transition-colors" />
                 </div>
+                <p className="text-xs text-muted-foreground text-center mt-4">CA LIC# 0K48512</p>
               </div>
             </nav>
-          )}
+          </div>
         </div>
       </div>
     </header>
