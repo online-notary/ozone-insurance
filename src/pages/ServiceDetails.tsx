@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CheckCircle, Shield, Clock, Users, Star, Phone, Mail, ArrowLeft, Heart, TrendingUp, FileText, Calculator, Maximize, Minimize, LucideIcon, Plane, MapPin, Globe } from 'lucide-react';
+import { CheckCircle, Shield, Clock, Users, Star, Phone, Mail, ArrowLeft, Heart, TrendingUp, FileText, Calculator, Maximize, Minimize, LucideIcon, Plane, MapPin, Globe, ExternalLink } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
+import { useIsMobile } from '@/hooks/use-mobile';
 import heroFamily from '@/assets/hero-family.jpg';
 interface ServiceData {
   id: string;
@@ -34,6 +35,7 @@ const ServiceDetails = () => {
   const {
     serviceId
   } = useParams();
+  const isMobile = useIsMobile();
   const [service, setService] = useState<ServiceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -433,6 +435,12 @@ const ServiceDetails = () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
   }, []);
+
+  // Scroll to top when serviceId changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [serviceId]);
+
   useEffect(() => {
     const fetchService = async () => {
       if (!serviceId) {
@@ -784,10 +792,12 @@ const ServiceDetails = () => {
                     Protect yourself from identity theft and fraud with comprehensive identity insurance coverage.
                   </p>
                   
-                  {identityIframeError ? (
+                  {isMobile || identityIframeError ? (
                     <div className="text-center py-12">
                       <p className="text-muted-foreground mb-6">
-                        The identity insurance portal couldn't be loaded directly. Click below to open it in a new window.
+                        {isMobile 
+                          ? "For the best experience, open the identity insurance portal in a new window."
+                          : "The identity insurance portal couldn't be loaded directly. Click below to open it in a new window."}
                       </p>
                       <Button 
                         size="lg" 
@@ -796,7 +806,7 @@ const ServiceDetails = () => {
                         }}
                         className="inline-flex items-center gap-2"
                       >
-                        <FileText className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5" />
                         View Identity Insurance Plans
                       </Button>
                     </div>
@@ -1171,18 +1181,20 @@ const ServiceDetails = () => {
                       Get comprehensive medical coverage for visitors to the USA.
                     </p>
                     
-                    {travelUsaIframeError ? (
+                    {isMobile || travelUsaIframeError ? (
                       <div className="text-center py-12">
                         <p className="text-muted-foreground mb-6">
-                          The form couldn't be loaded directly. Click below to open it in a new window.
+                          {isMobile 
+                            ? "For the best experience, open the quote form in a new window."
+                            : "The form couldn't be loaded directly. Click below to open it in a new window."}
                         </p>
                         <Button 
                           size="lg" 
                           onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=visitorUSA', '_blank', 'noopener,noreferrer')}
                           className="inline-flex items-center gap-2"
                         >
-                          <FileText className="w-5 h-5" />
-                          Open Form
+                          <ExternalLink className="w-5 h-5" />
+                          Get USA Visitors Quote
                         </Button>
                       </div>
                     ) : (
@@ -1231,18 +1243,20 @@ const ServiceDetails = () => {
                       Get medical coverage for destinations excluding the USA.
                     </p>
                     
-                    {travelOutsideIframeError ? (
+                    {isMobile || travelOutsideIframeError ? (
                       <div className="text-center py-12">
                         <p className="text-muted-foreground mb-6">
-                          The form couldn't be loaded directly. Click below to open it in a new window.
+                          {isMobile 
+                            ? "For the best experience, open the quote form in a new window."
+                            : "The form couldn't be loaded directly. Click below to open it in a new window."}
                         </p>
                         <Button 
                           size="lg" 
                           onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=travelOutsideUSA', '_blank', 'noopener,noreferrer')}
                           className="inline-flex items-center gap-2"
                         >
-                          <FileText className="w-5 h-5" />
-                          Open Form
+                          <ExternalLink className="w-5 h-5" />
+                          Get Outside USA Quote
                         </Button>
                       </div>
                     ) : (
@@ -1291,18 +1305,20 @@ const ServiceDetails = () => {
                       Get trip cancellation coverage for US residents.
                     </p>
                     
-                    {travelTripIframeError ? (
+                    {isMobile || travelTripIframeError ? (
                       <div className="text-center py-12">
                         <p className="text-muted-foreground mb-6">
-                          The form couldn't be loaded directly. Click below to open it in a new window.
+                          {isMobile 
+                            ? "For the best experience, open the quote form in a new window."
+                            : "The form couldn't be loaded directly. Click below to open it in a new window."}
                         </p>
                         <Button 
                           size="lg" 
                           onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=trip', '_blank', 'noopener,noreferrer')}
                           className="inline-flex items-center gap-2"
                         >
-                          <FileText className="w-5 h-5" />
-                          Open Form
+                          <ExternalLink className="w-5 h-5" />
+                          Get Trip Insurance Quote
                         </Button>
                       </div>
                     ) : (
