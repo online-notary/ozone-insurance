@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -13,6 +13,7 @@ import UpdateServices from "./pages/UpdateServices";
 import TeamMemberDetail from "./pages/TeamMemberDetail";
 import Privacy from "./pages/Privacy";
 import SmsPrivacy from "./pages/SmsPrivacy";
+import Book from "./pages/Book";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,14 @@ const App = () => (
             <Route path="/team/:memberId" element={<TeamMemberDetail />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/sms-privacy" element={<SmsPrivacy />} />
+            <Route path="/book" element={<Book />} />
+            {/* Service shortcut routes */}
+            <Route path="/travel" element={<Navigate to="/service/travel" replace />} />
+            <Route path="/grouphealth" element={<Navigate to="/service/group-health" replace />} />
+            <Route path="/health" element={<Navigate to="/service/health" replace />} />
+            <Route path="/dental" element={<Navigate to="/service/dental" replace />} />
+            <Route path="/business" element={<Navigate to="/service/business" replace />} />
+            <Route path="/services" element={<Navigate to="/#services" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

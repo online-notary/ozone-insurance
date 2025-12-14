@@ -62,17 +62,36 @@ const TeamMemberContactForm: React.FC<TeamMemberContactFormProps> = ({
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission - in production, this would call an API endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            phone: data.phone || undefined,
+            message: data.message,
+            memberName: memberName,
+            memberEmail: memberEmail,
+          }),
+        }
+      );
 
-      // Success message
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send message");
+      }
+
       toast.success(
         `Thank you! Your message has been sent to ${memberName}. They will get back to you soon.`
       );
 
-      // Reset form
       reset();
     } catch (error) {
+      console.error("Error sending contact form:", error);
       toast.error("Something went wrong. Please try again or contact us directly.");
     } finally {
       setIsSubmitting(false);
