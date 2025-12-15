@@ -22,6 +22,7 @@ import anitaMirchandani from "@/assets/anita-mirchandani-new.png";
 import sunithaPentapati from "@/assets/sunitha-pentapati-new.png";
 import santhoshRaghunath from "@/assets/santhosh-raghunath-new.png";
 import raMohan from "@/assets/ra-mohan.png";
+import geetaSharma from "@/assets/geeta-sharma.gif";
 
 interface TeamMemberData {
   id: string;
@@ -166,6 +167,22 @@ const teamMembersData: TeamMemberData[] = [
     bio: [
       "R.A. Mohan is a versatile professional offering comprehensive services in real estate, financial services, and notary public services. With expertise across multiple domains, he provides clients with a seamless experience for their real estate transactions and financial planning needs.",
       "As a licensed realtor with eXp Realty Inc., R.A. Mohan brings dedication and expertise to help clients navigate the real estate market. His financial services background enables him to provide valuable insights into investment properties and wealth-building strategies through real estate."
+    ],
+    socials: [
+      { iconClass: "linkedin", href: "#" },
+      { iconClass: "facebook", href: "#" }
+    ]
+  },
+  {
+    id: "geeta-sharma",
+    name: "Geeta Sharma",
+    role: "Insurance Advisor",
+    imgSrc: geetaSharma,
+    license: "CA Lic #4431834",
+    npn: "21414617",
+    email: "geeta@ozoneinsurance.com",
+    bio: [
+      "Geeta Sharma is a dedicated Insurance Advisor committed to helping families and individuals find the right insurance solutions for their unique needs."
     ],
     socials: [
       { iconClass: "linkedin", href: "#" },
