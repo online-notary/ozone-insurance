@@ -16,6 +16,7 @@ import Privacy from "./pages/Privacy";
 import SmsPrivacy from "./pages/SmsPrivacy";
 import Book from "./pages/Book";
 import NotFound from "./pages/NotFound";
+import ExternalRedirect from "./components/ExternalRedirect";
 
 const queryClient = new QueryClient();
 
@@ -37,7 +38,7 @@ const App = () => (
             <Route path="/sms-privacy" element={<SmsPrivacy />} />
             <Route path="/book" element={<Book />} />
             {/* Service shortcut routes */}
-            <Route path="/travel" element={<Navigate to="/service/travel" replace />} />
+            <Route path="/travel" element={<ExternalRedirect to="https://ozoneinsurance.brokersnexus.com" />} />
             <Route path="/grouphealth" element={<Navigate to="/service/group-health" replace />} />
             <Route path="/health" element={<Navigate to="/service/health" replace />} />
             <Route path="/dental" element={<Navigate to="/service/dental" replace />} />
