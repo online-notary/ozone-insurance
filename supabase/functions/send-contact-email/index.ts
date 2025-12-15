@@ -44,7 +44,7 @@ const handler = async (req: Request): Promise<Response> => {
     const recipientEmail = memberEmail || "info@ozoneinsurance.com";
     
     const emailResponse = await resend.emails.send({
-      from: "Ozone Insurance <onboarding@resend.dev>",
+      from: "Ozone Insurance <no-reply@mail.ozoneinsurance.com>",
       to: [recipientEmail],
       reply_to: email,
       subject: `New Contact Form Submission from ${name}`,
@@ -72,7 +72,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Also send a confirmation email to the sender
     await resend.emails.send({
-      from: "Ozone Insurance <onboarding@resend.dev>",
+      from: "Ozone Insurance <no-reply@mail.ozoneinsurance.com>",
       to: [email],
       subject: `Thank you for contacting Ozone Insurance`,
       html: `
