@@ -182,7 +182,9 @@ const teamMembersData: TeamMemberData[] = [
     npn: "21414617",
     email: "geeta@ozoneinsurance.com",
     bio: [
-      "Geeta Sharma is a dedicated Insurance Advisor committed to helping families and individuals find the right insurance solutions for their unique needs."
+      "With a career shaped by creativity, service, and a genuine desire to uplift others, Geeta brings a unique perspective to the team. Her journey from architect to holistic personal financial planner reflects her passion for helping people move from building dream homes to creating secure, abundant lives within those homes.",
+      "She is deeply committed to community financial education, especially empowering the younger generation to become financially confident at the right age. Active in the financial industry since 2021, Geeta is known for her warm communication, thoughtful guidance, and people-first approach.",
+      "Outside of work, Geeta enjoys reading, interior decorating, and volunteering with her daughter while creating meaningful memories."
     ],
     socials: [
       { iconClass: "linkedin", href: "#" },
