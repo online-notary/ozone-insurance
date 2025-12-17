@@ -163,11 +163,11 @@
 @layer components {
   /* Hero Button Variants */
   .btn-hero {
-    @apply bg-white text-primary hover:bg-white/90 shadow-medium transition-all duration-300 hover:shadow-strong;
+    @apply bg-white text-primary font-semibold hover:bg-white/90 shadow-medium transition-all duration-300 hover:shadow-strong;
   }
 
   .btn-hero-outline {
-    @apply bg-transparent text-foreground border-2 border-border hover:bg-[#8e6f2f] hover:text-white active:bg-[#8e6f2f] active:text-white transition-all duration-300;
+    @apply bg-transparent text-white border-2 border-white/80 hover:bg-white hover:text-primary active:bg-white active:text-primary transition-all duration-300;
   }
 
   /* Gradient Backgrounds */
