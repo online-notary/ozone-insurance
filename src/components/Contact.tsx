@@ -1,34 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Phone, Mail, MapPin, Clock, ExternalLink } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { ExternalLink } from "lucide-react";
 
 const Contact = () => {
-  const isMobile = useIsMobile();
-  
-  const contactInfo = [{
-    icon: Phone,
-    title: "Call Us",
-    details: ["1-833-MY-OZONE", "(833) 696-9663"],
-    color: "bg-blue-500"
-  }, {
-    icon: Mail,
-    title: "Email Us",
-    details: ["info@ozoneinsurance.com", "support@ozoneinsurance.com"],
-    color: "bg-green-500"
-  }, {
-    icon: MapPin,
-    title: "Visit Us",
-    details: ["California", "CA LIC# 0K48512"],
-    color: "bg-purple-500"
-  }, {
-    icon: Clock,
-    title: "Office Hours",
-    details: ["Sun-Monday: 9:00 AM - 5:00 PM", "Available for appointments"],
-    color: "bg-orange-500"
-  }];
-  
-  return <section id="contact" className="pt-8 pb-24 bg-background">
+  return (
+    <section id="contact" className="pt-8 pb-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Levitate Meeting Scheduler - Full Width */}
         <div className="w-full">
@@ -41,37 +17,19 @@ const Contact = () => {
                 </p>
               </div>
 
-              {/* Embedded Levitate Scheduler */}
-              {isMobile ? (
-                <div className="text-center py-12">
-                  <p className="text-muted-foreground mb-6">
-                    For the best experience, open the scheduler in a new window.
-                  </p>
-                  <Button 
-                    size="lg" 
-                    onClick={() => window.open('https://meeting.levitate.ai/#/landing/9105df-4i4n1e', '_blank', 'noopener,noreferrer')}
-                    className="inline-flex items-center gap-2"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                    Open Meeting Scheduler
-                  </Button>
-                </div>
-              ) : (
-                <div className="relative w-full" style={{
-                  minHeight: '700px'
-                }}>
-                  <iframe 
-                    src="https://meeting.levitate.ai/#/landing/9105df-4i4n1e" 
-                    className="w-full h-full rounded-lg" 
-                    style={{
-                      minHeight: '700px',
-                      border: 'none'
-                    }} 
-                    title="Schedule a Meeting" 
-                    loading="lazy" 
-                  />
-                </div>
-              )}
+              <div className="text-center py-12">
+                <p className="text-muted-foreground mb-6">
+                  Click the button below to open our meeting scheduler and book a time that works for you.
+                </p>
+                <Button 
+                  size="lg" 
+                  onClick={() => window.open('https://meeting.levitate.ai/#/landing/9105df-4i4n1e', '_blank', 'noopener,noreferrer')}
+                  className="inline-flex items-center gap-2"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  Open Meeting Scheduler
+                </Button>
+              </div>
             </div>
           </Card>
         </div>
@@ -87,7 +45,11 @@ const Contact = () => {
               create a comprehensive financial plan tailored to your unique needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="btn-hero text-lg px-8 py-4 h-auto">
+              <Button 
+                size="lg" 
+                className="btn-hero text-lg px-8 py-4 h-auto"
+                onClick={() => window.open('https://meeting.levitate.ai/#/landing/9105df-4i4n1e', '_blank', 'noopener,noreferrer')}
+              >
                 Schedule Free Consultation
               </Button>
               <Button size="lg" variant="outline" className="btn-hero-outline text-lg px-8 py-4 h-auto" asChild>
@@ -97,6 +59,8 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Contact;

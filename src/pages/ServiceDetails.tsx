@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CheckCircle, Shield, Clock, Users, Star, Phone, Mail, ArrowLeft, Heart, TrendingUp, FileText, Calculator, Maximize, Minimize, LucideIcon, Plane, MapPin, Globe, ExternalLink } from 'lucide-react';
+import { CheckCircle, Shield, Clock, Users, Star, Phone, Mail, ArrowLeft, Heart, TrendingUp, FileText, Calculator, LucideIcon, Plane, MapPin, Globe, ExternalLink } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
-import { useIsMobile } from '@/hooks/use-mobile';
 import heroFamily from '@/assets/hero-family.jpg';
+
 interface ServiceData {
   id: string;
   slug: string;
@@ -31,410 +31,13 @@ const iconMap: Record<string, LucideIcon> = {
   FileText,
   Calculator
 };
+
 const ServiceDetails = () => {
-  const {
-    serviceId
-  } = useParams();
-  const isMobile = useIsMobile();
+  const { serviceId } = useParams();
   const [service, setService] = useState<ServiceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isDentalFullscreen, setIsDentalFullscreen] = useState(false);
-  const [isVisionFullscreen, setIsVisionFullscreen] = useState(false);
-  const [isIdentityFullscreen, setIsIdentityFullscreen] = useState(false);
-  const [isAutoFullscreen, setIsAutoFullscreen] = useState(false);
-  const [isHomeFullscreen, setIsHomeFullscreen] = useState(false);
-  const [isGroupHealthFullscreen, setIsGroupHealthFullscreen] = useState(false);
-  const [dentalIframeError, setDentalIframeError] = useState(false);
-  const [visionIframeError, setVisionIframeError] = useState(false);
-  const [identityIframeError, setIdentityIframeError] = useState(false);
-  const [autoIframeError, setAutoIframeError] = useState(false);
-  const [homeIframeError, setHomeIframeError] = useState(false);
-  const [groupHealthIframeError, setGroupHealthIframeError] = useState(false);
-  const [dentalIframeLoading, setDentalIframeLoading] = useState(true);
-  const [visionIframeLoading, setVisionIframeLoading] = useState(true);
-  const [identityIframeLoading, setIdentityIframeLoading] = useState(true);
-  const [autoIframeLoading, setAutoIframeLoading] = useState(true);
-  const [homeIframeLoading, setHomeIframeLoading] = useState(true);
-  const [groupHealthIframeLoading, setGroupHealthIframeLoading] = useState(true);
   const [selectedTravelOption, setSelectedTravelOption] = useState<string | null>(null);
-  const [travelUsaIframeError, setTravelUsaIframeError] = useState(false);
-  const [travelOutsideIframeError, setTravelOutsideIframeError] = useState(false);
-  const [travelTripIframeError, setTravelTripIframeError] = useState(false);
-  const [travelUsaIframeLoading, setTravelUsaIframeLoading] = useState(true);
-  const [travelOutsideIframeLoading, setTravelOutsideIframeLoading] = useState(true);
-  const [travelTripIframeLoading, setTravelTripIframeLoading] = useState(true);
-  const [isTravelUsaFullscreen, setIsTravelUsaFullscreen] = useState(false);
-  const [isTravelOutsideFullscreen, setIsTravelOutsideFullscreen] = useState(false);
-  const [isTravelTripFullscreen, setIsTravelTripFullscreen] = useState(false);
-  const [isBusinessFullscreen, setIsBusinessFullscreen] = useState(false);
-  const [businessIframeError, setBusinessIframeError] = useState(false);
-  const [businessIframeLoading, setBusinessIframeLoading] = useState(true);
-  const dentalIframeRef = useRef<HTMLDivElement>(null);
-  const visionIframeRef = useRef<HTMLDivElement>(null);
-  const identityIframeRef = useRef<HTMLDivElement>(null);
-  const autoIframeRef = useRef<HTMLDivElement>(null);
-  const homeIframeRef = useRef<HTMLDivElement>(null);
-  const groupHealthIframeRef = useRef<HTMLDivElement>(null);
-  const travelUsaIframeRef = useRef<HTMLDivElement>(null);
-  const travelOutsideIframeRef = useRef<HTMLDivElement>(null);
-  const travelTripIframeRef = useRef<HTMLDivElement>(null);
-  const businessIframeRef = useRef<HTMLDivElement>(null);
-  const dentalTimeoutRef = useRef<NodeJS.Timeout>();
-  const visionTimeoutRef = useRef<NodeJS.Timeout>();
-  const identityTimeoutRef = useRef<NodeJS.Timeout>();
-  const autoTimeoutRef = useRef<NodeJS.Timeout>();
-  const homeTimeoutRef = useRef<NodeJS.Timeout>();
-  const groupHealthTimeoutRef = useRef<NodeJS.Timeout>();
-  const travelUsaTimeoutRef = useRef<NodeJS.Timeout>();
-  const travelOutsideTimeoutRef = useRef<NodeJS.Timeout>();
-  const travelTripTimeoutRef = useRef<NodeJS.Timeout>();
-  const businessTimeoutRef = useRef<NodeJS.Timeout>();
-
-  // Timeout fallback for dental iframe
-  useEffect(() => {
-    if (service?.slug === 'dental' && !dentalIframeError) {
-      dentalTimeoutRef.current = setTimeout(() => {
-        // If still loading after 5 seconds, assume it failed
-        if (dentalIframeLoading) {
-          console.log('Dental iframe timeout - switching to fallback button');
-          setDentalIframeError(true);
-          setDentalIframeLoading(false);
-        }
-      }, 5000);
-
-      return () => {
-        if (dentalTimeoutRef.current) {
-          clearTimeout(dentalTimeoutRef.current);
-        }
-      };
-    }
-  }, [service?.slug, dentalIframeLoading, dentalIframeError]);
-
-  // Timeout fallback for vision iframe
-  useEffect(() => {
-    if (service?.slug === 'vision' && !visionIframeError) {
-      visionTimeoutRef.current = setTimeout(() => {
-        // If still loading after 5 seconds, assume it failed
-        if (visionIframeLoading) {
-          console.log('Vision iframe timeout - switching to fallback button');
-          setVisionIframeError(true);
-          setVisionIframeLoading(false);
-        }
-      }, 5000);
-
-      return () => {
-        if (visionTimeoutRef.current) {
-          clearTimeout(visionTimeoutRef.current);
-        }
-      };
-    }
-  }, [service?.slug, visionIframeLoading, visionIframeError]);
-
-  // Timeout fallback for identity iframe
-  useEffect(() => {
-    if (service?.slug === 'identity' && !identityIframeError) {
-      identityTimeoutRef.current = setTimeout(() => {
-        // If still loading after 5 seconds, assume it failed
-        if (identityIframeLoading) {
-          console.log('Identity iframe timeout - switching to fallback button');
-          setIdentityIframeError(true);
-          setIdentityIframeLoading(false);
-        }
-      }, 5000);
-
-      return () => {
-        if (identityTimeoutRef.current) {
-          clearTimeout(identityTimeoutRef.current);
-        }
-      };
-    }
-  }, [service?.slug, identityIframeLoading, identityIframeError]);
-
-  // Timeout fallback for auto iframe
-  useEffect(() => {
-    if (service?.slug === 'auto' && !autoIframeError) {
-      autoTimeoutRef.current = setTimeout(() => {
-        // If still loading after 5 seconds, assume it failed
-        if (autoIframeLoading) {
-          console.log('Auto iframe timeout - switching to fallback button');
-          setAutoIframeError(true);
-          setAutoIframeLoading(false);
-        }
-      }, 5000);
-
-      return () => {
-        if (autoTimeoutRef.current) {
-          clearTimeout(autoTimeoutRef.current);
-        }
-      };
-    }
-  }, [service?.slug, autoIframeLoading, autoIframeError]);
-
-  // Timeout fallback for home iframe
-  useEffect(() => {
-    if (service?.slug === 'home' && !homeIframeError) {
-      homeTimeoutRef.current = setTimeout(() => {
-        // If still loading after 5 seconds, assume it failed
-        if (homeIframeLoading) {
-          console.log('Home iframe timeout - switching to fallback button');
-          setHomeIframeError(true);
-          setHomeIframeLoading(false);
-        }
-      }, 5000);
-
-      return () => {
-        if (homeTimeoutRef.current) {
-          clearTimeout(homeTimeoutRef.current);
-        }
-      };
-    }
-  }, [service?.slug, homeIframeLoading, homeIframeError]);
-
-  // Timeout fallback for group health iframe
-  useEffect(() => {
-    if (service?.slug === 'group-health' && !groupHealthIframeError) {
-      groupHealthTimeoutRef.current = setTimeout(() => {
-        // If still loading after 5 seconds, assume it failed
-        if (groupHealthIframeLoading) {
-          console.log('Group Health iframe timeout - switching to fallback button');
-          setGroupHealthIframeError(true);
-          setGroupHealthIframeLoading(false);
-        }
-      }, 5000);
-
-      return () => {
-        if (groupHealthTimeoutRef.current) {
-          clearTimeout(groupHealthTimeoutRef.current);
-        }
-      };
-    }
-  }, [service?.slug, groupHealthIframeLoading, groupHealthIframeError]);
-
-  // Timeout fallback for business iframe
-  useEffect(() => {
-    if (service?.slug === 'business' && !businessIframeError) {
-      businessTimeoutRef.current = setTimeout(() => {
-        // If still loading after 5 seconds, assume it failed
-        if (businessIframeLoading) {
-          console.log('Business iframe timeout - switching to fallback button');
-          setBusinessIframeError(true);
-          setBusinessIframeLoading(false);
-        }
-      }, 5000);
-
-      return () => {
-        if (businessTimeoutRef.current) {
-          clearTimeout(businessTimeoutRef.current);
-        }
-      };
-    }
-  }, [service?.slug, businessIframeLoading, businessIframeError]);
-
-  const toggleDentalFullscreen = () => {
-    if (!dentalIframeRef.current) return;
-
-    if (!document.fullscreenElement) {
-      dentalIframeRef.current.requestFullscreen().then(() => {
-        setIsDentalFullscreen(true);
-      }).catch((err) => {
-        console.error('Error attempting to enable fullscreen:', err);
-      });
-    } else {
-      document.exitFullscreen().then(() => {
-        setIsDentalFullscreen(false);
-      });
-    }
-  };
-
-  const toggleVisionFullscreen = () => {
-    if (!visionIframeRef.current) return;
-
-    if (!document.fullscreenElement) {
-      visionIframeRef.current.requestFullscreen().then(() => {
-        setIsVisionFullscreen(true);
-      }).catch((err) => {
-        console.error('Error attempting to enable fullscreen:', err);
-      });
-    } else {
-      document.exitFullscreen().then(() => {
-        setIsVisionFullscreen(false);
-      });
-    }
-  };
-
-  const toggleIdentityFullscreen = () => {
-    if (!identityIframeRef.current) return;
-
-    if (!document.fullscreenElement) {
-      identityIframeRef.current.requestFullscreen().then(() => {
-        setIsIdentityFullscreen(true);
-      }).catch((err) => {
-        console.error('Error attempting to enable fullscreen:', err);
-      });
-    } else {
-      document.exitFullscreen().then(() => {
-        setIsIdentityFullscreen(false);
-      });
-    }
-  };
-
-  const toggleAutoFullscreen = () => {
-    if (!autoIframeRef.current) return;
-
-    if (!document.fullscreenElement) {
-      autoIframeRef.current.requestFullscreen().then(() => {
-        setIsAutoFullscreen(true);
-      }).catch((err) => {
-        console.error('Error attempting to enable fullscreen:', err);
-      });
-    } else {
-      document.exitFullscreen().then(() => {
-        setIsAutoFullscreen(false);
-      });
-    }
-  };
-
-  const toggleHomeFullscreen = () => {
-    if (!homeIframeRef.current) return;
-
-    if (!document.fullscreenElement) {
-      homeIframeRef.current.requestFullscreen().then(() => {
-        setIsHomeFullscreen(true);
-      }).catch((err) => {
-        console.error('Error attempting to enable fullscreen:', err);
-      });
-    } else {
-      document.exitFullscreen().then(() => {
-        setIsHomeFullscreen(false);
-      });
-    }
-  };
-
-  const toggleGroupHealthFullscreen = () => {
-    if (!groupHealthIframeRef.current) return;
-
-    if (!document.fullscreenElement) {
-      groupHealthIframeRef.current.requestFullscreen().then(() => {
-        setIsGroupHealthFullscreen(true);
-      }).catch((err) => {
-        console.error('Error attempting to enable fullscreen:', err);
-      });
-    } else {
-      document.exitFullscreen().then(() => {
-        setIsGroupHealthFullscreen(false);
-      });
-    }
-  };
-
-  // Travel timeouts
-  useEffect(() => {
-    if (selectedTravelOption === 'usa' && !travelUsaIframeError) {
-      travelUsaTimeoutRef.current = setTimeout(() => {
-        if (travelUsaIframeLoading) {
-          setTravelUsaIframeError(true);
-          setTravelUsaIframeLoading(false);
-        }
-      }, 5000);
-      return () => {
-        if (travelUsaTimeoutRef.current) clearTimeout(travelUsaTimeoutRef.current);
-      };
-    }
-  }, [selectedTravelOption, travelUsaIframeLoading, travelUsaIframeError]);
-
-  useEffect(() => {
-    if (selectedTravelOption === 'outside' && !travelOutsideIframeError) {
-      travelOutsideTimeoutRef.current = setTimeout(() => {
-        if (travelOutsideIframeLoading) {
-          setTravelOutsideIframeError(true);
-          setTravelOutsideIframeLoading(false);
-        }
-      }, 5000);
-      return () => {
-        if (travelOutsideTimeoutRef.current) clearTimeout(travelOutsideTimeoutRef.current);
-      };
-    }
-  }, [selectedTravelOption, travelOutsideIframeLoading, travelOutsideIframeError]);
-
-  useEffect(() => {
-    if (selectedTravelOption === 'trip' && !travelTripIframeError) {
-      travelTripTimeoutRef.current = setTimeout(() => {
-        if (travelTripIframeLoading) {
-          setTravelTripIframeError(true);
-          setTravelTripIframeLoading(false);
-        }
-      }, 5000);
-      return () => {
-        if (travelTripTimeoutRef.current) clearTimeout(travelTripTimeoutRef.current);
-      };
-    }
-  }, [selectedTravelOption, travelTripIframeLoading, travelTripIframeError]);
-
-  const toggleTravelUsaFullscreen = () => {
-    if (!travelUsaIframeRef.current) return;
-    if (!document.fullscreenElement) {
-      travelUsaIframeRef.current.requestFullscreen().then(() => {
-        setIsTravelUsaFullscreen(true);
-      }).catch((err) => console.error('Error attempting to enable fullscreen:', err));
-    } else {
-      document.exitFullscreen().then(() => setIsTravelUsaFullscreen(false));
-    }
-  };
-
-  const toggleTravelOutsideFullscreen = () => {
-    if (!travelOutsideIframeRef.current) return;
-    if (!document.fullscreenElement) {
-      travelOutsideIframeRef.current.requestFullscreen().then(() => {
-        setIsTravelOutsideFullscreen(true);
-      }).catch((err) => console.error('Error attempting to enable fullscreen:', err));
-    } else {
-      document.exitFullscreen().then(() => setIsTravelOutsideFullscreen(false));
-    }
-  };
-
-  const toggleTravelTripFullscreen = () => {
-    if (!travelTripIframeRef.current) return;
-    if (!document.fullscreenElement) {
-      travelTripIframeRef.current.requestFullscreen().then(() => {
-        setIsTravelTripFullscreen(true);
-      }).catch((err) => console.error('Error attempting to enable fullscreen:', err));
-    } else {
-      document.exitFullscreen().then(() => setIsTravelTripFullscreen(false));
-    }
-  };
-
-  const toggleBusinessFullscreen = () => {
-    if (!businessIframeRef.current) return;
-    if (!document.fullscreenElement) {
-      businessIframeRef.current.requestFullscreen().then(() => {
-        setIsBusinessFullscreen(true);
-      }).catch((err) => console.error('Error attempting to enable fullscreen:', err));
-    } else {
-      document.exitFullscreen().then(() => setIsBusinessFullscreen(false));
-    }
-  };
-
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      if (!document.fullscreenElement) {
-        setIsDentalFullscreen(false);
-        setIsVisionFullscreen(false);
-        setIsIdentityFullscreen(false);
-        setIsAutoFullscreen(false);
-        setIsHomeFullscreen(false);
-        setIsGroupHealthFullscreen(false);
-        setIsTravelUsaFullscreen(false);
-        setIsTravelOutsideFullscreen(false);
-        setIsTravelTripFullscreen(false);
-        setIsBusinessFullscreen(false);
-      }
-    };
-
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-    };
-  }, []);
 
   // Scroll to top when serviceId changes
   useEffect(() => {
@@ -449,17 +52,13 @@ const ServiceDetails = () => {
         return;
       }
       try {
-        const {
-          data,
-          error
-        } = await supabase.from('services').select('*').eq('slug', serviceId).maybeSingle();
+        const { data, error } = await supabase.from('services').select('*').eq('slug', serviceId).maybeSingle();
         if (error) {
           console.error('Error fetching service:', error);
           setError('Failed to fetch service details');
         } else if (!data) {
           setError('Service not found');
         } else {
-          // Type cast the JSON fields to proper types
           const typedService: ServiceData = {
             ...data,
             features: Array.isArray(data.features) ? data.features as string[] : [],
@@ -478,8 +77,10 @@ const ServiceDetails = () => {
     };
     fetchService();
   }, [serviceId]);
+
   if (loading) {
-    return <div className="min-h-screen bg-background">
+    return (
+      <div className="min-h-screen bg-background">
         <Header />
         <section className="relative bg-gradient-to-r from-primary/10 to-primary/5 py-20">
           <div className="container mx-auto px-4 text-center">
@@ -504,10 +105,13 @@ const ServiceDetails = () => {
           </div>
         </section>
         <Footer />
-      </div>;
+      </div>
+    );
   }
+
   if (error || !service) {
-    return <div className="min-h-screen bg-background">
+    return (
+      <div className="min-h-screen bg-background">
         <Header />
         <section className="py-20">
           <div className="container mx-auto px-4 text-center">
@@ -522,20 +126,24 @@ const ServiceDetails = () => {
           </div>
         </section>
         <Footer />
-      </div>;
+      </div>
+    );
   }
+
   const ServiceIcon = iconMap[service.icon_name] || FileText;
-  return <div className="min-h-screen bg-background">
+
+  return (
+    <div className="min-h-screen bg-background">
       <Header />
       
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary/10 to-primary/5 py-20">
         <div className="absolute inset-0" style={{
-        backgroundImage: `url(${heroFamily})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        opacity: 0.1
-      }}></div>
+          backgroundImage: `url(${heroFamily})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.1
+        }}></div>
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Service Details
@@ -554,57 +162,64 @@ const ServiceDetails = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Image */}
             <div className="relative">
-              
               <div className="absolute bottom-6 left-6 w-16 h-16 bg-white rounded-xl flex items-center justify-center shadow-lg">
                 <ServiceIcon className="w-8 h-8 text-primary" />
               </div>
             </div>
-
-            {/* Content */}
-            
           </div>
 
           {/* Health Coverage Options - Only for Health Service */}
-          {service.slug === 'health' && <div className="mb-16">
+          {service.slug === 'health' && (
+            <div className="mb-16">
               <div className="text-center mb-12">
                 <p className="text-primary font-medium mb-2">Coverage Options</p>
                 <h3 className="text-3xl font-bold text-foreground">Explore Health Plans On Your Own</h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[{
-              id: 1,
-              image: '/images/health-plan-1.png',
-              title: 'Anthem Blue Cross',
-              description: 'Comprehensive PPO and HMO plans with extensive provider networks',
-              url: 'https://shop.anthem.com/individuals/shop/basics?locale=en_US&parenttin=LMJQRQNVTY&agentType=Agent&partnerID=ATK&ffm=&certificationNO=&channel=AC&licenseNO=&state=CA&phone=6502852264&cid=&addr=PO%20BOX%20789&agency=OZONE%20INSURANCE%20SERVICES%20INC&brand=abc&appState=CA&Faxext=&id=CKDNNPMSMZ&lname=Gowda&npn=17569517&email=MADHU.GOWDA@GMAIL.COM&language=en&lobState=&city=MOUNTAIN%20VIEW&zip=94042&agentCode=&fax=&fname=Madhu&paidTIN=LMJQRQNVTY&phoneext='
-            }, {
-              id: 2,
-              image: '/images/health-plan-2.png',
-              title: 'Blue Shield of California',
-              description: 'Flexible health insurance options for individuals and families',
-              url: 'https://www.blueshieldca.com/buyblue/unauth/shopping?broker_id=I%2BM785yypW3g&role=broker&filterEndorsedBroker=TRUE'
-            }, {
-              id: 3,
-              image: '/images/health-plan-3.png',
-              title: 'Covered California',
-              description: 'Affordable Care Act marketplace plans with premium assistance',
-              url: 'https://form.jotform.com/253316970682059'
-            }, {
-              id: 4,
-              image: '/images/health-plan-4.png',
-              title: 'Kaiser Permanente',
-              description: 'Quality healthcare coverage with competitive rates and benefits',
-              url: 'https://apply-individual-family.kaiserpermanente.org/validate-consumer?ln=en&guid=1f0d6f22-1280-4fb7-9d9a-f0ada7fb16c1'
-            }].map(plan => <Card key={plan.id} className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col" onClick={() => {
-                if (plan.url) {
-                  if (plan.id === 3) {
-                    window.open(plan.url, 'blank', 'scrollbars=yes,toolbar=no,width=700,height=500');
-                  } else {
-                    window.open(plan.url, '_blank', 'noopener,noreferrer');
+                {[
+                  {
+                    id: 1,
+                    image: '/images/health-plan-1.png',
+                    title: 'Anthem Blue Cross',
+                    description: 'Comprehensive PPO and HMO plans with extensive provider networks',
+                    url: 'https://shop.anthem.com/individuals/shop/basics?locale=en_US&parenttin=LMJQRQNVTY&agentType=Agent&partnerID=ATK&ffm=&certificationNO=&channel=AC&licenseNO=&state=CA&phone=6502852264&cid=&addr=PO%20BOX%20789&agency=OZONE%20INSURANCE%20SERVICES%20INC&brand=abc&appState=CA&Faxext=&id=CKDNNPMSMZ&lname=Gowda&npn=17569517&email=MADHU.GOWDA@GMAIL.COM&language=en&lobState=&city=MOUNTAIN%20VIEW&zip=94042&agentCode=&fax=&fname=Madhu&paidTIN=LMJQRQNVTY&phoneext='
+                  },
+                  {
+                    id: 2,
+                    image: '/images/health-plan-2.png',
+                    title: 'Blue Shield of California',
+                    description: 'Flexible health insurance options for individuals and families',
+                    url: 'https://www.blueshieldca.com/buyblue/unauth/shopping?broker_id=I%2BM785yypW3g&role=broker&filterEndorsedBroker=TRUE'
+                  },
+                  {
+                    id: 3,
+                    image: '/images/health-plan-3.png',
+                    title: 'Covered California',
+                    description: 'Affordable Care Act marketplace plans with premium assistance',
+                    url: 'https://form.jotform.com/253316970682059'
+                  },
+                  {
+                    id: 4,
+                    image: '/images/health-plan-4.png',
+                    title: 'Kaiser Permanente',
+                    description: 'Quality healthcare coverage with competitive rates and benefits',
+                    url: 'https://apply-individual-family.kaiserpermanente.org/validate-consumer?ln=en&guid=1f0d6f22-1280-4fb7-9d9a-f0ada7fb16c1'
                   }
-                }
-              }}>
+                ].map(plan => (
+                  <Card 
+                    key={plan.id} 
+                    className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col" 
+                    onClick={() => {
+                      if (plan.url) {
+                        if (plan.id === 3) {
+                          window.open(plan.url, 'blank', 'scrollbars=yes,toolbar=no,width=700,height=500');
+                        } else {
+                          window.open(plan.url, '_blank', 'noopener,noreferrer');
+                        }
+                      }
+                    }}
+                  >
                     <div className="aspect-[4/3] relative overflow-hidden bg-muted">
                       <img src={plan.image} alt={plan.title} className="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105" />
                     </div>
@@ -621,512 +236,187 @@ const ServiceDetails = () => {
                         </svg>
                       </div>
                     </div>
-                  </Card>)}
+                  </Card>
+                ))}
               </div>
-            </div>}
-
-          {/* Service Benefits */}
-          
-
-          {/* Additional Features */}
-          
+            </div>
+          )}
 
           {/* Individual Health Insurance Quote Request - Only for Health Service */}
-          {service.slug === 'health' && <div className="mb-16">
+          {service.slug === 'health' && (
+            <div className="mb-16">
               <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
                 <div className="p-8 md:p-12 text-center">
                   <h3 className="text-3xl font-bold text-foreground mb-4">Want Help Choosing?</h3>
                   <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                     Get personalized health insurance quotes tailored to your needs. Fill out our quick form and our team will help you find the perfect coverage.
                   </p>
-                  <Button size="lg" onClick={() => {
-                window.open('https://form.jotform.com/253316970682059', 'blank', 'scrollbars=yes,toolbar=no,width=700,height=500');
-              }} className="inline-flex items-center gap-2">
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://form.jotform.com/253316970682059', 'blank', 'scrollbars=yes,toolbar=no,width=700,height=500')}
+                    className="inline-flex items-center gap-2"
+                  >
                     <FileText className="w-5 h-5" />
                     Get Your Quote
                   </Button>
                 </div>
               </Card>
-            </div>}
+            </div>
+          )}
 
           {/* Dental Insurance Portal - Only for Dental Service */}
-          {service.slug === 'dental' && <div className="mb-16">
-              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6">
-                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Explore Dental Plans</h3>
-                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+          {service.slug === 'dental' && (
+            <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="p-8 md:p-12 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">Explore Dental Plans</h3>
+                  <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                     Browse and compare dental insurance plans to find the perfect coverage for your smile.
                   </p>
-                  
-                  {isMobile || dentalIframeError ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground mb-6">
-                        {isMobile 
-                          ? "For the best experience, open the dental portal in a new window."
-                          : "The dental portal couldn't be loaded directly. Click below to open it in a new window."}
-                      </p>
-                      <Button 
-                        size="lg" 
-                        onClick={() => {
-                          window.open('https://brokers.dentalforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer');
-                        }}
-                        className="inline-flex items-center gap-2"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        View Dental Insurance Plans
-                      </Button>
-                    </div>
-                  ) : (
-                    <div ref={dentalIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isDentalFullscreen ? '100vh' : '800px' }}>
-                      {dentalIframeLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                          <div className="text-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                            <p className="text-muted-foreground">Loading dental portal...</p>
-                          </div>
-                        </div>
-                      )}
-                      <Button
-                        onClick={toggleDentalFullscreen}
-                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                        size="icon"
-                        title={isDentalFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                      >
-                        {isDentalFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                      </Button>
-                      <iframe 
-                        src="https://brokers.dentalforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
-                        className="w-full h-full border-0"
-                        title="Dental Insurance Portal"
-                        allow="geolocation"
-                        onLoad={() => {
-                          console.log('Dental iframe loaded successfully');
-                          setDentalIframeLoading(false);
-                          if (dentalTimeoutRef.current) {
-                            clearTimeout(dentalTimeoutRef.current);
-                          }
-                        }}
-                        onError={() => {
-                          console.error('Dental iframe failed to load');
-                          setDentalIframeError(true);
-                          setDentalIframeLoading(false);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://brokers.dentalforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer')}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    View Dental Insurance Plans
+                  </Button>
                 </div>
               </Card>
-            </div>}
+            </div>
+          )}
 
           {/* Vision Insurance Portal - Only for Vision Service */}
-          {service.slug === 'vision' && <div className="mb-16">
-              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6">
-                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Explore Vision Plans</h3>
-                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+          {service.slug === 'vision' && (
+            <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="p-8 md:p-12 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">Explore Vision Plans</h3>
+                  <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                     Browse and compare vision insurance plans to find the perfect coverage for your eyecare needs.
                   </p>
-                  
-                  {isMobile || visionIframeError ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground mb-6">
-                        {isMobile 
-                          ? "For the best experience, open the vision portal in a new window."
-                          : "The vision portal couldn't be loaded directly. Click below to open it in a new window."}
-                      </p>
-                      <Button 
-                        size="lg" 
-                        onClick={() => {
-                          window.open('https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer');
-                        }}
-                        className="inline-flex items-center gap-2"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        View Vision Insurance Plans
-                      </Button>
-                    </div>
-                  ) : (
-                    <div ref={visionIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isVisionFullscreen ? '100vh' : '800px' }}>
-                      {visionIframeLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                          <div className="text-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                            <p className="text-muted-foreground">Loading vision portal...</p>
-                          </div>
-                        </div>
-                      )}
-                      <Button
-                        onClick={toggleVisionFullscreen}
-                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                        size="icon"
-                        title={isVisionFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                      >
-                        {isVisionFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                      </Button>
-                      <iframe 
-                        src="https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
-                        className="w-full h-full border-0"
-                        title="Vision Insurance Portal"
-                        allow="geolocation"
-                        onLoad={() => {
-                          console.log('Vision iframe loaded successfully');
-                          setVisionIframeLoading(false);
-                          if (visionTimeoutRef.current) {
-                            clearTimeout(visionTimeoutRef.current);
-                          }
-                        }}
-                        onError={() => {
-                          console.error('Vision iframe failed to load');
-                          setVisionIframeError(true);
-                          setVisionIframeLoading(false);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://brokers.visionforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer')}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    View Vision Insurance Plans
+                  </Button>
                 </div>
               </Card>
-            </div>}
+            </div>
+          )}
 
           {/* Identity Insurance Portal - Only for Identity Service */}
-          {service.slug === 'identity' && <div className="mb-16">
-              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6">
-                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Explore Identity Insurance Plans</h3>
-                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
+          {service.slug === 'identity' && (
+            <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="p-8 md:p-12 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">Explore Identity Insurance Plans</h3>
+                  <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                     Protect yourself from identity theft and fraud with comprehensive identity insurance coverage.
                   </p>
-                  
-                  {isMobile || identityIframeError ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground mb-6">
-                        {isMobile 
-                          ? "For the best experience, open the identity insurance portal in a new window."
-                          : "The identity insurance portal couldn't be loaded directly. Click below to open it in a new window."}
-                      </p>
-                      <Button 
-                        size="lg" 
-                        onClick={() => {
-                          window.open('https://brokers.insuranceforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer');
-                        }}
-                        className="inline-flex items-center gap-2"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        View Identity Insurance Plans
-                      </Button>
-                    </div>
-                  ) : (
-                    <div ref={identityIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isIdentityFullscreen ? '100vh' : '800px' }}>
-                      {identityIframeLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                          <div className="text-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                            <p className="text-muted-foreground">Loading identity insurance portal...</p>
-                          </div>
-                        </div>
-                      )}
-                      <Button
-                        onClick={toggleIdentityFullscreen}
-                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                        size="icon"
-                        title={isIdentityFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                      >
-                        {isIdentityFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                      </Button>
-                      <iframe 
-                        src="https://brokers.insuranceforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771"
-                        className="w-full h-full border-0"
-                        title="Identity Insurance Portal"
-                        allow="geolocation"
-                        onLoad={() => {
-                          console.log('Identity iframe loaded successfully');
-                          setIdentityIframeLoading(false);
-                          if (identityTimeoutRef.current) {
-                            clearTimeout(identityTimeoutRef.current);
-                          }
-                        }}
-                        onError={() => {
-                          console.error('Identity iframe failed to load');
-                          setIdentityIframeError(true);
-                          setIdentityIframeLoading(false);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://brokers.insuranceforeveryone.com/?share=true&Portal=3F1E75E8-3EB3-44DF-B610-D07EF8AA8771', '_blank', 'noopener,noreferrer')}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    View Identity Insurance Plans
+                  </Button>
                 </div>
               </Card>
-            </div>}
+            </div>
+          )}
 
-          {/* Auto Insurance Form - Only for Auto Service */}
-          {service.slug === 'auto' && <div className="mb-16">
-              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6">
-                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Get Your Auto Insurance Quote</h3>
-                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
-                    Fill out the form below to receive a personalized auto insurance quote tailored to your needs.
+          {/* Auto Insurance Quote - Only for Auto Service */}
+          {service.slug === 'auto' && (
+            <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="p-8 md:p-12 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">Get Your Auto Insurance Quote</h3>
+                  <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Fill out our form to receive a personalized auto insurance quote tailored to your driving needs.
                   </p>
-                  
-                  {isMobile || autoIframeError ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground mb-6">
-                        {isMobile 
-                          ? "For the best experience, open the quote form in a new window."
-                          : "The form couldn't be loaded directly. Click below to open it in a new window."}
-                      </p>
-                      <Button 
-                        size="lg" 
-                        onClick={() => {
-                          window.open('https://forms.monday.com/forms/50cd81705c249bac4ec9804fd41f7336?r=use1', '_blank', 'noopener,noreferrer');
-                        }}
-                        className="inline-flex items-center gap-2"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        Open Auto Insurance Form
-                      </Button>
-                    </div>
-                  ) : (
-                    <div ref={autoIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isAutoFullscreen ? '100vh' : '800px' }}>
-                      {autoIframeLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                          <div className="text-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                            <p className="text-muted-foreground">Loading form...</p>
-                          </div>
-                        </div>
-                      )}
-                      <Button
-                        onClick={toggleAutoFullscreen}
-                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                        size="icon"
-                        title={isAutoFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                      >
-                        {isAutoFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                      </Button>
-                      <iframe 
-                        src="https://forms.monday.com/forms/embed/50cd81705c249bac4ec9804fd41f7336?r=use1"
-                        className="w-full h-full border-0"
-                        title="Auto Insurance Quote Form"
-                        onLoad={() => {
-                          console.log('Auto form iframe loaded successfully');
-                          setAutoIframeLoading(false);
-                          if (autoTimeoutRef.current) {
-                            clearTimeout(autoTimeoutRef.current);
-                          }
-                        }}
-                        onError={() => {
-                          console.error('Auto form iframe failed to load');
-                          setAutoIframeError(true);
-                          setAutoIframeLoading(false);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://www.ezlynx.com/rater/CfQkAyR_u0W9m99Ql0PySw/all', '_blank', 'noopener,noreferrer')}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    Get Auto Insurance Quote
+                  </Button>
                 </div>
               </Card>
-            </div>}
+            </div>
+          )}
 
-          {/* Home Insurance Form - Only for Home Service */}
-          {service.slug === 'home' && <div className="mb-16">
-              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6">
-                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Get Your Home Insurance Quote</h3>
-                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
-                    Fill out the form below to receive a personalized home insurance quote tailored to your needs.
+          {/* Home Insurance Quote - Only for Home Service */}
+          {service.slug === 'home' && (
+            <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="p-8 md:p-12 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">Get Your Home Insurance Quote</h3>
+                  <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Protect your home with comprehensive coverage. Fill out our form to receive a personalized quote.
                   </p>
-                  
-                  {isMobile || homeIframeError ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground mb-6">
-                        {isMobile 
-                          ? "For the best experience, open the quote form in a new window."
-                          : "The form couldn't be loaded directly. Click below to open it in a new window."}
-                      </p>
-                      <Button 
-                        size="lg" 
-                        onClick={() => {
-                          window.open('https://forms.monday.com/forms/50cd81705c249bac4ec9804fd41f7336?r=use1', '_blank', 'noopener,noreferrer');
-                        }}
-                        className="inline-flex items-center gap-2"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        Open Home Insurance Form
-                      </Button>
-                    </div>
-                  ) : (
-                    <div ref={homeIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isHomeFullscreen ? '100vh' : '800px' }}>
-                      {homeIframeLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                          <div className="text-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                            <p className="text-muted-foreground">Loading form...</p>
-                          </div>
-                        </div>
-                      )}
-                      <Button
-                        onClick={toggleHomeFullscreen}
-                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                        size="icon"
-                        title={isHomeFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                      >
-                        {isHomeFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                      </Button>
-                      <iframe 
-                        src="https://forms.monday.com/forms/embed/50cd81705c249bac4ec9804fd41f7336?r=use1"
-                        className="w-full h-full border-0"
-                        title="Home Insurance Quote Form"
-                        onLoad={() => {
-                          console.log('Home form iframe loaded successfully');
-                          setHomeIframeLoading(false);
-                          if (homeTimeoutRef.current) {
-                            clearTimeout(homeTimeoutRef.current);
-                          }
-                        }}
-                        onError={() => {
-                          console.error('Home form iframe failed to load');
-                          setHomeIframeError(true);
-                          setHomeIframeLoading(false);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://www.ezlynx.com/rater/CfQkAyR_u0W9m99Ql0PySw/all', '_blank', 'noopener,noreferrer')}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    Get Home Insurance Quote
+                  </Button>
                 </div>
               </Card>
-            </div>}
+            </div>
+          )}
 
           {/* Group Health Insurance Form - Only for Group Health Service */}
-          {service.slug === 'group-health' && <div className="mb-16">
-              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6">
-                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Get Your Group Health Insurance Quote</h3>
-                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
-                    Fill out the form below to receive a personalized group health insurance quote for your organization.
+          {service.slug === 'group-health' && (
+            <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="p-8 md:p-12 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">Get Your Group Health Insurance Quote</h3>
+                  <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Fill out our form to receive a personalized group health insurance quote for your organization.
                   </p>
-                  
-                  {isMobile || groupHealthIframeError ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground mb-6">
-                        {isMobile 
-                          ? "For the best experience, open the quote form in a new window."
-                          : "The form couldn't be loaded directly. Click below to open it in a new window."}
-                      </p>
-                      <Button 
-                        size="lg" 
-                        onClick={() => {
-                          window.open('https://forms.monday.com/forms/346b024b1b2521abb30be53c4f0dc5a5?r=use1', '_blank', 'noopener,noreferrer');
-                        }}
-                        className="inline-flex items-center gap-2"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        Open Group Health Insurance Form
-                      </Button>
-                    </div>
-                  ) : (
-                    <div ref={groupHealthIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isGroupHealthFullscreen ? '100vh' : '800px' }}>
-                      {groupHealthIframeLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                          <div className="text-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                            <p className="text-muted-foreground">Loading form...</p>
-                          </div>
-                        </div>
-                      )}
-                      <Button
-                        onClick={toggleGroupHealthFullscreen}
-                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                        size="icon"
-                        title={isGroupHealthFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                      >
-                        {isGroupHealthFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                      </Button>
-                      <iframe 
-                        src="https://forms.monday.com/forms/embed/346b024b1b2521abb30be53c4f0dc5a5?r=use1"
-                        className="w-full h-full border-0"
-                        title="Group Health Insurance Quote Form"
-                        onLoad={() => {
-                          console.log('Group Health form iframe loaded successfully');
-                          setGroupHealthIframeLoading(false);
-                          if (groupHealthTimeoutRef.current) {
-                            clearTimeout(groupHealthTimeoutRef.current);
-                          }
-                        }}
-                        onError={() => {
-                          console.error('Group Health form iframe failed to load');
-                          setGroupHealthIframeError(true);
-                          setGroupHealthIframeLoading(false);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://forms.monday.com/forms/346b024b1b2521abb30be53c4f0dc5a5?r=use1', '_blank', 'noopener,noreferrer')}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    Open Group Health Insurance Form
+                  </Button>
                 </div>
               </Card>
-            </div>}
+            </div>
+          )}
 
           {/* Business Insurance Form - Only for Business Service */}
-          {service.slug === 'business' && <div className="mb-16">
-              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                <div className="p-4 md:p-6">
-                  <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Get Your Business Insurance Quote</h3>
-                  <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
-                    Fill out the form below to receive a personalized business insurance quote tailored to your company's needs.
+          {service.slug === 'business' && (
+            <div className="mb-16">
+              <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="p-8 md:p-12 text-center">
+                  <h3 className="text-3xl font-bold text-foreground mb-4">Get Your Business Insurance Quote</h3>
+                  <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Fill out our form to receive a personalized business insurance quote tailored to your company's needs.
                   </p>
-                  
-                  {isMobile || businessIframeError ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground mb-6">
-                        {isMobile 
-                          ? "For the best experience, open the quote form in a new window."
-                          : "The form couldn't be loaded directly. Click below to open it in a new window."}
-                      </p>
-                      <Button 
-                        size="lg" 
-                        onClick={() => {
-                          window.open('https://forms.monday.com/forms/3e204bacbc35930c1cbd3fe6dc7b2433?r=use1', '_blank', 'noopener,noreferrer');
-                        }}
-                        className="inline-flex items-center gap-2"
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        Open Business Insurance Form
-                      </Button>
-                    </div>
-                  ) : (
-                    <div ref={businessIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isBusinessFullscreen ? '100vh' : '800px' }}>
-                      {businessIframeLoading && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                          <div className="text-center">
-                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                            <p className="text-muted-foreground">Loading form...</p>
-                          </div>
-                        </div>
-                      )}
-                      <Button
-                        onClick={toggleBusinessFullscreen}
-                        className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                        size="icon"
-                        title={isBusinessFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                      >
-                        {isBusinessFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                      </Button>
-                      <iframe 
-                        src="https://forms.monday.com/forms/embed/3e204bacbc35930c1cbd3fe6dc7b2433?r=use1"
-                        className="w-full h-full border-0"
-                        title="Business Insurance Quote Form"
-                        onLoad={() => {
-                          console.log('Business form iframe loaded successfully');
-                          setBusinessIframeLoading(false);
-                          if (businessTimeoutRef.current) {
-                            clearTimeout(businessTimeoutRef.current);
-                          }
-                        }}
-                        onError={() => {
-                          console.error('Business form iframe failed to load');
-                          setBusinessIframeError(true);
-                          setBusinessIframeLoading(false);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.open('https://forms.monday.com/forms/3e204bacbc35930c1cbd3fe6dc7b2433?r=use1', '_blank', 'noopener,noreferrer')}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    Open Business Insurance Form
+                  </Button>
                 </div>
               </Card>
-            </div>}
+            </div>
+          )}
 
           {/* Travel Insurance Options - Only for Travel Service */}
           {service.slug === 'travel' && (
@@ -1143,248 +433,95 @@ const ServiceDetails = () => {
                     icon: MapPin,
                     title: 'USA Visitors Insurance',
                     description: 'Medical coverage for visitors to the USA',
+                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=visitorUSA'
                   },
                   {
                     id: 'outside',
                     icon: Plane,
                     title: 'Outside USA Insurance',
                     description: 'Medical coverage for destinations excluding the USA',
+                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=travelOutsideUSA'
                   },
                   {
                     id: 'trip',
                     icon: Globe,
                     title: 'Travel Insurance',
                     description: 'Trip cancellation coverage for US residents',
+                    url: 'https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=tripCancellation'
                   }
                 ].map((plan) => {
                   const IconComponent = plan.icon;
-                  const isSelected = selectedTravelOption === plan.id;
                   return (
                     <Card 
                       key={plan.id} 
-                      className={`group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col ${isSelected ? 'ring-2 ring-primary shadow-2xl' : ''}`}
-                      onClick={() => setSelectedTravelOption(plan.id)}
+                      className="group cursor-pointer overflow-hidden bg-card hover:shadow-2xl transition-all duration-300 flex flex-col"
+                      onClick={() => window.open(plan.url, '_blank', 'noopener,noreferrer')}
                     >
                       <div className="p-8 flex-1 flex flex-col items-center text-center">
-                        <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-colors ${isSelected ? 'bg-primary text-white' : 'bg-primary/10 group-hover:bg-primary/20'}`}>
-                          <IconComponent className={`w-8 h-8 ${isSelected ? 'text-white' : 'text-primary'}`} />
+                        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6 bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                          <IconComponent className="w-8 h-8 text-primary" />
                         </div>
-                        <h4 className={`text-xl font-bold mb-3 transition-colors ${isSelected ? 'text-primary' : 'text-foreground group-hover:text-primary'}`}>
+                        <h4 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
                           {plan.title}
                         </h4>
                         <p className="text-base text-muted-foreground flex-1 mb-6">
                           {plan.description}
                         </p>
                         <div className="flex justify-center items-center gap-2 text-primary font-medium">
-                          {isSelected ? 'Selected' : 'Select Plan'}
+                          <ExternalLink className="w-4 h-4" />
+                          Get Quote
                         </div>
                       </div>
                     </Card>
                   );
                 })}
               </div>
-
-              {/* USA Visitors Insurance Form */}
-              {selectedTravelOption === 'usa' && (
-                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                  <div className="p-4 md:p-6">
-                    <h3 className="text-3xl font-bold text-foreground mb-4 text-center">USA Visitors Insurance Quote</h3>
-                    <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
-                      Get comprehensive medical coverage for visitors to the USA.
-                    </p>
-                    
-                    {isMobile || travelUsaIframeError ? (
-                      <div className="text-center py-12">
-                        <p className="text-muted-foreground mb-6">
-                          {isMobile 
-                            ? "For the best experience, open the quote form in a new window."
-                            : "The form couldn't be loaded directly. Click below to open it in a new window."}
-                        </p>
-                        <Button 
-                          size="lg" 
-                          onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=visitorUSA', '_blank', 'noopener,noreferrer')}
-                          className="inline-flex items-center gap-2"
-                        >
-                          <ExternalLink className="w-5 h-5" />
-                          Get USA Visitors Quote
-                        </Button>
-                      </div>
-                    ) : (
-                      <div ref={travelUsaIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isTravelUsaFullscreen ? '100vh' : '800px' }}>
-                        {travelUsaIframeLoading && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                            <div className="text-center">
-                              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                              <p className="text-muted-foreground">Loading form...</p>
-                            </div>
-                          </div>
-                        )}
-                        <Button
-                          onClick={toggleTravelUsaFullscreen}
-                          className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                          size="icon"
-                          title={isTravelUsaFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                        >
-                          {isTravelUsaFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                        </Button>
-                        <iframe 
-                          src="https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=visitorUSA"
-                          className="w-full h-full border-0"
-                          title="USA Visitors Insurance Quote Form"
-                          onLoad={() => {
-                            setTravelUsaIframeLoading(false);
-                            if (travelUsaTimeoutRef.current) clearTimeout(travelUsaTimeoutRef.current);
-                          }}
-                          onError={() => {
-                            setTravelUsaIframeError(true);
-                            setTravelUsaIframeLoading(false);
-                          }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </Card>
-              )}
-
-              {/* Outside USA Insurance Form */}
-              {selectedTravelOption === 'outside' && (
-                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                  <div className="p-4 md:p-6">
-                    <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Outside USA Insurance Quote</h3>
-                    <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
-                      Get medical coverage for destinations excluding the USA.
-                    </p>
-                    
-                    {isMobile || travelOutsideIframeError ? (
-                      <div className="text-center py-12">
-                        <p className="text-muted-foreground mb-6">
-                          {isMobile 
-                            ? "For the best experience, open the quote form in a new window."
-                            : "The form couldn't be loaded directly. Click below to open it in a new window."}
-                        </p>
-                        <Button 
-                          size="lg" 
-                          onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=travelOutsideUSA', '_blank', 'noopener,noreferrer')}
-                          className="inline-flex items-center gap-2"
-                        >
-                          <ExternalLink className="w-5 h-5" />
-                          Get Outside USA Quote
-                        </Button>
-                      </div>
-                    ) : (
-                      <div ref={travelOutsideIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isTravelOutsideFullscreen ? '100vh' : '800px' }}>
-                        {travelOutsideIframeLoading && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                            <div className="text-center">
-                              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                              <p className="text-muted-foreground">Loading form...</p>
-                            </div>
-                          </div>
-                        )}
-                        <Button
-                          onClick={toggleTravelOutsideFullscreen}
-                          className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                          size="icon"
-                          title={isTravelOutsideFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                        >
-                          {isTravelOutsideFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                        </Button>
-                        <iframe 
-                          src="https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=travelOutsideUSA"
-                          className="w-full h-full border-0"
-                          title="Outside USA Insurance Quote Form"
-                          onLoad={() => {
-                            setTravelOutsideIframeLoading(false);
-                            if (travelOutsideTimeoutRef.current) clearTimeout(travelOutsideTimeoutRef.current);
-                          }}
-                          onError={() => {
-                            setTravelOutsideIframeError(true);
-                            setTravelOutsideIframeLoading(false);
-                          }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </Card>
-              )}
-
-              {/* Trip Cancellation Insurance Form */}
-              {selectedTravelOption === 'trip' && (
-                <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 overflow-hidden">
-                  <div className="p-4 md:p-6">
-                    <h3 className="text-3xl font-bold text-foreground mb-4 text-center">Trip Cancellation Insurance Quote</h3>
-                    <p className="text-lg text-muted-foreground mb-6 text-center max-w-2xl mx-auto">
-                      Get trip cancellation coverage for US residents.
-                    </p>
-                    
-                    {isMobile || travelTripIframeError ? (
-                      <div className="text-center py-12">
-                        <p className="text-muted-foreground mb-6">
-                          {isMobile 
-                            ? "For the best experience, open the quote form in a new window."
-                            : "The form couldn't be loaded directly. Click below to open it in a new window."}
-                        </p>
-                        <Button 
-                          size="lg" 
-                          onClick={() => window.open('https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=trip', '_blank', 'noopener,noreferrer')}
-                          className="inline-flex items-center gap-2"
-                        >
-                          <ExternalLink className="w-5 h-5" />
-                          Get Trip Insurance Quote
-                        </Button>
-                      </div>
-                    ) : (
-                      <div ref={travelTripIframeRef} className="relative w-full bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: isTravelTripFullscreen ? '100vh' : '800px' }}>
-                        {travelTripIframeLoading && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-20">
-                            <div className="text-center">
-                              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                              <p className="text-muted-foreground">Loading form...</p>
-                            </div>
-                          </div>
-                        )}
-                        <Button
-                          onClick={toggleTravelTripFullscreen}
-                          className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-foreground shadow-lg"
-                          size="icon"
-                          title={isTravelTripFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                        >
-                          {isTravelTripFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
-                        </Button>
-                        <iframe 
-                          src="https://ozoneinsurance.brokersnexus.com/get-travel-insurance-quotes/?presection=trip"
-                          className="w-full h-full border-0"
-                          title="Trip Cancellation Insurance Quote Form"
-                          onLoad={() => {
-                            setTravelTripIframeLoading(false);
-                            if (travelTripTimeoutRef.current) clearTimeout(travelTripTimeoutRef.current);
-                          }}
-                          onError={() => {
-                            setTravelTripIframeError(true);
-                            setTravelTripIframeLoading(false);
-                          }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </Card>
-              )}
             </div>
           )}
 
-          {/* Back to Services */}
-          <div className="text-center mt-12">
-            <Link to="/#services">
-              <Button variant="outline" className="inline-flex items-center">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Services
+          {/* CTA Section */}
+          <div className="bg-gradient-to-r from-primary to-primary/80 rounded-2xl p-8 md:p-12 text-center text-white">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              Ready to Get Started?
+            </h3>
+            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+              Our team of experienced insurance professionals is here to help you find the perfect coverage for your needs.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-white text-primary hover:bg-white/90"
+                onClick={() => window.open('https://meeting.levitate.ai/#/landing/9105df-4i4n1e', '_blank', 'noopener,noreferrer')}
+              >
+                <Phone className="w-4 h-4 mr-2" />
+                Schedule a Consultation
               </Button>
-            </Link>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
+                <a href="tel:+18336969663">
+                  <Phone className="w-4 h-4 mr-2" />
+                  Call: 1-833-MY-OZONE
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Back to Services */}
+      <section className="py-8 bg-muted/30">
+        <div className="container mx-auto px-4 text-center">
+          <Link to="/#services">
+            <Button variant="outline">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to All Services
+            </Button>
+          </Link>
+        </div>
+      </section>
+
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default ServiceDetails;
